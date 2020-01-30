@@ -67,7 +67,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($form);
+            
             //password processing
             $oldPassword = $form->get('oldPassword')->getData();
             $newPassword = $form->get('newPassword')->getData();
