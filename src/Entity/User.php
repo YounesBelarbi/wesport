@@ -71,6 +71,11 @@ class User implements UserInterface
      */
     private $createdAt;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $resetToken;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -234,5 +239,17 @@ class User implements UserInterface
     public function setCreatedAtValue()
     {
         $this->createdAt = new \DateTime();
+    }
+
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken(?string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
+
+        return $this;
     }
 }
