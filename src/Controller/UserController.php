@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Form\PasswordResetType;
+use App\Form\ChangePasswordType;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -62,7 +62,7 @@ class UserController extends AbstractController
 
         $user = $this->getUser();
         
-        $form = $this->createForm(PasswordResetType::class, $user);
+        $form = $this->createForm(ChangePasswordType::class, $user);
         
         $form->handleRequest($request);
 
@@ -94,7 +94,7 @@ class UserController extends AbstractController
         }
             
 
-        return $this->render('profileUser/password_reset.html.twig', [
+        return $this->render('profileUser/password_change.html.twig', [
             'form' => $form->createView(),
         ]);
 
