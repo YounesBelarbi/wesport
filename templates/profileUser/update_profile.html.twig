@@ -3,6 +3,23 @@
 {% block title %}Profile utilisateur - WeSport{% endblock %}
 
 {% block body %}
-<h1>update profile</h1>
-{{form(form)}}
+    <h1>update profile</h1>
+    {{form_start(form)}}
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.firstName) }}
+        {{ form_row(form.lastName) }}
+        {{ form_row(form.age) }}
+        {{ form_row(form.city) }}
+        {{ form_row(form.phoneNumber) }}
+
+
+    <h4>Changer mon mot de passe</h4>
+    <p>Pour modifier votre mot de passe vous devez saisir le mot de passe actuelle</p>
+
+        {{ form_row(form.oldPassword) }}
+        {{ form_row(form.newPassword) }}
+        {{ form_row(form.send) }}
+    {{ form_end(form) }}
+    
 {% endblock %}
