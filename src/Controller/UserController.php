@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\PasswordResetType;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -9,10 +10,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+/**
+* @Route("/profile", name="profile_")
+*/
 class UserController extends AbstractController
 {
+
     /**
-     * @Route("/profile", name="profile")
+     * @Route("/show", name="show")
      */
     public function index()
     {
@@ -23,8 +28,9 @@ class UserController extends AbstractController
         ]);
     }
 
+
     /**
-    * @Route("/profile/edit", name="profile_edit")
+    * @Route("/edit", name="edit")
     */
     public function editProfileUser(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -36,6 +42,32 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $em->flush();
+            $this->addFlash('success', 'Votre profile à été mit à jour');
+        }
+            
+
+        return $this->render('profileUser/update_profile.html.twig', [
+            'form' => $form->createView(),
+        ]);
+
+    }
+
+
+    /**
+    * @Route("/edit/password", name="edit_password")
+    */
+    public function userPasswordReset(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder)
+    {
+
+        $user = $this->getUser();
+        
+        $form = $this->createForm(PasswordResetType::class, $user);
+        
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            dump($form);
             //password processing
             $oldPassword = $form->get('oldPassword')->getData();
             $newPassword = $form->get('newPassword')->getData();
@@ -52,16 +84,17 @@ class UserController extends AbstractController
                                 $user,
                                 $form->get('newPassword')->getData()
                             ));
+                            
+                            $em->flush();
+                            $this->addFlash('success', 'Votre mot de passe à été changer');
                     }         
             }
 
 
-            $em->flush();
-            $this->addFlash('success', 'Votre profile à été mit à jour');
         }
             
 
-        return $this->render('profileUser/update_profile.html.twig', [
+        return $this->render('profileUser/password_reset.html.twig', [
             'form' => $form->createView(),
         ]);
 

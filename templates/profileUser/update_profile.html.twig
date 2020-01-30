@@ -13,13 +13,7 @@
         {{ form_row(form.city) }}
         {{ form_row(form.phoneNumber) }}
 
-
-    <h4>Changer mon mot de passe</h4>
-    <p>Pour modifier votre mot de passe vous devez saisir le mot de passe actuelle</p>
-
-        {{ form_row(form.oldPassword) }}
-        {{ form_row(form.newPassword) }}
-        {{ form_row(form.send) }}
     {{ form_end(form) }}
-    
+
+    <a href="{{path('profile_edit_password')}}">changer mon mot de passe</a>
 {% endblock %}
