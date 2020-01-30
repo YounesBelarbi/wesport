@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion - WeSport{% endblock %}
 
 {% block body %}
 <form method="post">
@@ -21,8 +21,7 @@
     <input type="password" name="password" id="inputPassword" class="form-control" required>
 
     <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+           value="{{ csrf_token('authenticate') }}">
 
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -38,5 +37,7 @@
     <button class="btn btn-lg btn-primary" type="submit">
         Sign in
     </button>
+    
 </form>
+<a href="{{path('app_forgotten_password')}}">J'ai oublié mon mot de passe</a>
 {% endblock %}
