@@ -80,10 +80,10 @@ class SecurityController extends AbstractController
                 
                 
                 $message = (new \Swift_Message('Forgot Password'))
-                    ->setFrom('wesport.w@gmail.com')
+                    ->setFrom($this->getParameter('app_email'))
                     ->setTo($user->getEmail())
                     ->setBody(
-                        "blablabla voici le token pour reseter votre mot de passe : " . $url,
+                        "Pour réinitialiser votre mot de passe cliquez sur le lien : " . $url,
                         'text/html'
                     );
 
@@ -120,7 +120,7 @@ class SecurityController extends AbstractController
             
 
             if ($user === null) {
-                $this->addFlash('danger', 'Token Inconnu');
+                $this->addFlash('danger', 'Un problème est survenu, votre mot de passe n\'a pas été modifié.');
                 return $this->redirectToRoute('main');
             }
 
