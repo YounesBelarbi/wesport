@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\MailResetPasswordType;
 use App\Form\ResetPasswordType;
-use Swift_Mailer;
+use App\Service\SendMail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,7 +48,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/forgotten_password", name="app_forgotten_password")
      */
-    public function forgottenPassword(Request $request, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer, TokenGeneratorInterface $tokenGenerator): Response
+    public function forgottenPassword(Request $request, UserPasswordEncoderInterface $encoder, SendMail $sendMail, TokenGeneratorInterface $tokenGenerator): Response
     {
 
             $form = $this->createForm(MailResetPasswordType::class);
@@ -78,16 +78,10 @@ class SecurityController extends AbstractController
 
                 $url = $this->generateUrl('app_reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
                 
-                
-                $message = (new \Swift_Message('Forgot Password'))
-                    ->setFrom($this->getParameter('app_email'))
-                    ->setTo($user->getEmail())
-                    ->setBody(
-                        "Pour réinitialiser votre mot de passe cliquez sur le lien : " . $url,
-                        'text/html'
-                    );
-
-                $mailer->send($message);
+                //use service to send mail
+                $sendMail->sendAnEmail('Mot de passe oublié', $this->getParameter('app_email'), $user->getEmail(),  "Pour réinitialiser votre mot de passe cliquez sur le lien : " . $url,
+                'text/html');
+               
 
                 $this->addFlash('success', 'Mail envoyé');
 
