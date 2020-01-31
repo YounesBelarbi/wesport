@@ -81,6 +81,11 @@ class User implements UserInterface
      */
     private $isActive;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $confirmationToken;
+
     public function __construct()
     {
         $this->isActive = false;
@@ -271,6 +276,18 @@ class User implements UserInterface
     public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function getConfirmationToken(): ?string
+    {
+        return $this->confirmationToken;
+    }
+
+    public function setConfirmationToken(?string $confirmationToken): self
+    {
+        $this->confirmationToken = $confirmationToken;
 
         return $this;
     }
