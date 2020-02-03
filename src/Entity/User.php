@@ -103,12 +103,18 @@ class User implements UserInterface
      */
     private $classifiedAds;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ContactList", mappedBy="creator")
+     */
+    private $contactLists;
+
     public function __construct()
     {
         $this->isActive = false;
         $this->eventParticipation = new ArrayCollection();
         $this->eventsOrganized = new ArrayCollection();
         $this->classifiedAds = new ArrayCollection();
+        $this->contactLists = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -394,6 +400,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($classifiedAd->getSeller() === $this) {
                 $classifiedAd->setSeller(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ContactList[]
+     */
+    public function getContactLists(): Collection
+    {
+        return $this->contactLists;
+    }
+
+    public function addContactList(ContactList $contactList): self
+    {
+        if (!$this->contactLists->contains($contactList)) {
+            $this->contactLists[] = $contactList;
+            $contactList->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContactList(ContactList $contactList): self
+    {
+        if ($this->contactLists->contains($contactList)) {
+            $this->contactLists->removeElement($contactList);
+            // set the owning side to null (unless already changed)
+            if ($contactList->getCreator() === $this) {
+                $contactList->setCreator(null);
             }
         }
 
