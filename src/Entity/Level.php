@@ -28,9 +28,15 @@ class Level
      */
     private $sport;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FavoriteSport", mappedBy="leve")
+     */
+    private $favoriteSports;
+
     public function __construct()
     {
         $this->sport = new ArrayCollection();
+        $this->favoriteSports = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -71,6 +77,37 @@ class Level
     {
         if ($this->sport->contains($sport)) {
             $this->sport->removeElement($sport);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FavoriteSport[]
+     */
+    public function getFavoriteSports(): Collection
+    {
+        return $this->favoriteSports;
+    }
+
+    public function addFavoriteSport(FavoriteSport $favoriteSport): self
+    {
+        if (!$this->favoriteSports->contains($favoriteSport)) {
+            $this->favoriteSports[] = $favoriteSport;
+            $favoriteSport->setLeve($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteSport(FavoriteSport $favoriteSport): self
+    {
+        if ($this->favoriteSports->contains($favoriteSport)) {
+            $this->favoriteSports->removeElement($favoriteSport);
+            // set the owning side to null (unless already changed)
+            if ($favoriteSport->getLeve() === $this) {
+                $favoriteSport->setLeve(null);
+            }
         }
 
         return $this;

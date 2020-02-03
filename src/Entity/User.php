@@ -113,6 +113,11 @@ class User implements UserInterface
      */
     private $presentInContactList;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FavoriteSport", mappedBy="user")
+     */
+    private $favoriteSports;
+
     public function __construct()
     {
         $this->isActive = false;
@@ -121,6 +126,7 @@ class User implements UserInterface
         $this->classifiedAds = new ArrayCollection();
         $this->contactLists = new ArrayCollection();
         $this->presentInContactList = new ArrayCollection();
+        $this->favoriteSports = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -464,6 +470,37 @@ class User implements UserInterface
     {
         if ($this->presentInContactList->contains($presentInContactList)) {
             $this->presentInContactList->removeElement($presentInContactList);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FavoriteSport[]
+     */
+    public function getFavoriteSports(): Collection
+    {
+        return $this->favoriteSports;
+    }
+
+    public function addFavoriteSport(FavoriteSport $favoriteSport): self
+    {
+        if (!$this->favoriteSports->contains($favoriteSport)) {
+            $this->favoriteSports[] = $favoriteSport;
+            $favoriteSport->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteSport(FavoriteSport $favoriteSport): self
+    {
+        if ($this->favoriteSports->contains($favoriteSport)) {
+            $this->favoriteSports->removeElement($favoriteSport);
+            // set the owning side to null (unless already changed)
+            if ($favoriteSport->getUser() === $this) {
+                $favoriteSport->setUser(null);
+            }
         }
 
         return $this;
