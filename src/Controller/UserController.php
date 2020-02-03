@@ -87,7 +87,9 @@ class UserController extends AbstractController
                             
                             $em->flush();
                             $this->addFlash('success', 'Votre mot de passe à été changer');
-                    }         
+                    } else {
+                       $this->addFlash('warning', 'Le mot de passe saisi est erroné');
+                    }        
             }
 
 
