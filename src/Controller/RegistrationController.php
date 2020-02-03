@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\UserMailAdress;
 use App\Service\SendMail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,6 +34,7 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            
             $ConfirmationToken = $tokenGenerator->generateToken();
             $user->setConfirmationToken($ConfirmationToken);
 
@@ -66,10 +68,10 @@ class RegistrationController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $user = $entityManager->getRepository(User::class)->findOneBy(['confirmationToken' => $token]);
         
-        
+   
         if($user === null) {
-            $this->addFlash('danger', 'utilisateur non trouvé');
-            return $this->redirectToRoute('app_register');
+            $this->addFlash('danger', 'Votre compte est déjà activé');
+            return $this->redirectToRoute('app_login');
         }
 
         $user->setConfirmationToken(null);
@@ -77,11 +79,60 @@ class RegistrationController extends AbstractController
 
         $entityManager->flush($user);
 
-        $this->addFlash('AccountActivation', 'Votre compte est désormais actif, vous pouvez vous identifier.');
+        $this->addFlash('success', 'Votre compte est désormais actif, vous pouvez vous identifier.');
         return $this->redirectToRoute('app_login');
 
     }
     
+
+    /**
+    * @Route("/register/account/new_confirmation_mail", name="app_send_confirmation_token")
+    */
+    public function sendConfirmationToken(Request $request, SendMail $sendMail)
+    {
+
+
+        $form = $this->createForm(UserMailAdress::class);
+        $form->handleRequest($request);
+
+        $email = $form->get('email')->getData();
+    
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $entityManager = $this->getDoctrine()->getManager();
+            $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
+
+            if ($user === null) {
+                
+                $this->addFlash('danger', 'Email Inconnu');
+                return $this->redirectToRoute('app_forgotten_password');
+
+            } elseif ($user && $user->getConfirmationToken() != null) {
+            
+                $url = $this->generateUrl('app_confirmation', array('token' => $user->getConfirmationToken()), UrlGeneratorInterface::ABSOLUTE_URL);
+    
+                $sendMail->sendAnEmail('Confirmation de votre inscription', $this->getParameter('app_email'), $user->getEmail(),  "Pour activer votre compte et confirmer votre inscription cliquez sur le lien : " . $url,
+                'text/html');     
+                $this->addFlash('success', 'Mail envoyé');
+
+            } else{
+                $this->addFlash('danger', 'Votre compte est déjà activé');
+                return $this->redirectToRoute('app_login');
+            } 
+            
+        }
+
+        return $this->render('security/mail_user.html.twig', [
+            'form' => $form->createView(),
+            'pageTitle' => 'Mail de confirmation d\'inscription' ,
+            'title' => 'Recevoir mon mail d\'activation de compte',
+            'description' => 'saisissez votre email pour recevoir le lien d\'activation de votre compte'
+        ]);
+
+
+
+    }
 
 
 
