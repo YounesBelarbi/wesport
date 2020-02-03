@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,6 +23,16 @@ class Level
      */
     private $name;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Sport", inversedBy="levels")
+     */
+    private $sport;
+
+    public function __construct()
+    {
+        $this->sport = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -34,6 +46,32 @@ class Level
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Sport[]
+     */
+    public function getSport(): Collection
+    {
+        return $this->sport;
+    }
+
+    public function addSport(Sport $sport): self
+    {
+        if (!$this->sport->contains($sport)) {
+            $this->sport[] = $sport;
+        }
+
+        return $this;
+    }
+
+    public function removeSport(Sport $sport): self
+    {
+        if ($this->sport->contains($sport)) {
+            $this->sport->removeElement($sport);
+        }
 
         return $this;
     }
