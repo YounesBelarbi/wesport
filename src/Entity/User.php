@@ -93,10 +93,16 @@ class User implements UserInterface
      */
     private $eventParticipation;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="eventOrganizer")
+     */
+    private $eventsOrganized;
+
     public function __construct()
     {
         $this->isActive = false;
         $this->eventParticipation = new ArrayCollection();
+        $this->eventsOrganized = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -321,6 +327,37 @@ class User implements UserInterface
     {
         if ($this->eventParticipation->contains($eventParticipation)) {
             $this->eventParticipation->removeElement($eventParticipation);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getEventsOrganized(): Collection
+    {
+        return $this->eventsOrganized;
+    }
+
+    public function addEventsOrganized(Event $eventsOrganized): self
+    {
+        if (!$this->eventsOrganized->contains($eventsOrganized)) {
+            $this->eventsOrganized[] = $eventsOrganized;
+            $eventsOrganized->setEventOrganizer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventsOrganized(Event $eventsOrganized): self
+    {
+        if ($this->eventsOrganized->contains($eventsOrganized)) {
+            $this->eventsOrganized->removeElement($eventsOrganized);
+            // set the owning side to null (unless already changed)
+            if ($eventsOrganized->getEventOrganizer() === $this) {
+                $eventsOrganized->setEventOrganizer(null);
+            }
         }
 
         return $this;

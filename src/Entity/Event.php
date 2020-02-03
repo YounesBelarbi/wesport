@@ -63,6 +63,12 @@ class Event
      */
     private $participatingUserList;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="eventsOrganized")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $eventOrganizer;
+
     public function __construct()
     {
         $this->participatingUserList = new ArrayCollection();
@@ -193,6 +199,18 @@ class Event
             $this->participatingUserList->removeElement($participatingUserList);
             $participatingUserList->removeEventParticipation($this);
         }
+
+        return $this;
+    }
+
+    public function getEventOrganizer(): ?User
+    {
+        return $this->eventOrganizer;
+    }
+
+    public function setEventOrganizer(?User $eventOrganizer): self
+    {
+        $this->eventOrganizer = $eventOrganizer;
 
         return $this;
     }
