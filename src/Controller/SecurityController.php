@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\MailResetPasswordType;
 use App\Form\ResetPasswordType;
+use App\Form\UserMailAdress;
 use App\Service\SendMail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,7 +51,7 @@ class SecurityController extends AbstractController
     public function forgottenPassword(Request $request, UserPasswordEncoderInterface $encoder, SendMail $sendMail, TokenGeneratorInterface $tokenGenerator): Response
     {
 
-            $form = $this->createForm(MailResetPasswordType::class);
+            $form = $this->createForm(UserMailAdress::class);
             $form->handleRequest($request);
 
             $email = $form->get('email')->getData();
@@ -89,8 +89,11 @@ class SecurityController extends AbstractController
             }
         
 
-        return $this->render('security/forgotten_password.html.twig', [
+        return $this->render('security/mail_user.html.twig', [
             'form' => $form->createView(),
+            'pageTitle' => 'Mot de passe oublié' ,
+            'title' => 'Reinitialiser mon mot de passe',
+            'description' => 'saisissez votre email pour recevoir le lien vous permettant de changer votre mot de passe'
         ]);
     }
 
