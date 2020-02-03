@@ -98,11 +98,17 @@ class User implements UserInterface
      */
     private $eventsOrganized;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ClassifiedAd", mappedBy="seller")
+     */
+    private $classifiedAds;
+
     public function __construct()
     {
         $this->isActive = false;
         $this->eventParticipation = new ArrayCollection();
         $this->eventsOrganized = new ArrayCollection();
+        $this->classifiedAds = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -357,6 +363,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($eventsOrganized->getEventOrganizer() === $this) {
                 $eventsOrganized->setEventOrganizer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ClassifiedAd[]
+     */
+    public function getClassifiedAds(): Collection
+    {
+        return $this->classifiedAds;
+    }
+
+    public function addClassifiedAd(ClassifiedAd $classifiedAd): self
+    {
+        if (!$this->classifiedAds->contains($classifiedAd)) {
+            $this->classifiedAds[] = $classifiedAd;
+            $classifiedAd->setSeller($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClassifiedAd(ClassifiedAd $classifiedAd): self
+    {
+        if ($this->classifiedAds->contains($classifiedAd)) {
+            $this->classifiedAds->removeElement($classifiedAd);
+            // set the owning side to null (unless already changed)
+            if ($classifiedAd->getSeller() === $this) {
+                $classifiedAd->setSeller(null);
             }
         }
 
