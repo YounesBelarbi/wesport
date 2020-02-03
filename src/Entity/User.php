@@ -108,6 +108,11 @@ class User implements UserInterface
      */
     private $contactLists;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\ContactList", inversedBy="userContactList")
+     */
+    private $presentInContactList;
+
     public function __construct()
     {
         $this->isActive = false;
@@ -115,6 +120,7 @@ class User implements UserInterface
         $this->eventsOrganized = new ArrayCollection();
         $this->classifiedAds = new ArrayCollection();
         $this->contactLists = new ArrayCollection();
+        $this->presentInContactList = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -432,6 +438,32 @@ class User implements UserInterface
             if ($contactList->getCreator() === $this) {
                 $contactList->setCreator(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ContactList[]
+     */
+    public function getPresentInContactList(): Collection
+    {
+        return $this->presentInContactList;
+    }
+
+    public function addPresentInContactList(ContactList $presentInContactList): self
+    {
+        if (!$this->presentInContactList->contains($presentInContactList)) {
+            $this->presentInContactList[] = $presentInContactList;
+        }
+
+        return $this;
+    }
+
+    public function removePresentInContactList(ContactList $presentInContactList): self
+    {
+        if ($this->presentInContactList->contains($presentInContactList)) {
+            $this->presentInContactList->removeElement($presentInContactList);
         }
 
         return $this;

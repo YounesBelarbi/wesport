@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,16 @@ class ContactList
      * @ORM\JoinColumn(nullable=false)
      */
     private $creator;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="presentInContactList")
+     */
+    private $userContactList;
+
+    public function __construct()
+    {
+        $this->userContactList = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +98,34 @@ class ContactList
     public function setCreator(?User $creator): self
     {
         $this->creator = $creator;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUserContactList(): Collection
+    {
+        return $this->userContactList;
+    }
+
+    public function addUserContactList(User $userContactList): self
+    {
+        if (!$this->userContactList->contains($userContactList)) {
+            $this->userContactList[] = $userContactList;
+            $userContactList->addPresentInContactList($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserContactList(User $userContactList): self
+    {
+        if ($this->userContactList->contains($userContactList)) {
+            $this->userContactList->removeElement($userContactList);
+            $userContactList->removePresentInContactList($this);
+        }
 
         return $this;
     }
