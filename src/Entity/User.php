@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -86,9 +88,15 @@ class User implements UserInterface
      */
     private $confirmationToken;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Event", inversedBy="participatingUserList")
+     */
+    private $eventParticipation;
+
     public function __construct()
     {
         $this->isActive = false;
+        $this->eventParticipation = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -288,6 +296,32 @@ class User implements UserInterface
     public function setConfirmationToken(?string $confirmationToken): self
     {
         $this->confirmationToken = $confirmationToken;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getEventParticipation(): Collection
+    {
+        return $this->eventParticipation;
+    }
+
+    public function addEventParticipation(Event $eventParticipation): self
+    {
+        if (!$this->eventParticipation->contains($eventParticipation)) {
+            $this->eventParticipation[] = $eventParticipation;
+        }
+
+        return $this;
+    }
+
+    public function removeEventParticipation(Event $eventParticipation): self
+    {
+        if ($this->eventParticipation->contains($eventParticipation)) {
+            $this->eventParticipation->removeElement($eventParticipation);
+        }
 
         return $this;
     }

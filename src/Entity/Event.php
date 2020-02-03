@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -55,6 +57,16 @@ class Event
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="eventParticipation")
+     */
+    private $participatingUserList;
+
+    public function __construct()
+    {
+        $this->participatingUserList = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -153,6 +165,34 @@ class Event
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getParticipatingUserList(): Collection
+    {
+        return $this->participatingUserList;
+    }
+
+    public function addParticipatingUserList(User $participatingUserList): self
+    {
+        if (!$this->participatingUserList->contains($participatingUserList)) {
+            $this->participatingUserList[] = $participatingUserList;
+            $participatingUserList->addEventParticipation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipatingUserList(User $participatingUserList): self
+    {
+        if ($this->participatingUserList->contains($participatingUserList)) {
+            $this->participatingUserList->removeElement($participatingUserList);
+            $participatingUserList->removeEventParticipation($this);
+        }
 
         return $this;
     }
