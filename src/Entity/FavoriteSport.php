@@ -34,12 +34,7 @@ class FavoriteSport
     private $level;
 
 
-    public function __construct()
-    {
-        $this->user = new ArrayCollection();
-        $this->sport = new ArrayCollection();
-        $this->level = new ArrayCollection();
-    }
+  
 
     public function getId(): ?int
     {
