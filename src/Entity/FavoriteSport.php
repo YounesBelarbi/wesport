@@ -11,20 +11,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class FavoriteSport
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="favoriteSports")
+     * @ORM\Id @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="favoriteSports")
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Sport", inversedBy="favoriteSports")
+     * @ORM\Id @ORM\ManyToOne(targetEntity="App\Entity\Sport", inversedBy="favoriteSports")
      */
     private $sport;
 
