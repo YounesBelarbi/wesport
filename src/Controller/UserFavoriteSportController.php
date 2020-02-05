@@ -16,7 +16,7 @@ class UserFavoriteSportController extends AbstractController
     /**
      * @Route("/user/addfavorite/sport", name="user_favorite_sport")
      */
-    public function index(Request $request, EntityManagerInterface $em)
+    public function addFavoriteSport(Request $request, EntityManagerInterface $em)
     {
         
         $user = $this->getUser();
