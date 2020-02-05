@@ -14,7 +14,7 @@ class EventController extends AbstractController
 
 
     /**
-     * @Route("/user/event/organisation", name="event")
+     * @Route("/user/event/organisation", name="event_organized")
      */
     public function eventOrganisation(Request $request, EntityManagerInterface $em)
     {
@@ -46,11 +46,14 @@ class EventController extends AbstractController
                 $em->persist($event);
                 $em->flush();
                 $this->addFlash('success', 'Votre événement est créer');
+                return $this->redirectToRoute('profile_edit');
     
             }catch (\Exception $e) {
                 
                 $this->addFlash('warning','Un probème est survenue, une information est manquante. Votre événement n\'est pas enregistré'); 
             }
+
+            return $this->redirectToRoute('edit');
 
         }
 

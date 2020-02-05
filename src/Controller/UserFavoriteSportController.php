@@ -43,6 +43,7 @@ class UserFavoriteSportController extends AbstractController
                     $em->persist($favoriteSport);
                     $em->flush();
                     $this->addFlash('success', 'Le sport est rajouté dans vos favoris');
+                    return $this->redirectToRoute('profile_edit');
         
                 }catch (\Exception $e) {
                     
@@ -51,6 +52,8 @@ class UserFavoriteSportController extends AbstractController
             } else {
                 $this->addFlash('warning', 'renseigné tous les champs');
             }
+
+            
 
         }
 
