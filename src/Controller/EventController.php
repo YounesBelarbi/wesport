@@ -81,6 +81,8 @@ class EventController extends AbstractController
     }
 
 
+
+
     /**
      * @Route("/user/event/participation/{id}", name="event_participation")
      */
@@ -93,6 +95,24 @@ class EventController extends AbstractController
         
         $em->flush();
         $this->addFlash('success', 'Vous êtes inscrit à l\'evenement '.$event->getTitle());
+          
+        return $this->redirectToRoute('event_list');
+
+    }
+
+
+    /**
+    * @Route("/user/event/deregistration/{id}", name="event_deregistration")
+    */
+    public function eventDeregistration($id, EntityManagerInterface $em, EventRepository $eventRepository)
+    {
+
+        $user = $this->getUser();
+        $event = $eventRepository->find($id);
+        $event->removeParticipatingUserList($user);
+        
+        $em->flush();
+        $this->addFlash('warning', 'Vous n\'êtes plus inscrit à l\'evenement '.$event->getTitle());
           
         return $this->redirectToRoute('event_list');
 
