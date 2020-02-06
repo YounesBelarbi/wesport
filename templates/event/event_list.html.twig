@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EventController!{% endblock %}
+
+{% block body %}
+
+{# {{dump(eventList)}} #}
+{% for event in eventList %}
+
+
+    <div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">{{event.title}}</h5>
+        <p class="card-text">{{event.eventBody}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{event.sportConcerned}}</li>
+        <li class="list-group-item">{{event.location}}</li>
+        {# <li class="list-group-item">{{event.eventDate}}</li> #}
+    </ul>
+    <div class="card-body">
+        <a href="{{ path('event_participation', {id: event.id}) }}" class="card-link">s'inscrire à l'evénement</a>
+    </div>
+    </div>
+
+{% endfor %}
+
+{% endblock %}
