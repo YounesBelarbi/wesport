@@ -18,8 +18,8 @@ class EventController extends AbstractController
      */
     public function eventShow(Request $request, EntityManagerInterface $em, EventRepository $eventRepository)
     {
+        
         $allEvent = $eventRepository->findAll();
-
 
         return $this->render('event/event_list.html.twig', [
             'eventList' => $allEvent,
@@ -90,23 +90,11 @@ class EventController extends AbstractController
         $user = $this->getUser();
         $event = $eventRepository->find($id);
         $event->addParticipatingUserList($user);
+        
         $em->flush();
         $this->addFlash('success', 'Vous êtes inscrit à l\'evenement '.$event->getTitle());
+          
         return $this->redirectToRoute('event_list');
-      
-        // $eventParticipationForm = $this->createForm(EventOrganizationType::class);
 
-        // $eventParticipationForm->handleRequest($request);
-       
-        // if ($eventParticipationForm->isSubmitted() && $eventParticipationForm->isValid()) {
-
-           
-
-        // }
-
-        // return $this->render('event/event_participation.html.twig', [
-
-        //     'eventParticipationForm' => $eventParticipationForm->createView(),
-        // ]);
     }
 }

@@ -4,9 +4,7 @@
 
 {% block body %}
 
-{# {{dump(eventList)}} #}
 {% for event in eventList %}
-
 
     <div class="card" style="width: 18rem;">
     <img src="..." class="card-img-top" alt="...">
@@ -17,13 +15,21 @@
     <ul class="list-group list-group-flush">
         <li class="list-group-item">{{event.sportConcerned}}</li>
         <li class="list-group-item">{{event.location}}</li>
-        {# <li class="list-group-item">{{event.eventDate}}</li> #}
+        <li class="list-group-item">{{event.eventDate|date("m/d/Y")}}</li>
     </ul>
+    <div>
+    <ul class="list-group list-group-flush">
+        {% for participant in event.participatingUserList %}
+        <li class="list-group-item">{{participant.username}}</li>
+        {% endfor %}
+    </ul>
+    </div>
     <div class="card-body">
         <a href="{{ path('event_participation', {id: event.id}) }}" class="card-link">s'inscrire à l'evénement</a>
     </div>
     </div>
-
+ 
 {% endfor %}
+
 
 {% endblock %}
