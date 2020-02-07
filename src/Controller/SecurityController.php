@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ResetPasswordType;
-use App\Form\UserMailAdress;
+use App\Form\UserType;
 use App\Service\SendMail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,7 +51,7 @@ class SecurityController extends AbstractController
     public function forgottenPassword(Request $request, UserPasswordEncoderInterface $encoder, SendMail $sendMail, TokenGeneratorInterface $tokenGenerator): Response
     {
 
-            $form = $this->createForm(UserMailAdress::class);
+            $form = $this->createForm(UserType::class);
             $form->handleRequest($request);
 
             $email = $form->get('email')->getData();
