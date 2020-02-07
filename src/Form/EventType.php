@@ -10,23 +10,18 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EventOrganizationType extends AbstractType
+class EventType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('eventBody')
-            // ->add('author')
             ->add('sportConcerned', EntityType::class, [
                 'class' => Sport::class,
             ])
             ->add('title')
             ->add('location')
             ->add('eventDate')
-            // ->add('createdAt')
-            // ->add('updatedAt')
-            // ->add('participatingUserList')
-            // ->add('eventOrganizer')
             ->add('send', SubmitType::class, [
                 'label' => 'modifier'
             ])

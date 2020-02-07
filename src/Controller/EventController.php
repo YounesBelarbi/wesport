@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Event;
-use App\Form\EventOrganizationType;
+use App\Form\EventType;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,8 +39,7 @@ class EventController extends AbstractController
 
         $user = $this->getUser();
     
-       
-        $eventOrganizationForm = $this->createForm(EventOrganizationType::class);
+        $eventOrganizationForm = $this->createForm(EventType::class);
 
         $eventOrganizationForm->handleRequest($request);
        
@@ -75,10 +74,33 @@ class EventController extends AbstractController
 
         }
 
-        return $this->render('event/event_organization.html.twig', [
-            'eventOrganizationForm' => $eventOrganizationForm->createView(),
+        return $this->render('event/event.html.twig', [
+            'eventForm' => $eventOrganizationForm->createView(),
         ]);
     }
+
+
+
+    /**
+    * @Route("/user/event/edit/{id}", name="event_edit")
+    */
+    public function eventEdit($id, Request $request, EntityManagerInterface $em, EventRepository $eventRepository, Event $event)
+    {
+        $eventEditForm = $this->createForm(EventType::class, $event);
+
+        $eventEditForm->handleRequest($request);
+       
+        if ($eventEditForm->isSubmitted() && $eventEditForm->isValid()) {
+            $em->flush();
+            $this->addFlash('success', 'l\'événement à été mit à jour');
+            return $this->redirectToRoute('event_list');
+        }
+
+        return $this->render('event/event.html.twig', [
+            'eventForm' => $eventEditForm->createView(),
+        ]);
+    }
+
 
 
     /**
@@ -96,21 +118,6 @@ class EventController extends AbstractController
 
         return $this->redirectToRoute('event_list');
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
