@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EventController extends AbstractController
 {
 
+
      /**
      * @Route("/user/event/show", name="event_list")
      */
@@ -23,11 +24,10 @@ class EventController extends AbstractController
 
         return $this->render('event/event_list.html.twig', [
             'eventList' => $allEvent,
+            'user' =>  $this->getUser(),
         ]);
 
     }
-
-
 
 
 
@@ -79,6 +79,37 @@ class EventController extends AbstractController
             'eventOrganizationForm' => $eventOrganizationForm->createView(),
         ]);
     }
+
+
+    /**
+    * @Route("/user/event/deletion/{id}", name="event_deletion")
+    */
+    public function eventDeletion($id, EntityManagerInterface $em, EventRepository $eventRepository)
+    {
+
+       
+
+        $event = $eventRepository->find($id);
+        $em->remove($event);
+        $em->flush();
+        $this->addFlash('success', 'l\'evenement '.$event->getTitle().' à bien été suppimé');
+
+        return $this->redirectToRoute('event_list');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
