@@ -3,41 +3,46 @@
 {% block title %}Hello EventController!{% endblock %}
 
 {% block body %}
+<div class="container-fluid">
+<div class="row">
+    {% for event in eventList %}
 
-{% for event in eventList %}
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{event.title}}</h5>
+                <p class="card-text">{{event.eventBody}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{event.sportConcerned}}</li>
+                <li class="list-group-item">{{event.location}}</li>
+                <li class="list-group-item">{{event.eventDate|date("m/d/Y")}}</li>
+            </ul>
+            <div>
+            <ul class="list-group list-group-flush">
+                {% for participant in event.participatingUserList %}
+                <li class="list-group-item">{{participant.username}}</li>
+                {% endfor %}
+            </ul>
+            </div>
+            <div class="card-body">
+                <a href="{{ path('event_participation', {id: event.id}) }}" class="card-link">s'inscrire à l'evénement</a>
+                <a href="{{ path('event_deregistration', {id: event.id}) }}" class="card-link">se désinscrire de l'evénement</a>
+                
 
-    <div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-        <h5 class="card-title">{{event.title}}</h5>
-        <p class="card-text">{{event.eventBody}}</p>
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    {# only the user who organizes the event can delete and modify it #}
+                    {% if user.id == event.eventOrganizer.id %}
+                    <a href="{{ path('event_edit', {id: event.id}) }}" class="card-link">modifié l'évenement</a>
+                    <a href="{{ path('event_deletion', {id: event.id}) }}" class="card-link">supprimé l'évenement</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    
+    {% endfor %}
     </div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">{{event.sportConcerned}}</li>
-        <li class="list-group-item">{{event.location}}</li>
-        <li class="list-group-item">{{event.eventDate|date("m/d/Y")}}</li>
-    </ul>
-    <div>
-    <ul class="list-group list-group-flush">
-        {% for participant in event.participatingUserList %}
-        <li class="list-group-item">{{participant.username}}</li>
-        {% endfor %}
-    </ul>
-    </div>
-    <div class="card-body">
-        <a href="{{ path('event_participation', {id: event.id}) }}" class="card-link">s'inscrire à l'evénement</a>
-        <a href="{{ path('event_deregistration', {id: event.id}) }}" class="card-link">se désinscrire de l'evénement</a>
-        
-
-        {# only the user who organizes the event can delete and modify it #}
-        {% if user.id == event.eventOrganizer.id %}
-        <a href="{{ path('event_edit', {id: event.id}) }}" class="card-link">modifié l'évenement</a>
-        <a href="{{ path('event_deletion', {id: event.id}) }}" class="card-link">supprimé l'évenement</a>
-        {% endif %}
-    </div>
-    </div>
- 
-{% endfor %}
+</div>
 
 
 {% endblock %}
