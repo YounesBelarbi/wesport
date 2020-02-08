@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Petites annonces - WeSport{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+<div class="row">
+    {% for classifiedAd in classifiedAdList %}
+
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{classifiedAd.title}}</h5>
+                <p class="card-text">{{classifiedAd.classifiedAdBody}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{classifiedAd.sportConcerned}}</li>
+                <li class="list-group-item">{{classifiedAd.objectForSale}}</li>
+                <li class="list-group-item">{{classifiedAd.author}}</li>
+                <li class="list-group-item">{{classifiedAd.createdAt|date("m/d/Y")}}</li>
+            </ul>
+            <div class="card-body">               
+
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    {# only the user who cretatede a classified ad can delete or modify it #}
+                    {# {% if user.id == classifiedAd.seller.id %}
+                    <a href="{{ path('classifiedAd_edit', {id: classifiedAd.id}) }}" class="card-link">modifié l'annonce</a>
+                    <a href="{{ path('classifiedAd_deletion', {id: eclassifiedAd.id}) }}" class="card-link">supprimé l'annonce</a>
+                    {% endif %} #}
+                {% endif %}
+            </div>
+        </div>
+    
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
