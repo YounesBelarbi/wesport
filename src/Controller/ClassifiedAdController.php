@@ -14,7 +14,7 @@ class ClassifiedAdController extends AbstractController
 {
 
     /**
-     * @Route("user/classified-ad/show", name="classified_ad_list")
+     * @Route("user/classified-ad/show", name="ad_list")
      */
     public function classifiedAdList(ClassifiedAdRepository $classifiedAdRepository)
     {
@@ -29,7 +29,7 @@ class ClassifiedAdController extends AbstractController
 
 
     /**
-    * @Route("/user/classified-ad/post-an-ad", name="event_postAd")
+    * @Route("/user/classified-ad/post-an-ad", name="ad_creating")
     */
     public function postAnAd(Request $request, EntityManagerInterface $em)
     {
@@ -70,7 +70,44 @@ class ClassifiedAdController extends AbstractController
             'classifiedAdForm' => $classifiedAdForm->createView(),
         ]);
 
+    }
+
+
+    /**    
+    * @Route("/user/classified-ad/update-an-ad/{id}", name="ad_updating")
+    */
+    public function updateAnAd(Request $request, $id, ClassifiedAdRepository $classifiedAdRepository, EntityManagerInterface $em, ClassifiedAd $classifiedAd)
+    {
+        $classifiedAd = $classifiedAdRepository->find($id);
+    
+        $classifiedAdForm = $this->createForm(ClassifiedAdType::class, $classifiedAd);
+
+
+        $classifiedAdForm->handleRequest($request);
+       
+        if ($classifiedAdForm->isSubmitted() && $classifiedAdForm->isValid()) {
+
+            $em->flush();
+            $this->addFlash('success', 'Votre annonce à bien été mise à jour');
+            return $this->redirectToRoute('ad_list');
+
+        }
+
+        return $this->render('classified_ad/classified_ad.html.twig', [
+            'classifiedAdForm' => $classifiedAdForm->createView(),
+        ]);
 
 
     }
+
+
+    /**    
+    * @Route("/user/classified-ad/delete-an-ad/{id}", name="ad_deleting")
+    */
+    public function deleteAnAd(Request $request, EntityManagerInterface $em)
+    {
+        
+
+    }
+
 }
