@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Petites annonces - WeSport{% endblock %}
+
+{% block body %}
+{{form(classifiedAdForm)}}
+<a href="{{path('ad_list')}}">liste des petites annonces</a>
+{% endblock %}

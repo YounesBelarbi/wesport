@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -37,7 +39,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $username;
 
@@ -86,9 +88,45 @@ class User implements UserInterface
      */
     private $confirmationToken;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Event", inversedBy="participatingUserList")
+     */
+    private $eventParticipation;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="eventOrganizer")
+     */
+    private $eventsOrganized;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ClassifiedAd", mappedBy="seller")
+     */
+    private $classifiedAds;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ContactList", mappedBy="creator")
+     */
+    private $contactLists;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\ContactList", inversedBy="userContactList")
+     */
+    private $presentInContactList;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FavoriteSport", mappedBy="user")
+     */
+    private $favoriteSports;
+
     public function __construct()
     {
         $this->isActive = false;
+        $this->eventParticipation = new ArrayCollection();
+        $this->eventsOrganized = new ArrayCollection();
+        $this->classifiedAds = new ArrayCollection();
+        $this->contactLists = new ArrayCollection();
+        $this->presentInContactList = new ArrayCollection();
+        $this->favoriteSports = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -115,7 +153,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string) $this->username;
     }
 
     /**
@@ -288,6 +326,182 @@ class User implements UserInterface
     public function setConfirmationToken(?string $confirmationToken): self
     {
         $this->confirmationToken = $confirmationToken;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getEventParticipation(): Collection
+    {
+        return $this->eventParticipation;
+    }
+
+    public function addEventParticipation(Event $eventParticipation): self
+    {
+        if (!$this->eventParticipation->contains($eventParticipation)) {
+            $this->eventParticipation[] = $eventParticipation;
+        }
+
+        return $this;
+    }
+
+    public function removeEventParticipation(Event $eventParticipation): self
+    {
+        if ($this->eventParticipation->contains($eventParticipation)) {
+            $this->eventParticipation->removeElement($eventParticipation);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getEventsOrganized(): Collection
+    {
+        return $this->eventsOrganized;
+    }
+
+    public function addEventsOrganized(Event $eventsOrganized): self
+    {
+        if (!$this->eventsOrganized->contains($eventsOrganized)) {
+            $this->eventsOrganized[] = $eventsOrganized;
+            $eventsOrganized->setEventOrganizer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventsOrganized(Event $eventsOrganized): self
+    {
+        if ($this->eventsOrganized->contains($eventsOrganized)) {
+            $this->eventsOrganized->removeElement($eventsOrganized);
+            // set the owning side to null (unless already changed)
+            if ($eventsOrganized->getEventOrganizer() === $this) {
+                $eventsOrganized->setEventOrganizer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ClassifiedAd[]
+     */
+    public function getClassifiedAds(): Collection
+    {
+        return $this->classifiedAds;
+    }
+
+    public function addClassifiedAd(ClassifiedAd $classifiedAd): self
+    {
+        if (!$this->classifiedAds->contains($classifiedAd)) {
+            $this->classifiedAds[] = $classifiedAd;
+            $classifiedAd->setSeller($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClassifiedAd(ClassifiedAd $classifiedAd): self
+    {
+        if ($this->classifiedAds->contains($classifiedAd)) {
+            $this->classifiedAds->removeElement($classifiedAd);
+            // set the owning side to null (unless already changed)
+            if ($classifiedAd->getSeller() === $this) {
+                $classifiedAd->setSeller(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ContactList[]
+     */
+    public function getContactLists(): Collection
+    {
+        return $this->contactLists;
+    }
+
+    public function addContactList(ContactList $contactList): self
+    {
+        if (!$this->contactLists->contains($contactList)) {
+            $this->contactLists[] = $contactList;
+            $contactList->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContactList(ContactList $contactList): self
+    {
+        if ($this->contactLists->contains($contactList)) {
+            $this->contactLists->removeElement($contactList);
+            // set the owning side to null (unless already changed)
+            if ($contactList->getCreator() === $this) {
+                $contactList->setCreator(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ContactList[]
+     */
+    public function getPresentInContactList(): Collection
+    {
+        return $this->presentInContactList;
+    }
+
+    public function addPresentInContactList(ContactList $presentInContactList): self
+    {
+        if (!$this->presentInContactList->contains($presentInContactList)) {
+            $this->presentInContactList[] = $presentInContactList;
+        }
+
+        return $this;
+    }
+
+    public function removePresentInContactList(ContactList $presentInContactList): self
+    {
+        if ($this->presentInContactList->contains($presentInContactList)) {
+            $this->presentInContactList->removeElement($presentInContactList);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FavoriteSport[]
+     */
+    public function getFavoriteSports(): Collection
+    {
+        return $this->favoriteSports;
+    }
+
+    public function addFavoriteSport(FavoriteSport $favoriteSport): self
+    {
+        if (!$this->favoriteSports->contains($favoriteSport)) {
+            $this->favoriteSports[] = $favoriteSport;
+            $favoriteSport->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteSport(FavoriteSport $favoriteSport): self
+    {
+        if ($this->favoriteSports->contains($favoriteSport)) {
+            $this->favoriteSports->removeElement($favoriteSport);
+            // set the owning side to null (unless already changed)
+            if ($favoriteSport->getUser() === $this) {
+                $favoriteSport->setUser(null);
+            }
+        }
 
         return $this;
     }

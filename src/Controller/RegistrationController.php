@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
-use App\Form\UserMailAdress;
+use App\Form\UserType;
 use App\Service\SendMail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -92,7 +92,7 @@ class RegistrationController extends AbstractController
     {
 
 
-        $form = $this->createForm(UserMailAdress::class);
+        $form = $this->createForm(UserType::class);
         $form->handleRequest($request);
 
         $email = $form->get('email')->getData();

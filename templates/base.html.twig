@@ -10,7 +10,7 @@
     <body>
 
     <nav class = "container">
-     
+            <a href="{{path('main')}}">accueil</a>
              {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <a href="{{path('app_login')}}">connexion</a>
 

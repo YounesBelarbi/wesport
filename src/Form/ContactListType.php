@@ -2,18 +2,18 @@
 
 namespace App\Form;
 
-
+use App\Entity\ContactList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserMailAdress extends AbstractType
+class ContactListType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email')
+            ->add('name')
             ->add('send', SubmitType::class, [
                 'label' => 'modifier'
             ])
@@ -23,8 +23,7 @@ class UserMailAdress extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            //mail to reset password not must be mapped with user entity
-            // 'data_class' => User::class,
+            'data_class' => ContactList::class,
         ]);
     }
 }

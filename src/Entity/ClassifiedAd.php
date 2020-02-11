@@ -51,6 +51,12 @@ class ClassifiedAd
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="classifiedAds")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $seller;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -136,6 +142,18 @@ class ClassifiedAd
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getSeller(): ?User
+    {
+        return $this->seller;
+    }
+
+    public function setSeller(?User $seller): self
+    {
+        $this->seller = $seller;
 
         return $this;
     }

@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evenement - WeSport{% endblock %}
+
+{% block body %}
+{{form(eventForm)}}
+<a href="{{path('event_list')}}">voir liste des evenements</a>
+{% endblock %}
