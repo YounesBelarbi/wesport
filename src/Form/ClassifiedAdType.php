@@ -15,15 +15,11 @@ class ClassifiedAdType extends AbstractType
         $builder
             ->add('classifiedAdBody')
             ->add('title')
-            // ->add('author')
             ->add('sportConcerned')
             ->add('objectForSale')
             ->add('send', SubmitType::class, [
                 'label' => 'modifier'
             ])
-            // ->add('createdAt')
-            // ->add('updatedAt')
-            // ->add('seller')
         ;
     }
 
