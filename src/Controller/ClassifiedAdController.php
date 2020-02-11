@@ -97,16 +97,21 @@ class ClassifiedAdController extends AbstractController
             'classifiedAdForm' => $classifiedAdForm->createView(),
         ]);
 
-
     }
 
 
     /**    
     * @Route("/user/classified-ad/delete-an-ad/{id}", name="ad_deleting")
     */
-    public function deleteAnAd(Request $request, EntityManagerInterface $em)
+    public function deleteAnAd(Request $request, $id,  EntityManagerInterface $em, ClassifiedAdRepository $classifiedAdRepository)
     {
-        
+
+        $classifiedAd = $classifiedAdRepository->find($id);
+
+        $em->remove($classifiedAd);
+        $em->flush();
+        $this->addFlash('success', 'Votre annonce à bien été supprimée');
+        return $this->redirectToRoute('ad_list');
 
     }
 

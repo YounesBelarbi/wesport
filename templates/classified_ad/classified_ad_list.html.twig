@@ -23,10 +23,10 @@
 
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     {# only the user who cretatede a classified ad can delete or modify it #}
-                    {# {% if user.id == classifiedAd.seller.id %}
-                    <a href="{{ path('classifiedAd_edit', {id: classifiedAd.id}) }}" class="card-link">modifié l'annonce</a>
-                    <a href="{{ path('classifiedAd_deletion', {id: eclassifiedAd.id}) }}" class="card-link">supprimé l'annonce</a>
-                    {% endif %} #}
+                    {% if user.id == classifiedAd.seller.id %}
+                    <a href="{{ path('ad_updating', {id: classifiedAd.id}) }}" class="card-link">modifié l'annonce</a>
+                    <a href="{{ path('ad_deleting', {id: classifiedAd.id}) }}" class="card-link">supprimé l'annonce</a>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>
