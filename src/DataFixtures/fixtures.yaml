@@ -17,7 +17,7 @@ App\Entity\User:
 App\Entity\ClassifiedAd:
     classified_ad_{1..23}:
         classifiedAdBody: '<text(100)>' 
-        title: '<word()>' 
+        title: '<word(5)>' 
         seller: '@user*'
         # author: #username of the author set in appFixtures.php file
         sportConcerned: '<sports()>'
