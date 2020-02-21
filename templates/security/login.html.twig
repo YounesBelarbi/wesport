@@ -3,17 +3,17 @@
 {% block title %}Connexion - WeSport{% endblock %}
 
 {% block body %}
-<section class="page-top-section set-bg" data-setbg="{{asset('assets/img/header-bg/6.jpg')}}">
+<section class="page-top-section  ">
     <div class="container">
         <h2>Connexion</h2>
     </div>
 </section>
 <section class="form-login-section">
 <div class="container mb-5 pt-5 mt-5">
-	<div class="row justify-content-md-center">
-        <div class="col-lg-12">
+	<div class="row justify-content-md-center col-lg-12">
+        <div class="col-lg-12 d-flex justify-content-center">
         
-            <form class="contact-form" method="post">
+            <form class="contact-form col-md-10" method="post">
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
@@ -34,8 +34,10 @@
 
                         
                     </div>
-                    <div class="checkbox mb-3">
-                        <input type="checkbox" name="_remember_me" id="remember me"><label for="remember me"> Se souvenir de moi </label>
+                    <div class="checkbox mb-3 col-md-12 d-flex nowrap">
+                     <label for="remember me"> Se souvenir de moi </label>
+                        <input type="checkbox" name="_remember_me" id="remember me" class="col-md-1">
+                       
                     </div>
 
 
@@ -44,9 +46,10 @@
                     </div>
                 </div>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-			</form>
-            <a href="{{path('app_forgotten_password')}}">J'ai oublié mon mot de passe</a> <br>
+                <a href="{{path('app_forgotten_password')}}">J'ai oublié mon mot de passe</a> <br>
             <a href="{{path('app_send_confirmation_token')}}">Je n'ai pas reçu mon email d'activation</a>
+			</form>
+            
 		</div>
 	</div>
 </div>
