@@ -163,8 +163,8 @@ Commom elements
 	font-weight: 700;
 	min-width: 228px;
 	padding: 20px 40px;
-	background: #b5b712;
-	color: #353535;
+	background: #e3e498;
+	color: #9c7272;
 	line-height: normal;
 	cursor: pointer;
 	text-align: center;
@@ -507,6 +507,10 @@ Hero section
 	-ms-flex-pack: center;
 	justify-content: center;
 	text-align: center;
+	background-image: url(/assets/img/8.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: left;
 }
 
 .hero-text {
@@ -731,13 +735,38 @@ Newsletter section
 	border: none;
 }
 
+
+/* ----------------
+login section
+ ---------------------*/
+.form-login-section {
+	margin: 140px auto;
+}
+
+
+
+/* ----------------
+registration section
+ ---------------------*/
+
+}
+
+.form-div {
+	margin-bottom: 150px 150px;
+}
+
 /* ----------------
 Footer section
  ---------------------*/
 
+
 .footer-section {
 	padding-top: 106px;
 	padding-bottom: 23px;
+	background-image: url(/assets/img/7.jpg);
+	background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
 }
 
 .footer-widget {
@@ -815,7 +844,11 @@ Other Pages
 .page-top-section {
 	height: 400px;
 	text-align: center;
-	padding-top: 95px;
+	padding-top: 35px;
+	background-image: url(/assets/img/header-bg/6.jpg);
+	background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
 }
 
 .page-top-section h2 {
@@ -1440,7 +1473,8 @@ Responsive
 	}
 	.hero-section {
 		height: auto;
-	}
+	
+	
 	.hero-text {
 		padding-top: 200px;
 		padding-bottom: 180px;
