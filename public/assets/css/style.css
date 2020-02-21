@@ -496,7 +496,7 @@ Hero section
  ---------------------*/
 
 .hero-section {
-	height: 860px;
+	height: 560px;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -507,10 +507,10 @@ Hero section
 	-ms-flex-pack: center;
 	justify-content: center;
 	text-align: center;
-	background-image: url(/assets/img/8.jpg);
+	background-image: url(/assets/img/fond-multisport.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-position: left;
+	
 }
 
 .hero-text {
