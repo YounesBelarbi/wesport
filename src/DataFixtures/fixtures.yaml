@@ -1,0 +1,74 @@
+App\Entity\User:
+    user_{1..25}:
+        email (unique): '<email()>'
+        roles: '<roles()>'
+        password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$sg7Gw4fdepeiPc9FyuKfJA\$0+AMLeya0eMBNPvR164M2NlRlbvM4wlJOe+aSTvArUg'
+        username (unique): '<userName()>'
+        age: '<numberBetween(20, 60)>'
+        lastName: '<lastName()>'
+        firstName: '<firstName()>'
+        city: '<city()>'
+        phoneNumber: '<phoneNumber()>'
+        createdAt: '<date_create()>'
+        isActive: '<boolean()>'
+
+
+
+App\Entity\ClassifiedAd:
+    classified_ad_{1..23}:
+        classifiedAdBody: '<text(100)>' 
+        title: '<word(5)>' 
+        seller: '@user*'
+        # author: #username of the author set in appFixtures.php file
+        sportConcerned: '<sports()>'
+        objectForSale: '<word()>'
+        createdAt: '<date_create()>'
+        
+
+
+App\Entity\ContactList:
+    contactList_{1..10}:
+        name: '<word(3))>'
+        creator: '@user*'
+        userContactList: '<numberBetween(1, 10)>x @user*'
+        createdAt: '<date_create()>'
+
+
+App\Entity\Event:
+    event_{1..20}:
+        eventBody: '<text(55)>'
+        # author: #username of the author set in appFixtures.php file
+        sportConcerned: '@sport*'
+        title: '<word()>'
+        location: '<city()>'
+        eventDate: '<dateTimeBetween( "now", "60 days")>'
+        createdAt: '<dateTimeBetween("-60 days", "now")>'
+        participatingUserList: '<numberBetween(1, 15)>x @user*'
+        eventOrganizer: '@user*'
+
+
+App\Entity\FavoriteSport:
+    favoriteSport_{1..20}:
+        user: '@user*'
+        sport: '@sport*'
+        level: '@level*'
+       
+
+
+App\Entity\Level:
+    level_{1..5}:
+        name (unique): '<levels()>'
+
+
+App\Entity\Sport:
+    sport_{1..10}:
+        name (unique): '<sports()>'
+        levels: '5x @level*'
+
+
+
+
+
+        
+
+        
