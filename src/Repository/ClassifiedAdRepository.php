@@ -47,4 +47,14 @@ class ClassifiedAdRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function lastClassifiedAds()
+    {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.createdAt', 'DESC')
+            ->setMaxResults(6)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

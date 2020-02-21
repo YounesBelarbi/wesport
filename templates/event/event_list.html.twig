@@ -16,7 +16,7 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">{{event.sportConcerned}}</li>
                 <li class="list-group-item">{{event.location}}</li>
-                <li class="list-group-item">{{event.eventDate|date("m/d/Y")}}</li>
+                <li class="list-group-item">{{event.eventDate|format_datetime('full','none',locale='fr')}}</li>
             </ul>
             <div>
             <ul class="list-group list-group-flush">
