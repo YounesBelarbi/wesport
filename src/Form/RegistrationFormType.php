@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -24,7 +25,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('username',null, [
                 'row_attr' => ['class' => 'col-md-12'],
-                'label' => 'pseudonyme'
+                'label' => 'Pseudonyme'
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
@@ -40,17 +41,43 @@ class RegistrationFormType extends AbstractType
                 'constraints' => [
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Votre mots de passe doit contenir au minimum {{ limit }} caractères',
+                        'minMessage' => 'Votre mot de passe doit contenir au minimum {{ limit }} caractères',
                         'max' => 4096,
                     ])
                 ],
                 'options' => ['row_attr' => ['class' => 'col-md-6']],
                 'first_options'  => [
-                    'label' => 'mot de passe',
+                    'label' => 'Mot de passe',
                     
                 ],
                 'second_options' => ['label' => 'Confirmer le mot de passe'],
                 'invalid_message' => 'Les mots de passe doivent être identiques',
+            ])
+            ->add('age',null, [
+                'row_attr' => ['class' => 'col-md-2'],
+                'label' => 'Âge',
+                'required' => false
+            ])
+            ->add('lastname',null, [
+                'row_attr' => ['class' => 'col-md-5'],
+                'label' => 'Nom',
+                'required' => false
+            ])
+            ->add('firstname',null, [
+                'row_attr' => ['class' => 'col-md-5'],
+                'label' => 'Prénom',
+                'required' => false
+            ])
+            ->add('city',null, [
+                'row_attr' => ['class' => 'col-md-6'],
+                'label' => 'Ville',
+                'required' => false
+            ])
+            ->add('phonenumber',TelType::class, [
+                'row_attr' => ['class' => 'col-md-6'],
+                'label' => 'Numéro de téléphone',
+                'required' => false
+                
             ])
             ->add('send', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-lg btn-primary site-btn col-md-6'],

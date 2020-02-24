@@ -40,7 +40,9 @@ class ChangePasswordType extends AbstractType
                 'invalid_message' => 'Les mots de passe doivent être identiques',
             ])
             ->add('send', SubmitType::class, [
-                'label' => 'modifier'
+                'attr' => ['class' => 'btn btn-lg btn-primary site-btn col-md-6'],
+                'label' => 'Je confirme mon nouveau mot de passe',
+                'row_attr' => ['class' => 'd-flex justify-content-center'],
             ])
         ;
     }
