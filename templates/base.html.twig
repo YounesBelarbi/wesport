@@ -61,8 +61,10 @@
 			<div class="col-md-6 order-1 order-md-2">
 				<ul class="footer-menu">
 					<li><a href="">Accueil</a></li>
+					{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 					<li><a href="">Connexion</a></li>
 					<li><a href="">Inscription</a></li>
+					{% endif %}
 				</ul>
 			</div>
 		</footer>
