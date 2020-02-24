@@ -92,7 +92,7 @@ class SecurityController extends AbstractController
         return $this->render('security/mail_user.html.twig', [
             'form' => $form->createView(),
             'pageTitle' => 'Mot de passe oublié' ,
-            'title' => 'Reinitialiser mon mot de passe',
+            'title' => 'Mot de passe oubliée',
             'description' => 'saisissez votre email pour recevoir le lien vous permettant de changer votre mot de passe'
         ]);
     }
