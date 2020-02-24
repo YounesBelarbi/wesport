@@ -551,10 +551,6 @@ ClassifiedAds section
 	padding-bottom: 63px;
 }
 
-.classifiedAd-section p {
-	max-width: 100%;
-}
-
 .classifiedAdImg {
 	padding-top: 10px;
 }
@@ -645,11 +641,12 @@ events section
 	margin-bottom: 30px;
 }
 
+
 .event-item .event-pic {
 	width: 300px;
 	height: 300px;
 	/* border-radius: 50%; */
-	margin: 0 auto 10px;
+	margin: 0 auto ;
 	overflow: hidden;
 }
 
@@ -664,6 +661,11 @@ events section
 .event-item p {
 	margin-bottom: 0;
 	
+}
+
+.event-content p {
+	overflow: auto;
+    max-height:75px;
 }
 
 /* ----------------
@@ -1325,6 +1327,7 @@ Contact page
 	top: 0;
 }
 
+
 /* ----------------
 Responsive
  ---------------------*/
@@ -1333,6 +1336,12 @@ Responsive
 	.container {
 		max-width: 1176px;
 	}
+	#navbarSupportedContent ul {
+		width: 100%;
+		
+	}
+
+	
 }
 
 /* Medium screen : 992px. */
@@ -1363,11 +1372,17 @@ Responsive
 	.add-text h2 {
 		margin-right: 100px;
 	}
+
+	#navbarSupportedContent ul {
+		width: 100%;
+	
+	}
 }
 
 /* Tablet :768px. */
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+	
 	.site-logo {
 		max-width: 165px;
 		padding: 15px 15px;
@@ -1558,3 +1573,4 @@ Responsive
 		margin-right: 0;
 	}
 }
+
