@@ -126,7 +126,7 @@ class RegistrationController extends AbstractController
         return $this->render('security/mail_user.html.twig', [
             'form' => $form->createView(),
             'pageTitle' => 'Mail de confirmation d\'inscription' ,
-            'title' => 'Recevoir mon mail d\'activation de compte',
+            'title' => 'Activation de compte',
             'description' => 'saisissez votre email pour recevoir le lien d\'activation de votre compte'
         ]);
 
