@@ -3,6 +3,22 @@
 {% block title %}Petites annonces - WeSport{% endblock %}
 
 {% block body %}
-{{form(contactListForm)}}
-<a href="{{path('contact_list_show')}}">voir mes listes de contact</a>
+
+
+
+    <section class="page-top-section">
+        <div class="container">
+            <h2>Déposer une annonce</h2>
+        </div>
+    </section>
+    <section class="form-registration-section">
+        <div class="container mb-5 pt-5 mt-5">
+            <div class="row justify-content-md-center form-div">
+            {{form(contactListForm ,  {
+                'attr': {'class': 'contact-form col-10 ',
+            }})}}   
+            </div>
+            <a href="{{path('contact_list_show')}}">voir mes listes de contact</a>
+        </div>
+    </section>
 {% endblock %}
