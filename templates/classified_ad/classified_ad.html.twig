@@ -3,6 +3,30 @@
 {% block title %}Petites annonces - WeSport{% endblock %}
 
 {% block body %}
-{{form(classifiedAdForm)}}
-<a href="{{path('ad_list')}}">liste des petites annonces</a>
+
+    <section class="page-top-section">
+        <div class="container">
+            <h2>Déposer une annonce</h2>
+        </div>
+    </section>
+    <section class="form-registration-section">
+        <div class="container mb-5 pt-5 mt-5">
+            <div class="row justify-content-md-center form-div">
+                {{form_start(classifiedAdForm,  {
+                    'attr': {'class': 'contact-form col-10 ',
+                }})}}
+                <div class="row">
+                    {{form_row(classifiedAdForm.title)}}
+                    {{form_row(classifiedAdForm.objectForSale)}}
+                    {{form_row(classifiedAdForm.sportConcerned)}}
+                    {{form_row(classifiedAdForm.price)}}
+                    {{form_row(classifiedAdForm.classifiedAdBody)}}
+                </div>
+                {{form_row(classifiedAdForm.send)}}
+                <a href="{{path('ad_list')}}">liste des petites annonces</a>
+                {{ form_end(classifiedAdForm) }} 
+            </div>
+        </div>
+    </section>
+   
 {% endblock %}
