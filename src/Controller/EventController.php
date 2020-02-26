@@ -54,12 +54,17 @@ class EventController extends AbstractController
             $event->setSportConcerned($eventOrganizationForm->get('sportConcerned')->getData());
             $event->setTitle($eventOrganizationForm->get('title')->getData());
             $event->setLocation($eventOrganizationForm->get('location')->getData());
-            $event->setEventDate($eventOrganizationForm->get('eventDate')->getData());
             $event->setCreatedAt(new \DateTime());
             
+            $eventDate = $eventOrganizationForm->get('eventDate')->getData();
 
+            //ckeck if event date comes after current date
+            if ($eventDate > new \DateTime()) {
+                $event->setEventDate($eventDate);
+            }
+            
             try {
-                    
+                
                 $em->persist($event);
                 $em->flush();
                 $this->addFlash('success', 'Votre événement est créer');
