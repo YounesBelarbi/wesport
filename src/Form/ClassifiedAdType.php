@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\ClassifiedAd;
+use App\Entity\Sport;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,14 +29,14 @@ class ClassifiedAdType extends AbstractType
                 'label' => 'Prix',
 
             ])
-            ->add('sportConcerned', null , [
+            ->add('sportConcerned', EntityType::class , [
+                'class' => Sport::class,
                 'row_attr' => ['class' => 'col-md-5'],
                 'label' => 'Sport concerné par l\'annonce',
             ])
             ->add('objectForSale', null , [
                 'row_attr' => ['class' => 'col-md-5'],
                 'label' => 'Objet que vous souhaitez vendre',
-                'required' => false
             ])
             ->add('send', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-lg btn-primary site-btn col-md-6'],
