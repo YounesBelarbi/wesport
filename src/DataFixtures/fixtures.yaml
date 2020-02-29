@@ -28,7 +28,7 @@ App\Entity\ClassifiedAd:
 
 
 App\Entity\ContactList:
-    contactList_{1..10}:
+    contactList_{1..50}:
         name: '<word(3))>'
         creator: '@user*'
         userContactList: '<numberBetween(1, 10)>x @user*'
