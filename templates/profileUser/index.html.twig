@@ -4,19 +4,14 @@
 
 {% block body %}
 
-
-
-
 	<section class="page-top-section">
 		<div class="container">
 			<h2>Mon compte</h2>
 		</div>
-	</section>
-
-   
+	</section>   
   
 
-    <div class="container emp-profile">
+    <section class="container emp-profile">
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
@@ -44,19 +39,41 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <div class="profile-work">
-                    <p>Lien de création </p>
-                    <a href="{{path('user_favorite_sport_add')}}">Rajouter un sport dans mes favori</a><br/>
-                    <a href="{{path('event_organized')}}">Organiser un événement</a><br/>
-                    <a href="{{path('contact_list_creating')}}">faire une liste de contact</a><br>
-                    <a href="{{path('ad_creating')}}">deposer une petite annonce</a><br/>
+                <nav class="navbar ">
+                    <ul class="navbar-nav profile-nav">
+                        <p>Lien de création </p>
 
-                    <p>Lien de visite</p>
-                    <a href="{{path('user_favorite_sport_list')}}">liste de mes sports favoris</a><br>
-                    <a href="{{path('event_list')}}">voir liste des evenements</a><br/>
-                    <a href="{{path('contact_list_show')}}">voir mes listes de contact</a><br/>
-                    <a href="{{path('ad_list')}}">liste des petites annonces</a><br/>
-                </div>
+                        <li class="nav-item">
+                            <a href="{{path('user_favorite_sport_add')}}">Rajouter un sport dans mes favori</a><br/>                        
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{path('event_organized')}}">Organiser un événement</a><br/>                        
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{path('contact_list_creating')}}">faire une liste de contact</a><br>                        
+                        </li>
+                         <li class="nav-item">
+                            <a href="{{path('ad_creating')}}">deposer une petite annonce</a><br/>                            
+                        </li>
+                    </ul>
+
+                     <ul class="navbar-nav profile-nav">
+                         <p>Lien de visite</p>                       
+
+                        <li class="nav-item">
+                            <a href="{{path('user_favorite_sport_list')}}">liste de mes sports favoris</a><br>                                                
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{path('event_list')}}">voir liste des evenements</a><br/>                                                  
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{path('contact_list_show')}}">voir mes listes de contact</a><br/>                                                   
+                        </li>
+                         <li class="nav-item">
+                            <a href="{{path('ad_list')}}">liste des petites annonces</a><br/>                                                        
+                        </li>
+                    </ul>
+                </nav>
             </div>
             <div class="col-md-8">
                 <div class="tab-content profile-tab" id="myTabContent">
@@ -162,7 +179,7 @@
                 </div>
             </div>
         </div>          
-    </div>
+    </section>
 
 
 {% endblock %}
