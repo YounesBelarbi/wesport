@@ -3,35 +3,28 @@
 {% block title %}Petites annonces - WeSport{% endblock %}
 
 {% block body %}
-<div class="container-fluid">
-<div class="row">
-    {% for classifiedAd in classifiedAdList %}
 
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{classifiedAd.title}}</h5>
-                <p class="card-text">{{classifiedAd.classifiedAdBody}}</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">{{classifiedAd.sportConcerned}}</li>
-                <li class="list-group-item">{{classifiedAd.objectForSale}}</li>
-                <li class="list-group-item">{{classifiedAd.author}}</li>
-                <li class="list-group-item">{{classifiedAd.createdAt|format_datetime('full','none',locale='fr')}}</li>
-            </ul>
-            <div class="card-body">               
-
-                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    {# only the user who cretatede a classified ad can delete or modify it #}
-                    {% if user.id == classifiedAd.seller.id %}
-                    <a href="{{ path('ad_updating', {id: classifiedAd.id}) }}" class="card-link">modifié l'annonce</a>
-                    <a href="{{ path('ad_deleting', {id: classifiedAd.id}) }}" class="card-link">supprimé l'annonce</a>
-                    {% endif %}
-                {% endif %}
-            </div>
+	<section class="page-top-section">
+		<div class="container">
+			<h2>Les petites annonces</h2>
+		</div>
+	</section>
+    <div class="container pt-5">
+        <div class="row justify-content-center">
+            {% for classifiedAd in classifiedAdList %}
+                <div class="card m-3" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{classifiedAd.title}}</h5>
+                        <p class="card-text">{{classifiedAd.classifiedAdBody}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{classifiedAd.sportConcerned}}</li>
+                        <li class="list-group-item">{{classifiedAd.objectForSale}}</li>
+                        <li class="list-group-item">{{classifiedAd.author}}</li>
+                        <li class="list-group-item">{{classifiedAd.createdAt|format_datetime('full','none',locale='fr')}}</li>
+                    </ul>
+                </div>
+            {% endfor %}
         </div>
-    
-    {% endfor %}
     </div>
-</div>
 {% endblock %}
