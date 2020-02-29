@@ -19,11 +19,10 @@ class ContactListController extends AbstractController
      */
     public function showContactList(ContactListRepository $contactListRepository)
     {
-        $contactList = $contactListRepository->findAll();
+         $contactList = $contactListRepository->ContactListOfUser($this->getUser());
 
         return $this->render('contact_list/index.html.twig', [
             'contactList' => $contactList,
-            'user' =>  $this->getUser(),
         ]);
     }
 
