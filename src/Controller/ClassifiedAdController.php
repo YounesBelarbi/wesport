@@ -47,6 +47,7 @@ class ClassifiedAdController extends AbstractController
             $classifiedAd->setTitle($classifiedAdForm->get('title')->getData());
             $classifiedAd->setSportConcerned($classifiedAdForm->get('sportConcerned')->getData());
             $classifiedAd->setObjectForSale($classifiedAdForm->get('objectForSale')->getData());
+            $classifiedAd->setPrice($classifiedAdForm->get('price')->getData());
             $classifiedAd->setAuthor($user->getUsername());
             $classifiedAd->setSeller($user);
             $classifiedAd->setCreatedAt(new \DateTime());

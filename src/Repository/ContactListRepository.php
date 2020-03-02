@@ -47,4 +47,15 @@ class ContactListRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function ContactListOfUser($user)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.creator = :val')
+            ->setParameter('val', $user)
+            ->getQuery()
+            ->getResult()
+            
+        ;
+    }
 }

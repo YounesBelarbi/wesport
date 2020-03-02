@@ -1,45 +1,75 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion - WeSport{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+<section class="page-top-section  ">
+    <div class="container">
+        <h2>Connexion</h2>
+    </div>
+</section>
+<section class="form-login-section">
+<div class="container mb-5 pt-5 mt-5">
+	<div class="row justify-content-md-center col-lg-12">
+        <div class="col-lg-12 d-flex justify-content-center">
+        
+            <form class="contact-form col-md-10" method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+                {% if app.user %}
+                    <div class="mb-3">
+                        You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="inputEmail" placeholder="Email">Email</label>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputPassword" placeholder="Mot de passe">Password</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control" required>
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
+                        
+                    </div>
+                    <div class="checkbox mb-3 col-md-12 d-flex nowrap">
+                     <label for="remember me"> Se souvenir de moi </label>
+                        <input type="checkbox" name="_remember_me" id="remember me" class="col-md-1">
+                       
+                    </div>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}">
+
+                    <div class="col-md-12 row justify-content-md-center">
+                            <button class="btn btn-lg btn-primary site-btn col-md-4" type="submit">Connexion</button>
+                    </div>
+                </div>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <a href="{{path('app_forgotten_password')}}">J'ai oublié mon mot de passe</a> <br>
+            <a href="{{path('app_send_confirmation_token')}}">Je n'ai pas reçu mon email d'activation</a>
+			</form>
+            
+		</div>
+	</div>
+</div>
+</section>
+   
+
+    
+    
+    
 
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
         See https://symfony.com/doc/current/security/remember_me.html #}
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Se souvenir de moi
-            </label>
-        </div>
+        
     
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
+   
     
-</form>
-<a href="{{path('app_forgotten_password')}}">J'ai oublié mon mot de passe</a> <br>
-<a href="{{path('app_send_confirmation_token')}}">Je n'ai pas reçu mon email d'activation</a>
+
+
 
 {% endblock %}

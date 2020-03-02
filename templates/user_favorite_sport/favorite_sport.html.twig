@@ -1,8 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserFavoriteSportController!{% endblock %}
+{% block title %}Rajouter un sort en favori{% endblock %}
 
 {% block body %}
-{{form(favoriteSportForm)}}
-<a href="{{path('user_favorite_sport_list')}}">liste des sports favoris</a>
+
+
+<section class="page-top-section">
+    <div class="container">
+        <h2>Rajouter un sport favori</h2>
+    </div>
+</section>
+<section class="form-registration-section">
+    <div class="container mb-5 pt-5 mt-5">
+	    <div class="row justify-content-md-center form-div">
+        
+            
+            {{ form_start(favoriteSportForm, {
+                'attr': {'class': 'contact-form col-10 ',
+            }})}}
+            <div class="row">
+            {{form_row(favoriteSportForm.sport)}}
+            {{form_row(favoriteSportForm.level)}}
+            </div>
+            {{form_row(favoriteSportForm.send)}}
+	    </div>
+    </div>
+</section>
+   
+
 {% endblock %}

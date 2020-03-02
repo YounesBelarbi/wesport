@@ -1,7 +1,92 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil - WeSport{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
-<h1>accueil</h1>
+
+
+
+
+
+	<!-- Hero section -->
+	<section class="hero-section ">
+		<div class="container">
+			<div class="hero-text">
+				<h2>WeSport</h2>
+				<h2>Trouvez vos coéquipiers et vos adversaires facilement</h2>
+				
+			</div>
+		</div>
+	</section>
+	<!-- Hero section end -->
+
+	<!-- Event section -->
+	<section class="events-section">
+		<div class="events-container">
+			<div class="section-title text-center">
+				<h2>Les Prochains Evénéments</h2>
+			</div>
+			<div class="row">
+				{% for event in lastEvent %}
+				
+				<div class="col-lg-4 col-sm-6 mb-4">
+					<div class="event-item">
+						<div class="event-pic">
+						<h3>{{event.sportConcerned}}</h3>
+							<img src="{{asset('assets/img/test-image.jpg')}}" alt="">
+						</div>
+						<div class="event-content">
+						<h4>{{event.title}}</h4>
+						<p class="event-body">{{event.eventBody}}</p>
+						<p>Lieu: {{event.location}}</p>
+						<p>Date: {{event.eventDate|date("d/m/Y")}}</p>
+						</div>
+					</div>
+				</div>
+
+				{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Event section end -->
+
+
+
+
+
+
+	<!-- ClassifiedAds section-->
+	<section class="classifiedAds-section">
+		<div class="ads-container">
+		<div class="section-title text-center">
+				<h2>Les Nouvelles anonces</h2>
+			</div>
+			<div class="row row-cols-2">
+			{% for classifiedAd in lastClassifiedAds %}
+				
+				<div class="col-lg-6 row col-md-12">
+				
+					<div class="col-4 classifiedAdImg">
+						<img src="{{asset('assets/img/test-image.jpg')}}" alt="">
+					</div>
+					<div class="col-8 adsBody">
+						<div class="d-flex justify-content-center">
+							<h3 >{{classifiedAd.title}}</h3>
+						</div>
+						<p class="d-inline-block">
+						{{classifiedAd.classifiedAdBody}}
+						</p>
+						<div class="d-flex justify-content-end">
+							<p>Publiée par {{classifiedAd.author}} le {{classifiedAd.createdAt|format_datetime('full','none',locale='fr')}}</p>
+						</div>
+					</div>
+
+				</div>	
+			{% endfor %}
+			</div>
+		</div>
+	</section>
+	<!-- ClassifiedAds section end-->
+
 {% endblock %}

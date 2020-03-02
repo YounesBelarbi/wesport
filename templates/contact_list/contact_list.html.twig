@@ -1,8 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Petites annonces - WeSport{% endblock %}
+{% block title %}Créer une liste de contact{% endblock %}
 
 {% block body %}
-{{form(contactListForm)}}
-<a href="{{path('contact_list_show')}}">voir mes listes de contact</a>
+
+
+
+    <section class="page-top-section">
+        <div class="container">
+            <h2>Faire une liste de contact</h2>
+        </div>
+    </section>
+    <section class="form-registration-section">
+        <div class="container mb-5 pt-5 mt-5">
+            <div class="row justify-content-md-center form-div">
+            {{form_start(contactListForm ,  {
+                'attr': {'class': 'contact-form col-10 ',
+            }})}}   
+            <div class="row">
+            {{form_row(contactListForm.name)}}
+            </div>
+            {{form_row(contactListForm.send)}}
+            {{form_end(contactListForm)}}
+            </div>
+            
+        </div>
+    </section>
 {% endblock %}

@@ -1,16 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactListController!{% endblock %}
+{% block title %}Mes liste de contact{% endblock %}
 
 {% block body %}
-<div class="container-fluid">
-    <div class="row">
-    {% for list in contactList %}
-        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %} 
-                    {# only the user who cretate a contact list can view and delete or modify it #}
-            {% if user.id == list.creator.id %}
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+
+	<section class="page-top-section">
+		<div class="container">
+			<h2>Mes listes de contact</h2>
+		</div>
+	</section>
+
+    <section class="container pt-5">
+        <div class="row justify-content-center">
+            {% for list in contactList %}
+                <div class="card m-3" style="width: 18rem;">
                     <div class="card-body">
                     <h5 class="card-title">{{list.name}}</h5>
                     </div>
@@ -20,13 +23,11 @@
                         </ul>
                     {% endfor %}
                     <div class="card-body">               
-                       <a href="{{ path('contact_list_updating', {id: list.id}) }}" class="card-link">modifié la liste</a>
+                        <a href="{{ path('contact_list_updating', {id: list.id}) }}" class="card-link">modifié la liste</a>
                         <a href="{{ path('contact_list_deleting', {id: list.id}) }}" class="card-link">supprimé la liste</a>
                     </div>
                 </div>
-            {% endif %}
-        {% endif %} 
-    {% endfor %}
-    </div>
-</div>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}

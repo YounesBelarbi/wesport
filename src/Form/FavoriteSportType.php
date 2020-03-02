@@ -16,13 +16,18 @@ class FavoriteSportType extends AbstractType
     {
         $builder
             
-            ->add('sport')
+            ->add('sport', null, [
+                'row_attr' => ['class' => 'col-md-6'],
+            ])
             ->add('level', EntityType::class, [
                 'class' => Level::class,
-                'expanded' => true
+                'row_attr' => ['class' => 'col-md-6'],
+                
             ])
             ->add('send', SubmitType::class, [
-                'label' => 'modifier'
+                'attr' => ['class' => 'btn btn-lg btn-primary site-btn col-md-6'],
+                'label' => 'Enregistrer',
+                'row_attr' => ['class' => 'd-flex justify-content-center'],
             ])
         ;
     }
