@@ -10,12 +10,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+* @Route("/user", name="event_")
+*/
 class EventController extends AbstractController
 {
 
 
      /**
-     * @Route("/user/event/show", name="event_list")
+     * @Route("/event/show", name="list")
      */
     public function eventShow(Request $request, EntityManagerInterface $em, EventRepository $eventRepository)
     {
@@ -32,7 +35,7 @@ class EventController extends AbstractController
 
 
     /**
-     * @Route("/user/event/organization", name="event_organized")
+     * @Route("/event/organization", name="organized")
      */
     public function eventOrganization(Request $request, EntityManagerInterface $em)
     {
@@ -68,14 +71,14 @@ class EventController extends AbstractController
                 $em->persist($event);
                 $em->flush();
                 $this->addFlash('success', 'Votre événement est créer');
-                return $this->redirectToRoute('profile_edit');
+                return $this->redirectToRoute('profile_show');
     
             }catch (\Exception $e) {
                 
                 $this->addFlash('warning','Un problème est survenu, une information est manquante. Votre événement n\'est pas enregistré'); 
             }
 
-            return $this->redirectToRoute('profile_edit');
+            return $this->redirectToRoute('profile_show');
 
         }
 
@@ -87,7 +90,7 @@ class EventController extends AbstractController
 
 
     /**
-    * @Route("/user/event/edit/{id}", name="event_edit")
+    * @Route("/event/edit/{id}", name="edit")
     */
     public function eventEdit($id, Request $request, EntityManagerInterface $em, EventRepository $eventRepository, Event $event)
     {
@@ -98,7 +101,7 @@ class EventController extends AbstractController
         if ($eventEditForm->isSubmitted() && $eventEditForm->isValid()) {
             $em->flush();
             $this->addFlash('success', 'l\'événement à été mit à jour');
-            return $this->redirectToRoute('event_list');
+            return $this->redirectToRoute('profile_show');
         }
 
         return $this->render('event/event.html.twig', [
@@ -109,7 +112,7 @@ class EventController extends AbstractController
 
 
     /**
-    * @Route("/user/event/deletion/{id}", name="event_deletion")
+    * @Route("/event/deletion/{id}", name="deletion")
     */
     public function eventDeletion($id, EntityManagerInterface $em, EventRepository $eventRepository)
     {
@@ -121,13 +124,13 @@ class EventController extends AbstractController
         $em->flush();
         $this->addFlash('success', 'l\'evenement '.$event->getTitle().' à bien été suppimé');
 
-        return $this->redirectToRoute('event_list');
+        return $this->redirectToRoute('profile_show');
     }
 
 
 
     /**
-     * @Route("/user/event/participation/{id}", name="event_participation")
+     * @Route("/event/participation/{id}", name="participation")
      */
     public function eventParticipation($id, EntityManagerInterface $em, EventRepository $eventRepository)
     {
@@ -145,7 +148,7 @@ class EventController extends AbstractController
 
 
     /**
-    * @Route("/user/event/deregistration/{id}", name="event_deregistration")
+    * @Route("/event/deregistration/{id}", name="deregistration")
     */
     public function eventDeregistration($id, EntityManagerInterface $em, EventRepository $eventRepository)
     {

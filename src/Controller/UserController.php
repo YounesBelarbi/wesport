@@ -44,6 +44,7 @@ class UserController extends AbstractController
 
             $em->flush();
             $this->addFlash('success', 'Votre profile à été mit à jour');
+            return $this->redirectToRoute('profile_show');
         }
             
 
