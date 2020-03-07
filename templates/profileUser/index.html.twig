@@ -49,15 +49,7 @@
                         <li class="nav-item">
                             <a href="{{path('user_favorite_sport_add')}}">Rajouter un sport dans mes favori</a><br/>                        
                         </li>
-                        <li class="nav-item">
-                            <a href="{{path('event_organized')}}">Organiser un événement</a><br/>                        
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{path('contact_list_creating')}}">faire une liste de contact</a><br>                        
-                        </li>
-                         <li class="nav-item">
-                            <a href="{{path('ad_creating')}}">deposer une petite annonce</a><br/>                            
-                        </li>
+
                     </ul>
 
                      <ul class="navbar-nav profile-nav">
@@ -129,9 +121,35 @@
                                 <p>{{user.phonenumber}}</p>
                             </div>
                         </div>
-                        <div class="col-md-5 mt-5 ml-5">
+                        <div class="col-md-5 mt-5 ml-5 text-center">
                             <a href="{{path('profile_edit')}}"><button class="profile-edit-btn">Modifier mes informations</button></a> 
                         </div>
+                        <div class="">
+                        <h3 class="mt-5 mb-4">mes sports favoris</h3>
+                        </div>
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                <th scope="col">sport</th>
+                                <th scope="col">niveau</th>
+                                <th scope="col">modifier</th>
+                                <th scope="col">supprimer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <div>
+                                    <a href="{{ path('user_favorite_sport_add')}}">Rajouter un sport favori <i class="fas fa-plus-square"></i></a>
+                                </div>
+                                {% for favorite in user.favoriteSports %}                                    
+                                    <tr>                            
+                                        <td><a  href="" data-toggle="modal" data-target="#exampleModalScrollable">{{favorite.sport.name}}</a></td>
+                                        <td><a  href="" data-toggle="modal" data-target="#exampleModalScrollable">{{favorite.level.name}}</a></td>  
+                                        <td><a href="{{ path('user_favorite_sport_update', {id:favorite.sport.id }) }}" class="icon-contact-list"><i class="fas fa-edit"></i></a></td>
+                                        <td><a href="{{ path('user_favorite_sport_delete', {id:favorite.sport.id}) }}"  class="icon-contact-list"><i class="far fa-trash-alt"></i></a></td>
+                                    </tr>                  
+                                {% endfor %}
+                            </tbody>
+                        </table>  
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div>
