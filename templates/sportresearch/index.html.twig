@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rechercher des sportifs{% endblock %}
+
+{% block body %}
+
+
+
+{{form(form)}}
+
+ 
+
+{% endblock %}
+{% block javascripts %}
+<script src="{{asset('assets/js/app.js')}}">
+  console.log($("#sport_research_level"));
+  </script>
+
+
+		{% endblock %}
+
