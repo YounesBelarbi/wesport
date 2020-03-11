@@ -47,4 +47,26 @@ class FavoriteSportRepository extends ServiceEntityRepository
         ;
     }
     */
+
+ 
+    public function findUsersBySport($sport)
+    {
+        return $this->createQueryBuilder('f')
+            ->andWhere('f.sport= :val')
+            ->setParameter('val', $sport)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+    public function findUsersByLevel($level)
+    {
+        return $this->createQueryBuilder('f')
+            ->andWhere('f.level= :val')
+            ->setParameter('val', $level)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
