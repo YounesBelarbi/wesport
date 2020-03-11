@@ -16,14 +16,38 @@ class SportResearchType extends AbstractType
     {
         $builder
             ->add('sport', EntityType::class, [
-                'class' => Sport::class
+                'class' => Sport::class,
+                'attr' => ['class' => 'form-control search-slt','placeholder' => 'Sport'],
+                'label'=> false,
+                'row_attr' => ['class' => 'd-flex justify-content-center'],
+                'required' =>false,
+                'placeholder' => 'Sport',
+                
             ])
             ->add('level', EntityType::class, [
-                'class' => Level::class
+                'class' => Level::class,
+                'attr' => ['class' => 'form-control search-slt','placeholder' => 'Sport'],
+                'label'=> false,
+                'row_attr' => ['class' => 'd-flex justify-content-center'],
+                'required' =>false,
+                'placeholder' => 'Niveau',
             ])
-            ->add('age')
-            ->add('city')
-            ->add('send', SubmitType::class)
+            ->add('age', null, [
+                'attr' => ['class' => 'form-control search-slt','placeholder' => 'Âge'],
+                'label'=> false,
+                'row_attr' => ['class' => 'd-flex justify-content-center'],
+                'required' =>false
+            ])
+            ->add('city', null, [
+                'attr' => ['class' => 'form-control search-slt','placeholder' => 'Ville'],
+                'label'=> false,
+                'row_attr' => ['class' => 'd-flex justify-content-center'],
+                'required' =>false
+            ])
+            ->add('send', SubmitType::class, [
+                'attr' => ['class' => 'btn btn-danger wrn-btn'],
+                'label' => 'rechercher'
+            ])
         ;
     }
 
