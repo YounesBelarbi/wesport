@@ -44,32 +44,21 @@
             <div class="col-md-4">
                 <nav class="navbar ">
                     <ul class="navbar-nav profile-nav">
-                        <p>Lien de création </p>
-
-                        <li class="nav-item">
-                            <a href="{{path('user_favorite_sport_add')}}">Rajouter un sport dans mes favori</a><br/>                        
-                        </li>
-
-                    </ul>
 
                      <ul class="navbar-nav profile-nav">
                          <p>Lien de visite</p>                       
 
                         <li class="nav-item">
-                            <a href="{{path('user_favorite_sport_list')}}">liste de mes sports favoris</a><br>                                                
-                        </li>
-                        <li class="nav-item">
                             <a href="{{path('event_list')}}">voir liste des evenements</a><br/>                                                  
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{path('contact_list_show')}}">voir mes listes de contact</a><br/>                                                   
                         </li>
                          <li class="nav-item">
                             <a href="{{path('ad_list')}}">liste des petites annonces</a><br/>                                                        
                         </li>
                     </ul>
                 </nav>
+           
             </div>
+
             <div class="col-md-8">
                 <div class="tab-content profile-tab" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -225,7 +214,9 @@
                 </div>
             </div>
         </div>          
+        
     </section>
+    
 
 
 {% endblock %}
