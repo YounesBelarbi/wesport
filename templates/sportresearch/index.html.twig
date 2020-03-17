@@ -29,40 +29,53 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>            
         {{form_end(form)}}
         </div>
     </section>
 
     <section id="result_section">
-        <template id="templateResult" class= "mt-5">
+        {% if app.request.method == "POST" %}        
             <div class="container mt-5">
-                <div class="row mb-3 justify-content-center" id="result_content">
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row ">
-                                    <div class="col-md-3">
-                                        <img src="{{asset('assets/img/avatar.svg')}}" alt="">
-                                    </div>
-                                    <div class="col-md-5" id="profil_information">
-                                        <h3 id= "username">username</h3>
-                                        <p id = "age">âge</p>
-                                        <p id= "city">ville</p>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h6></h6>
-                                        <div class="sub-row">
-                                            <button type="button" class="btn btn-secondary btn-sm btn-block">Voir profile</button>
+                {% if users | length == 0 %}
+                    <div class= "d-flex justify-content-between m-5 row ">
+                    <h3>Aucun résultat pour votre recherche</h3>
+                    <a href="{{ path('sportresearch') }}" class="btn btn-primary btn-lg active " role="button" aria-pressed="true">Nouvelle recherche</a>
+                    </div>
+                {% else %}                        
+                    <div class= "d-flex justify-content-between m-5 row ">
+                        <h3 class="col-md-6">{{users | length}} résultats correspondent à votre recherche</h3>
+                        <a href="{{ path('sportresearch') }}" class="btn btn-primary btn-lg active " role="button" aria-pressed="true">Nouvelle recherche</a>
+                    </div>                  
+                    {% for user in users %}
+                        <div class="row mb-4 justify-content-center" id="result_content">
+                            <div class="col-md-8">
+                                <div class="card">                                    
+                                    <div class="card-body">
+                                        <div class="row ">
+                                            <div class="col-md-3">
+                                                <img src="{{asset('assets/img/avatar.svg')}}" alt="">
+                                            </div>
+                                            <div class="col-md-5" id="profil_information">
+                                                <h3 id= "username">{{user.username}} </h3>
+                                                <p id = "age">{{user.age}} ans</p>
+                                                <p id= "city">{{user.city}}</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h6></h6>
+                                                <div class="sub-row">
+                                                    <button type="button" class="btn btn-secondary btn-sm btn-block">Voir profile</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </template>
+                    {% endfor %} 
+                {% endif %}
+            </div>        
+        {% endif %}
     </section>
 
 {% endblock %}
