@@ -11,11 +11,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+    /**
+     * @Route("/user", name="user_favorite_")
+     */
 class UserFavoriteSportController extends AbstractController
 {
 
     /**
-     * @Route("/user/listfavorite/sport", name="user_favorite_sport_list")
+     * @Route("/listfavorite/sport", name="sport_list")
      */
     public function userFavoriteSportList(FavoriteSportRepository $favoriteSportRepository)
     {
@@ -29,7 +32,7 @@ class UserFavoriteSportController extends AbstractController
 
 
     /**
-     * @Route("/user/addfavorite/sport", name="user_favorite_sport_add")
+     * @Route("/addfavorite/sport", name="sport_add")
      */
     public function addFavoriteSport(Request $request, EntityManagerInterface $em)
     {
@@ -77,7 +80,7 @@ class UserFavoriteSportController extends AbstractController
 
 
     /**
-     * @Route("/user/updatefavorite/sport/{id}", name="user_favorite_sport_update")
+     * @Route("/updatefavorite/sport/{id}", name="sport_update")
      */
     public function updateFavoriteSport(Request $request, $id, EntityManagerInterface $em)
     {
@@ -107,7 +110,7 @@ class UserFavoriteSportController extends AbstractController
 
 
     /**
-     * @Route("/user/deletefavorite/sport/{id}", name="user_favorite_sport_delete")
+     * @Route("/deletefavorite/sport/{id}", name="sport_delete")
      */
     public function deleteFavoriteSport(Request $request,$id, EntityManagerInterface $em)
     {

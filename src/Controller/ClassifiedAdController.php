@@ -57,14 +57,14 @@ class ClassifiedAdController extends AbstractController
                 $em->persist($classifiedAd);
                 $em->flush();
                 $this->addFlash('success', 'Votre annonce à bien été créer');
-                return $this->redirectToRoute('profile_edit');
+                return $this->redirectToRoute('profile_show');
     
             }catch (\Exception $e) {
                 
                 $this->addFlash('warning','Un problème est survenu, une information est manquante. Votre annonce n\'est pas enregistrée'); 
             }
 
-            return $this->redirectToRoute('profile_edit');
+            return $this->redirectToRoute('profile_show');
         }
 
         return $this->render('classified_ad/classified_ad.html.twig', [
@@ -90,7 +90,7 @@ class ClassifiedAdController extends AbstractController
 
             $em->flush();
             $this->addFlash('success', 'Votre annonce à bien été mise à jour');
-            return $this->redirectToRoute('ad_list');
+            return $this->redirectToRoute('profile_show');
 
         }
 
@@ -112,7 +112,7 @@ class ClassifiedAdController extends AbstractController
         $em->remove($classifiedAd);
         $em->flush();
         $this->addFlash('success', 'Votre annonce à bien été supprimée');
-        return $this->redirectToRoute('ad_list');
+        return $this->redirectToRoute('profile_show');
 
     }
 

@@ -18,10 +18,13 @@ class FavoriteSportType extends AbstractType
             
             ->add('sport', null, [
                 'row_attr' => ['class' => 'col-md-6'],
+                'placeholder'=> 'selectionner un sport'
             ])
             ->add('level', EntityType::class, [
                 'class' => Level::class,
                 'row_attr' => ['class' => 'col-md-6'],
+                'label' => 'niveau',
+                'placeholder'=> 'selectionner un niveau'
                 
             ])
             ->add('send', SubmitType::class, [

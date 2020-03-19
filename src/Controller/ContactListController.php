@@ -10,12 +10,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+* @Route("/user", name="contact_list_")
+*/
 class ContactListController extends AbstractController
 {
 
 
     /**
-     * @Route("/user/contact_list", name="contact_list_show")
+     * @Route("/contact_list", name="show")
      */
     public function showContactList(ContactListRepository $contactListRepository)
     {
@@ -28,7 +31,7 @@ class ContactListController extends AbstractController
 
 
     /**
-    * @Route("/user/contact_list/add", name="contact_list_creating")
+    * @Route("/contact_list/add", name="creating")
     */
     public function addContactList(Request $request, EntityManagerInterface $em)
     {
@@ -51,7 +54,7 @@ class ContactListController extends AbstractController
             $em->flush();
             $this->addFlash('success', 'votre liste à bien été créer');
 
-            $this->redirectToRoute('contact_list_show');
+            return $this->redirectToRoute('profile_show');
 
         }
 
@@ -63,7 +66,7 @@ class ContactListController extends AbstractController
 
 
     /**
-    * @Route("/user/contact_list/update/{id}", name="contact_list_updating")
+    * @Route("/contact_list/update/{id}", name="updating")
     */
     public function updateContactList(Request $request, $id, EntityManagerInterface $em, ContactList $contactList, ContactListRepository $contactListRepository)
     {
@@ -78,7 +81,7 @@ class ContactListController extends AbstractController
 
             $em->flush();
             $this->addFlash('success', 'votre liste de contact à été mise à jour');
-            return $this->redirectToRoute('contact_list_show');
+            return $this->redirectToRoute('profile_show');
         }
 
         return $this->render('contact_list/contact_list.html.twig', [
@@ -89,7 +92,7 @@ class ContactListController extends AbstractController
 
 
     /**
-    * @Route("/user/contact_list/delete/{id}", name="contact_list_deleting")
+    * @Route("/contact_list/delete/{id}", name="deleting")
     */
     public function deleteContactList(Request $request, $id, EntityManagerInterface $em, ContactList $contactList, ContactListRepository $contactListRepository)
     {
@@ -98,7 +101,7 @@ class ContactListController extends AbstractController
         $em->remove($contactList);
         $em->flush();
         $this->addFlash('success', 'votre liste de contact à bien supprimée');
-        return $this->redirectToRoute('contact_list_show');
+        return $this->redirectToRoute('profile_show');
     }
 
 }
