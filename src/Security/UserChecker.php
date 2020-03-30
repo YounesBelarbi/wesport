@@ -17,30 +17,23 @@ class UserChecker implements UserCheckerInterface
             return;
         }
 
-        if (!$user->getIsActive())  {
-            
+        if (!$user->getIsActive()) {
+
             throw new DisabledException('Compte désactivé');
-           
-            
-            
-        }  else  {
+        } else {
             return;
         }
     }
 
     public function checkPostAuth(UserInterface $user)
     {
-
-        
         if (!$user instanceof AppUser) {
             return;
         }
-       
+
         // user account is expired, the user may be notified
         if (!$user->getIsActive()) {
             throw new AccountExpiredException();
-        
-           
         }
     }
 }
