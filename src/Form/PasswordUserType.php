@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\User;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -10,7 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 
 
@@ -46,11 +45,6 @@ class PasswordUserType extends AbstractType
             ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults($this->configureOption);
-    }
-
     public function onPreSetData(FormEvent $event)
     {
         $form = $event->getForm();
@@ -64,14 +58,9 @@ class PasswordUserType extends AbstractType
                     'mapped' => false,
                     'label' => 'Mot de passe actuelle ',
                     'row_attr' => ['class' => 'col-md-12'],
-                    // 'constraints' => new NotBlank(['message' => 'Please enter a password']),
+                    // 'constraints' => new NotBlank(['message' => 'veuillez mettre votre ancien mot de passe']),
 
                 ]);
-
-
-            $this->configureOption = [
-                'data_class' => User::class,
-            ];
         }
     }
 }
