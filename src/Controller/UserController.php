@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Form\ChangePasswordType;
+use App\Form\PasswordUserType;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -58,7 +58,7 @@ class UserController extends AbstractController
     {
         $user = $this->getUser();
 
-        $form = $this->createForm(ChangePasswordType::class, $user);
+        $form = $this->createForm(PasswordUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -82,6 +82,7 @@ class UserController extends AbstractController
 
                     $em->flush();
                     $this->addFlash('success', 'Votre mot de passe à été changer');
+                    return $this->redirectToRoute('profile_show');
                 } else {
                     $this->addFlash('warning', 'Le mot de passe saisi est erroné');
                 }
