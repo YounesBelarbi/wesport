@@ -54,7 +54,6 @@ class EventRepository extends ServiceEntityRepository
             ->orderBy('e.createdAt', 'DESC')
             ->setMaxResults(9)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 }
