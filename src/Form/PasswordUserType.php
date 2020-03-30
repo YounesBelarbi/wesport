@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Constraints\Length;
-
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class PasswordUserType extends AbstractType
 {
@@ -58,7 +58,7 @@ class PasswordUserType extends AbstractType
                     'mapped' => false,
                     'label' => 'Mot de passe actuelle ',
                     'row_attr' => ['class' => 'col-md-12'],
-                    // 'constraints' => new NotBlank(['message' => 'veuillez mettre votre ancien mot de passe']),
+                    'constraints' => new NotBlank(['message' => 'veuillez mettre votre ancien mot de passe']),
 
                 ]);
         }
