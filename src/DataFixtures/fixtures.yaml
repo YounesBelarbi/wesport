@@ -1,5 +1,5 @@
 App\Entity\User:
-    user_{1..25}:
+    user_{1..50}:
         email (unique): '<email()>'
         roles: '<roles()>'
         password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$sg7Gw4fdepeiPc9FyuKfJA\$0+AMLeya0eMBNPvR164M2NlRlbvM4wlJOe+aSTvArUg'
@@ -49,7 +49,7 @@ App\Entity\Event:
 
 
 App\Entity\FavoriteSport:
-    favoriteSport_{1..15}:
+    favoriteSport_{1..20}:
         user: '@user*'
         sport: '@sport*'
         level: '@level*'
@@ -57,14 +57,14 @@ App\Entity\FavoriteSport:
 
 
 App\Entity\Level:
-    level_{1..5}:
+    level_{1..4}:
         name (unique): '<levels()>'
 
 
 App\Entity\Sport:
-    sport_{1..10}:
+    sport_{1..55}:
         name (unique): '<sports()>'
-        levels: '5x @level*'
+        levels: '4x @level*'
 
 
 
