@@ -10,54 +10,91 @@ class Provider extends BaseProvider
     protected static $roles = [
         ['ROLE_USER'],
         ['ROLE_ADMIN'],
-        ['ROLE_ANONYMOUS']
     ];
 
 
     protected static $sports = [
-        'football',
-        'rugby',
-        'tennis',
-        'ping-pong',
-        'course à pied',
-        'hanball',
-        'basket',
-        'marche rapide',
-        'musculation',
-        'futsal',
-        'badmington'
+
+        'Alpinisme',
+        'Aquagym',
+        'Aviron',
+        'Baseball',
+        'Course à pied',
+        'Futsal',
+        'Badmington',
+        'Kitesurf',
+        'Kung-fu',
+        'Lutte / Grappling',
+        'Marche rapide',
+        'Musculation',
+        'Natation',
+        'Padel',
+        'Patin à glace',
+        'Pétanque',
+        'Planche à voile',
+        'Plongée',
+        'Quad',
+        'Raid',
+        'Randonnée',
+        'Raquette à neige',
+        'Roller',
+        'Rugby',
+        'Skateboard',
+        'Ski',
+        'Snowboard',
+        'Basketball',
+        'Bodyboard',
+        'Boxe',
+        'Dériveur',
+        'Équitation',
+        'Fléchettes',
+        'Football',
+        'Football américain',
+        'Gym / Fitness',
+        'Handball',
+        'Hockey',
+        'Sports de plage',
+        'Squash',
+        'Stand up paddle',
+        'Surf',
+        'Taekwondo',
+        'Tennis',
+        'Tennis de table',
+        'Trail',
+        'Trottinette',
+        'Vélo / VTT',
+        'Via ferrata',
+        'Voile',
+        'Volleyball',
+        'Wakeboard',
+        'Sports d\'eau',
+        'Tir à l\'arc',
+        'Yoga',
     ];
+
 
     protected static $levels = [
         'debutant',
         'moyen',
         'bon niveau',
         'exellent niveau',
-        'haut niveau'
     ];
 
 
-
-
-
-
-    public static function roles(){
+    public static function roles()
+    {
         return static::randomElement(static::$roles);
     }
 
 
-    public static function sports(){
+    public static function sports()
+    {
         return static::randomElement(static::$sports);
     }
 
 
-    public static function levels(){
+    public static function levels()
+    {
         return static::randomElement(static::$levels);
     }
-
-
-    
-    
-
-
 }
