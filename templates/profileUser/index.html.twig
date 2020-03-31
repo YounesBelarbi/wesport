@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Compte utilisateur{% endblock %}
+{% block title %}Compte utilisateur
+{% endblock %}
 
 {% block body %}
 
@@ -8,218 +9,258 @@
 		<div class="container">
 			<h2>Mon compte</h2>
 		</div>
-	</section>   
-  
+	</section>
 
-    <section class="container emp-profile">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-img">
-                    <img src="{{asset('assets/img/test-image.jpg')}}" alt=""/>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="profile-head">
-                    <h2>
-                        {{user.username}}
-                    </h2>        
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mes données personnelles</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Mes listes de contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="event-tab" data-toggle="tab" href="#event" role="tab" aria-controls="event" aria-selected="false">Mes Evénements</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="event-tab" data-toggle="tab" href="#classifiedAd" role="tab" aria-controls="classifiedAd" aria-selected="false">Mes petites annonce</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>      
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <nav class="navbar ">
-                    <ul class="navbar-nav profile-nav">
+	<section class="container emp-profile">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="profile-img">
+					<img src="{{asset('assets/img/test-image.jpg')}}" alt=""/>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="profile-head">
+					<h2>
+						{{user.username}}
+					</h2>
+					<ul class="nav nav-tabs" id="myTab" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mes données personnelles</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Mes listes de contact</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="event-tab" data-toggle="tab" href="#event" role="tab" aria-controls="event" aria-selected="false">Mes Evénements</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="event-tab" data-toggle="tab" href="#classifiedAd" role="tab" aria-controls="classifiedAd" aria-selected="false">Mes petites annonce</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<nav class="navbar ">
+					<ul class="navbar-nav profile-nav">
+						<p>Lien de visite</p>
 
-                     <ul class="navbar-nav profile-nav">
-                         <p>Lien de visite</p>                       
-
-                        <li class="nav-item">
-                            <a href="{{path('event_list')}}">Liste des evenements</a><br/>                                                  
-                        </li>
-                         <li class="nav-item">
-                            <a href="{{path('ad_list')}}">Liste des petites annonces</a><br/>                                                        
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{path('sportresearch')}}">Rechercher des coéquipiers</a><br/>                                                        
-                        </li>
-                    </ul>
-                </nav>
-           
-            </div>
-
-            <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Email</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{user.email}}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Nom</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{user.lastname}}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>prénom</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{user.firstname}}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Âge</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{user.age}}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Ville</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{user.city}}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Numéro de téléphone</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{user.phonenumber}}</p>
-                            </div>
-                        </div>
-                        <div class="col-md-5 mt-5 ml-5 text-center">
-                            <a href="{{path('profile_edit')}}"><button class="profile-edit-btn">Modifier mes informations</button></a> 
-                        </div>
-                        <div class="">
-                        <h3 class="mt-5 mb-4">mes sports favoris</h3>
-                        </div>
-                        <table class="table table-borderless">
-                            <thead>
-                                <tr>
-                                <th scope="col">sport</th>
-                                <th scope="col">niveau</th>
-                                <th scope="col">modifier</th>
-                                <th scope="col">supprimer</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <div>
-                                    <a href="{{ path('user_favorite_sport_add')}}">Rajouter un sport favori <i class="fas fa-plus-square"></i></a>
-                                </div>
-                                {% for favorite in user.favoriteSports %}                                    
-                                    <tr>                            
-                                        <td><a  href="" data-toggle="modal" data-target="#exampleModalScrollable">{{favorite.sport.name}}</a></td>
-                                        <td><a  href="" data-toggle="modal" data-target="#exampleModalScrollable">{{favorite.level.name}}</a></td>  
-                                        <td><a href="{{ path('user_favorite_sport_update', {id:favorite.sport.id }) }}" class="icon-contact-list"><i class="fas fa-edit"></i></a></td>
-                                        <td><a href="{{ path('user_favorite_sport_delete', {id:favorite.sport.id}) }}"  class="icon-contact-list"><i class="far fa-trash-alt"></i></a></td>
-                                    </tr>                  
-                                {% endfor %}
-                            </tbody>
-                        </table>  
-                    </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div>
-                            <a href="{{ path('contact_list_creating')}}">nouvelle liste <i class="fas fa-plus-square"></i></a>
-                        </div>
-                        <table class="table table-borderless">
-                            <thead>
-                                <tr>
-                                <th scope="col">Nom de la liste</th>
-                                <th scope="col">modifier</th>
-                                <th scope="col">supprimer</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for contactList in user.contactLists %}
-                                <tr>
-                                <td>{{contactList.name}}</td>
-                                <td><a href="{{ path('contact_list_updating', {id: contactList.id}) }}" class="icon-contact-list"><i class="fas fa-edit"></i></a></td>
-                                <td><a href="{{ path('contact_list_deleting', {id: contactList.id}) }}"  class="icon-contact-list"><i class="far fa-trash-alt"></i></a></td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>                                  
-                    </div>
-                    <div class="tab-pane fade" id="event" role="tabpanel" aria-labelledby="event-tab">
-                        <div>
-                            <a href="{{ path('event_organized')}}">nouvel événement <i class="fas fa-plus-square"></i></a>
-                        </div>
-                        <table class="table table-borderless">
-                            <thead>
-                                <tr>
-                                <th scope="col">Nom de l'événement</th>
-                                <th scope="col">modifier</th>
-                                <th scope="col">supprimer</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for event in user.eventsOrganized %}
-                                <tr>
-                                <td><a  href="" data-toggle="modal" data-target="#exampleModalScrollable">{{event.title}}</a></td>
-                                <td><a href="{{ path('event_edit', {id: event.id}) }}" class="icon-contact-list"><i class="fas fa-edit"></i></a></td>
-                                <td><a href="{{ path('event_deletion', {id: event.id}) }}"  class="icon-contact-list"><i class="far fa-trash-alt"></i></a></td>
-                                </tr>                   
-                                {% endfor %}
-                            </tbody>
-                        </table>  
-                    </div>
-
-
-                    <div class="tab-pane fade" id="classifiedAd" role="tabpanel" aria-labelledby="classifiedAd-tab">
-                        <div>
-                            <a href="{{ path('ad_creating')}}">déposer une annonce <i class="fas fa-plus-square"></i></a>
-                        </div>
-                        <table class="table table-borderless">
-                            <thead>
-                                <tr>
-                                <th scope="col">Nom de l'événement</th>
-                                <th scope="col">modifier</th>
-                                <th scope="col">supprimer</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for classifiedAd in user.classifiedAds %}
-                                <tr>
-                                <td><a  href="" data-toggle="modal" data-target="#exampleModalScrollable">{{classifiedAd.title}}</a></td>
-                                <td><a href="{{ path('ad_updating', {id: classifiedAd.id}) }}" class="icon-contact-list"><i class="fas fa-edit"></i></a></td>
-                                <td><a href="{{ path('ad_deleting', {id: classifiedAd.id}) }}"  class="icon-contact-list"><i class="far fa-trash-alt"></i></a></td>
-                                </tr>                   
-                                {% endfor %}
-                            </tbody>
-                        </table>  
-                    </div>
-                </div>
-            </div>
-        </div>          
-        
-    </section>
-    
-
+						<li class="nav-item">
+							<a href="{{path('event_list')}}">Liste des evenements</a><br/>
+						</li>
+						<li class="nav-item">
+							<a href="{{path('ad_list')}}">Liste des petites annonces</a><br/>
+						</li>
+						<li class="nav-item">
+							<a href="{{path('sportresearch')}}">Rechercher des coéquipiers</a><br/>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div class="tab-content profile-tab" id="myTabContent">
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<div class="row">
+						<div class="col-md-6">
+							<label>Email</label>
+						</div>
+						<div class="col-md-6">
+							<p>{{user.email}}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<label>Nom</label>
+						</div>
+						<div class="col-md-6">
+							<p>{{user.lastname}}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<label>prénom</label>
+						</div>
+						<div class="col-md-6">
+							<p>{{user.firstname}}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<label>Âge</label>
+						</div>
+						<div class="col-md-6">
+							<p>{{user.age}}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<label>Ville</label>
+						</div>
+						<div class="col-md-6">
+							<p>{{user.city}}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<label>Numéro de téléphone</label>
+						</div>
+						<div class="col-md-6">
+							<p>{{user.phonenumber}}</p>
+						</div>
+					</div>
+					<div class="col-md-5 mt-5 ml-5 text-center">
+						<a href="{{path('profile_edit')}}">
+							<button class="profile-edit-btn">Modifier mes informations</button>
+						</a>
+					</div>
+					<div class="">
+						<h3 class="mt-5 mb-4">mes sports favoris</h3>
+					</div>
+					<table class="table table-borderless">
+						<thead>
+							<tr>
+								<th scope="col">sport</th>
+								<th scope="col">niveau</th>
+								<th scope="col">modifier</th>
+								<th scope="col">supprimer</th>
+							</tr>
+						</thead>
+						<tbody>
+							<div>
+								<a href="{{ path('user_favorite_sport_add')}}">Rajouter un sport favori
+									<i class="fas fa-plus-square"></i>
+								</a>
+							</div>
+							{% for favorite in user.favoriteSports %}
+								<tr>
+									<td>
+										<a href="" data-toggle="modal" data-target="#exampleModalScrollable">{{favorite.sport.name}}</a>
+									</td>
+									<td>
+										<a href="" data-toggle="modal" data-target="#exampleModalScrollable">{{favorite.level.name}}</a>
+									</td>
+									<td>
+										<a href="{{ path('user_favorite_sport_update', {id:favorite.sport.id }) }}" class="icon-contact-list">
+											<i class="fas fa-edit"></i>
+										</a>
+									</td>
+									<td>
+										<a href="{{ path('user_favorite_sport_delete', {id:favorite.sport.id}) }}" class="icon-contact-list">
+											<i class="far fa-trash-alt"></i>
+										</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+					<div>
+						<a href="{{ path('contact_list_creating')}}">nouvelle liste
+							<i class="fas fa-plus-square"></i>
+						</a>
+					</div>
+					<table class="table table-borderless">
+						<thead>
+							<tr>
+								<th scope="col">Nom de la liste</th>
+								<th scope="col">modifier</th>
+								<th scope="col">supprimer</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for contactList in user.contactLists %}
+								<tr>
+									<td>{{contactList.name}}</td>
+									<td>
+										<a href="{{ path('contact_list_updating', {id: contactList.id}) }}" class="icon-contact-list">
+											<i class="fas fa-edit"></i>
+										</a>
+									</td>
+									<td>
+										<a href="{{ path('contact_list_deleting', {id: contactList.id}) }}" class="icon-contact-list">
+											<i class="far fa-trash-alt"></i>
+										</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<div class="tab-pane fade" id="event" role="tabpanel" aria-labelledby="event-tab">
+					<div>
+						<a href="{{ path('event_organized')}}">nouvel événement
+							<i class="fas fa-plus-square"></i>
+						</a>
+					</div>
+					<table class="table table-borderless">
+						<thead>
+							<tr>
+								<th scope="col">Nom de l'événement</th>
+								<th scope="col">modifier</th>
+								<th scope="col">supprimer</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for event in user.eventsOrganized %}
+								<tr>
+									<td>
+										<a href="" data-toggle="modal" data-target="#exampleModalScrollable">{{event.title}}</a>
+									</td>
+									<td>
+										<a href="{{ path('event_edit', {id: event.id}) }}" class="icon-contact-list">
+											<i class="fas fa-edit"></i>
+										</a>
+									</td>
+									<td>
+										<a href="{{ path('event_deletion', {id: event.id}) }}" class="icon-contact-list">
+											<i class="far fa-trash-alt"></i>
+										</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<div class="tab-pane fade" id="classifiedAd" role="tabpanel" aria-labelledby="classifiedAd-tab">
+					<div>
+						<a href="{{ path('ad_creating')}}">déposer une annonce
+							<i class="fas fa-plus-square"></i>
+						</a>
+					</div>
+					<table class="table table-borderless">
+						<thead>
+							<tr>
+								<th scope="col">Nom de l'événement</th>
+								<th scope="col">modifier</th>
+								<th scope="col">supprimer</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for classifiedAd in user.classifiedAds %}
+								<tr>
+									<td>
+										<a href="" data-toggle="modal" data-target="#exampleModalScrollable">{{classifiedAd.title}}</a>
+									</td>
+									<td>
+										<a href="{{ path('ad_updating', {id: classifiedAd.id}) }}" class="icon-contact-list">
+											<i class="fas fa-edit"></i>
+										</a>
+									</td>
+									<td>
+										<a href="{{ path('ad_deleting', {id: classifiedAd.id}) }}" class="icon-contact-list">
+											<i class="far fa-trash-alt"></i>
+										</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
 
 {% endblock %}
