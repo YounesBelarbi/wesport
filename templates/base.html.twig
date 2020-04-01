@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}{% endblock %} - Wesport</title>
-        {% block stylesheets %}
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}{% endblock %} - Wesport
+		</title>
+		{% block stylesheets %}
+			<link
+			rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-        <!-- Main Stylesheets -->
-        <link rel="stylesheet" href="{{asset('assets/css/style.css')}}"/>
+			<!-- Main Stylesheets -->
+			<link rel="stylesheet" href="{{asset('assets/css/style.css')}}"/>
 
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"></link>
-        {% endblock %}
-    </head>
-    <body>
-
-
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
+		{% endblock %}
+	</head>
+	</body>
 		{% for label, messages in app.flashes %}
-			{% for  message in messages %}      
-				<div class="alert alert-{{label}} alert-dismissible fade show col-12" role="alert">	
+			{% for  message in messages %}
+				<div class="alert alert-{{label}} alert-dismissible fade show col-12" role="alert">
 					{{ message }}
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -25,8 +26,6 @@
 				</div>
 			{% endfor %}
 		{% endfor %}
-
-
 		<!-- Header section -->
 		<header class="header-section">
 			<nav class="navbar navbar-light bg-light navbar-expand-lg">
@@ -34,52 +33,55 @@
 					<h1>WeSport</h1>
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
+					<span class="navbar-toggler-icon"></span>
 				</button>
-				 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="main-menu navbar-nav mr-auto justify-content-end">
-						<li class="nav-item"><a  class="nav-link" href="{{path('main')}}">Accueil</a></li>
-						{% if is_granted('ROLE_USER') %}
-						<li class="nav-item"><a  class="nav-link" href="{{path('app_logout')}}">Deconnection</a></li>
-						<li class="nav-item"><a  class="nav-link" href="{{path('profile_show')}}">Mon compte</a></li>
-						<li class="nav-item"><a  class="nav-link" href="{{path('profile_edit')}}">Modifier mon Profile</a></li>
-						{% else %}
-						<li class="nav-item"><a  class="nav-link" href="{{path('app_login')}}">Connexion</a></li>
-						<li class="nav-item"><a  class="nav-link" href="{{path('app_register')}}">Inscription</a></li>
-						{% endif %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{path('main')}}">Accueil</a>
+						</li>
+					{% if is_granted('ROLE_USER') %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{path('profile_show')}}">Mon compte</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{path('app_logout')}}">Deconnection</a>
+						</li>
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{path('app_login')}}">Connexion</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{path('app_register')}}">Inscription</a>
+						</li>
+					{% endif %}
 					</ul>
 				</div>
 			</nav>
 		</header>
-
 		<!-- Header section end -->
-			{% block body %}
-			
-			{% endblock %}
-		
-		
-		
-		
-			<!-- Footer section -->
+		{% block body %}{% endblock %}
+		<!-- Footer section -->
 		<footer class="footer-section">
 			<div class="col-md-6 order-1 order-md-2">
 				<ul class="footer-menu">
-					<li><a href="">Accueil</a></li>
-					{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-					<li><a href="">Connexion</a></li>
-					<li><a href="">Inscription</a></li>
-					{% endif %}
+					<li>
+						<a href="{{path('main')}}">Accueil</a>
+					</li>
+				{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+					<li>
+						<a href="{{path('app_login')}}">Connexion</a>
+					</li>
+					<li>
+						<a href="{{path('app_register')}}">Inscription</a>
+					</li>
+				{% endif %}
 				</ul>
 			</div>
 		</footer>
-
-		<script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-		{% block javascripts %}
-		{% endblock %}
-
-
-    </body>
+		{% block javascripts %}{% endblock %}
+	</body>
 </html>

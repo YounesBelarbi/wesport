@@ -29,3 +29,8 @@ Pour mettre en place la base de données, il faut éxécuter les commandes suiva
 - création de la base données: ``bin/console d:d:c``  
 - création des migrations : ``bin/console m:m``
 - envoie des migrations : ``bin/console d:m:m``
+
+**Utilisation des fixtures**
+Mise en place des fixtures en cli: ``bin/console d:f:l``
+
+mot de passe des users fixtures: "azerty"

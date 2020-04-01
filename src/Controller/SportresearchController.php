@@ -15,12 +15,10 @@ class SportresearchController extends AbstractController
     /**
      * @Route("/user/sportresearch", name="sportresearch")
      */
-    public function index(Request $request,EntityManagerInterface $em)
+    public function index(Request $request, EntityManagerInterface $em)
     {
-        
-        $userSportList =[];
-        $users=[];
-
+        $userSportList = [];
+        $users = [];
         $form = $this->createForm(SportResearchType::class);
         $form->handleRequest($request);
 
@@ -29,11 +27,9 @@ class SportresearchController extends AbstractController
             $criteria = $form->getData();
 
             if (!is_null($criteria['age']) || !is_null($criteria['city']) || !is_null($criteria['sport']) || !is_null($criteria['level'])) {
-                
+
                 $userSportList = $em->getRepository(FavoriteSport::class)->findUsersByAllInformations($criteria);
             }
-          dump($userSportList);
-
         }
 
         foreach ($userSportList as $key => $value) {
@@ -43,7 +39,6 @@ class SportresearchController extends AbstractController
         return $this->render('sportresearch/index.html.twig', [
             'form' => $form->createView(),
             'users' => $users
-            ]);
+        ]);
     }
-        
 }

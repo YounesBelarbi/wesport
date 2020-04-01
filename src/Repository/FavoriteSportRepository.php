@@ -3,9 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\FavoriteSport;
-use App\Entity\Level;
-use App\Entity\Sport;
-use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -55,41 +52,36 @@ class FavoriteSportRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('f');
 
         $qb
-        ->join('f.user', 'user');
+            ->join('f.user', 'user');
 
-        
+
         if (!is_null($criteria['age'])) {
             $qb
-            ->where('user.age =:age')
-            ->setParameter('age', $criteria['age']);
-                
-            }
+                ->where('user.age =:age')
+                ->setParameter('age', $criteria['age']);
+        }
 
-            if (!is_null($criteria['city'])) {
-                $qb                
+        if (!is_null($criteria['city'])) {
+            $qb
                 ->andWhere('user.city =:city')
                 ->setParameter('city', $criteria['city']);
-            }
-            
-            if (!is_null($criteria['level'])) {
-                $qb
+        }
+
+        if (!is_null($criteria['level'])) {
+            $qb
                 ->andWhere('f.level= :level')
                 ->setParameter('level', $criteria['level']);
-            }
+        }
 
-            if (!is_null($criteria['sport'])) {
-                $qb
+        if (!is_null($criteria['sport'])) {
+            $qb
                 ->andWhere('f.sport= :sport')
                 ->setParameter('sport', $criteria['sport']);
-            }
+        }
 
 
-            return $qb
+        return $qb
             ->getQuery()
             ->getResult();
     }
-
- 
-
-
 }

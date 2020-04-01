@@ -54,7 +54,6 @@ class ClassifiedAdRepository extends ServiceEntityRepository
             ->orderBy('c.createdAt', 'DESC')
             ->setMaxResults(6)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 }

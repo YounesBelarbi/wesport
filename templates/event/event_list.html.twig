@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des événements{% endblock %}
+{% block title %}Liste des événements
+{% endblock %}
 
 {% block body %}
 
@@ -8,38 +9,38 @@
 		<div class="container">
 			<h2>Liste des événements</h2>
 		</div>
-	</section> 
+	</section>
 
-    <section class="container pt-5">
-        <div class="row justify-content-center">
-        {% for event in eventList %}
+	<section class="container pt-5">
+		<div class="row justify-content-center">
+			{% for event in eventList %}
 
-            <div class="card m-3" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">{{event.title}}</h5>
-                    <p class="card-text">{{event.eventBody}}</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{event.sportConcerned}}</li>
-                    <li class="list-group-item">{{event.location}}</li>
-                    <li class="list-group-item">{{event.eventDate|format_datetime('full','none',locale='fr')}}</li>
-                </ul>
-                <div>
-                    <ul class="list-group list-group-flush">
-                        {% for participant in event.participatingUserList %}
-                        <li class="list-group-item">{{participant.username}}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="card-body">
-                    <a href="{{ path('event_participation', {id: event.id}) }}" class="card-link">s'inscrire à l'evénement</a><br>
-                    <a href="{{ path('event_deregistration', {id: event.id}) }}" class="card-link">se désinscrire de l'evénement</a>
-                </div>
-            </div>
-        
-        {% endfor %}
-        </div>
-    </section>
+				<div class="card m-3" style="width: 18rem;">
+					<div class="card-body">
+						<h5 class="card-title">{{event.title}}</h5>
+						<p class="card-text">{{event.eventBody}}</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">{{event.sportConcerned}}</li>
+						<li class="list-group-item">{{event.location}}</li>
+						<li class="list-group-item">{{event.eventDate|format_datetime('full','none',locale='fr')}}</li>
+					</ul>
+					<div>
+						<ul class="list-group list-group-flush">
+							{% for participant in event.participatingUserList %}
+								<li class="list-group-item">{{participant.username}}</li>
+							{% endfor %}
+						</ul>
+					</div>
+					<div class="card-body">
+						<a href="{{ path('event_participation', {id: event.id}) }}" class="card-link">s'inscrire à l'evénement</a><br>
+						<a href="{{ path('event_deregistration', {id: event.id}) }}" class="card-link">se désinscrire de l'evénement</a>
+					</div>
+				</div>
+
+			{% endfor %}
+		</div>
+	</section>
 
 
 {% endblock %}

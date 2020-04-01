@@ -54,8 +54,6 @@ class ContactListRepository extends ServiceEntityRepository
             ->andWhere('c.creator = :val')
             ->setParameter('val', $user)
             ->getQuery()
-            ->getResult()
-            
-        ;
+            ->getResult();
     }
 }
