@@ -3,9 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\FavoriteSport;
-use App\Entity\Level;
-use App\Entity\Sport;
-use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 

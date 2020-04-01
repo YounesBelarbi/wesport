@@ -4,11 +4,10 @@ namespace App\DataFixtures;
 
 use App\Entity\ClassifiedAd;
 use App\Entity\Event;
-use App\Entity\FavoriteSport;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Nelmio\Alice\Loader\NativeLoader;
+
 
 class AppFixtures extends Fixture
 {
