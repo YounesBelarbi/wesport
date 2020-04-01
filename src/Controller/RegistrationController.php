@@ -75,7 +75,6 @@ class RegistrationController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $user = $entityManager->getRepository(User::class)->findOneBy(['confirmationToken' => $token]);
 
-
         if ($user === null) {
             $this->addFlash('danger', 'Votre compte est déjà activé');
             return $this->redirectToRoute('app_login');
