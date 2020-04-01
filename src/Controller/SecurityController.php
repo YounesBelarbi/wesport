@@ -52,7 +52,7 @@ class SecurityController extends AbstractController
     {
         $form = $this->createForm(UserType::class);
         $form->handleRequest($request);        
-
+ 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $email = $form->get('email')->getData();
@@ -72,8 +72,9 @@ class SecurityController extends AbstractController
             $userToken->setToken($token);
             $userToken->setType('reset password');            
             $userToken->setUser($user);
-            $userToken->setCreatedAt($currentDate);
+            $userToken->setCreatedAt(new \DateTime());
             $userToken->setExpirationDate($currentDate->modify( '+1 month'));
+            
             $entityManager->persist($userToken);
             $entityManager->flush();                     
            
@@ -108,9 +109,10 @@ class SecurityController extends AbstractController
     {
         $entityManager = $this->getDoctrine()->getManager();
         $userToken = $entityManager->getRepository(UserToken::class)->findOneBy(['token' => $token, 'type' => 'reset password']);
+        $currentDate = new \DateTime();
        
         
-        if ($userToken === null) {
+        if ($userToken === null || $userToken->getExpirationDate() < $currentDate) {
             $this->addFlash('danger', 'Un problème est survenu, votre mot de passe n\'a pas été modifié. Ce lien n\'est peut-être plus disponible.');
             return $this->redirectToRoute('main');
         }
