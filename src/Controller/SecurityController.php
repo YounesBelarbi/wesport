@@ -52,9 +52,9 @@ class SecurityController extends AbstractController
         $form = $this->createForm(UserType::class);
         $form->handleRequest($request);
 
-        $email = $form->get('email')->getData();
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
+            $email = $form->get('email')->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
             $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
@@ -63,16 +63,11 @@ class SecurityController extends AbstractController
                 $this->addFlash('danger', 'Email Inconnu');
                 return $this->redirectToRoute('app_forgotten_password');
             }
+
             $token = $tokenGenerator->generateToken();
-
-            try {
-                $user->setResetToken($token);
-                $entityManager->flush();
-            } catch (\Exception $e) {
-                $this->addFlash('warning', $e->getMessage());
-                return $this->redirectToRoute('main');
-            }
-
+            $user->setResetToken($token);
+            $entityManager->flush();                     
+           
             $url = $this->generateUrl('app_reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
 
             //use service to send mail
@@ -88,7 +83,6 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('main');
         }
 
-
         return $this->render('security/mail_user.html.twig', [
             'form' => $form->createView(),
             'pageTitle' => 'Mot de passe oublié',
@@ -103,18 +97,18 @@ class SecurityController extends AbstractController
      */
     public function resetPassword(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder)
     {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $entityManager->getRepository(User::class)->findOneBy(['resetToken' => $token]);
+        
+        if ($user === null) {
+            $this->addFlash('danger', 'Un problème est survenu, votre mot de passe n\'a pas été modifié. Ce lien n\'est peut-être plus disponible.');
+            return $this->redirectToRoute('main');
+        }
+
         $form = $this->createForm(PasswordUserType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $user = $entityManager->getRepository(User::class)->findOneBy(['resetToken' => $token]);
-
-            if ($user === null) {
-                $this->addFlash('danger', 'Un problème est survenu, votre mot de passe n\'a pas été modifié.');
-                return $this->redirectToRoute('main');
-            }
 
             $user->setResetToken(null);
             $user->setPassword($passwordEncoder->encodePassword($user, $form->get('newPassword')->getData()));
