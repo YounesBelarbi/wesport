@@ -24,12 +24,7 @@ class UserToken
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $updatedAt;
+    private $createdAt;   
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="userTokens")
@@ -41,6 +36,11 @@ class UserToken
      * @ORM\Column(type="string", length=255)
      */
     private $token;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $expirationDate;
   
     public function getId(): ?int
     {
@@ -103,6 +103,18 @@ class UserToken
     public function setToken(string $token): self
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    public function getExpirationDate(): ?\DateTimeInterface
+    {
+        return $this->expirationDate;
+    }
+
+    public function setExpirationDate(\DateTimeInterface $expirationDate): self
+    {
+        $this->expirationDate = $expirationDate;
 
         return $this;
     }

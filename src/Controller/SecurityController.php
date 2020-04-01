@@ -51,9 +51,10 @@ class SecurityController extends AbstractController
     public function forgottenPassword(Request $request, SendMail $sendMail, TokenGeneratorInterface $tokenGenerator): Response
     {
         $form = $this->createForm(UserType::class);
-        $form->handleRequest($request);
-        
+        $form->handleRequest($request);        
+
         if ($form->isSubmitted() && $form->isValid()) {
+
             $email = $form->get('email')->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -66,11 +67,13 @@ class SecurityController extends AbstractController
 
             $token = $tokenGenerator->generateToken();
             $userToken = new UserToken;
+            $currentDate = new \DateTime();
 
             $userToken->setToken($token);
             $userToken->setType('reset password');            
             $userToken->setUser($user);
-            $userToken->setCreatedAt(new \DateTime());
+            $userToken->setCreatedAt($currentDate);
+            $userToken->setExpirationDate($currentDate->modify( '+1 month'));
             $entityManager->persist($userToken);
             $entityManager->flush();                     
            
