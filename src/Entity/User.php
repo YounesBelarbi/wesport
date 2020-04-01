@@ -123,6 +123,11 @@ class User implements UserInterface
      */
     private $favoriteSports;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserToken", mappedBy="user")
+     */
+    private $userTokens;
+
     public function __construct()
     {
         $this->isActive = false;
@@ -132,6 +137,7 @@ class User implements UserInterface
         $this->contactLists = new ArrayCollection();
         $this->presentInContactList = new ArrayCollection();
         $this->favoriteSports = new ArrayCollection();
+        $this->userTokens = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -505,6 +511,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($favoriteSport->getUser() === $this) {
                 $favoriteSport->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserToken[]
+     */
+    public function getUserTokens(): Collection
+    {
+        return $this->userTokens;
+    }
+
+    public function addUserToken(UserToken $userToken): self
+    {
+        if (!$this->userTokens->contains($userToken)) {
+            $this->userTokens[] = $userToken;
+            $userToken->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserToken(UserToken $userToken): self
+    {
+        if ($this->userTokens->contains($userToken)) {
+            $this->userTokens->removeElement($userToken);
+            // set the owning side to null (unless already changed)
+            if ($userToken->getUser() === $this) {
+                $userToken->setUser(null);
             }
         }
 
