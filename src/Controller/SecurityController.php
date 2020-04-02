@@ -7,13 +7,13 @@ use App\Entity\UserToken;
 use App\Form\PasswordUserType;
 use App\Form\UserType;
 use App\Service\SendMail;
+use App\Service\TokenManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -48,15 +48,14 @@ class SecurityController extends AbstractController
     /**
      * @Route("/forgotten_password", name="app_forgotten_password")
      */
-    public function forgottenPassword(Request $request, SendMail $sendMail, TokenGeneratorInterface $tokenGenerator): Response
+    public function forgottenPassword(Request $request, SendMail $sendMail, TokenManager $tokenManager): Response
     {
         $form = $this->createForm(UserType::class);
-        $form->handleRequest($request);        
- 
+        $form->handleRequest($request);               
+       
         if ($form->isSubmitted() && $form->isValid()) {
 
             $email = $form->get('email')->getData();
-
             $entityManager = $this->getDoctrine()->getManager();
             $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
 
@@ -65,18 +64,8 @@ class SecurityController extends AbstractController
                 return $this->redirectToRoute('app_forgotten_password');
             }
 
-            $token = $tokenGenerator->generateToken();
-            $userToken = new UserToken;
-            $currentDate = new \DateTime();
-
-            $userToken->setToken($token);
-            $userToken->setType('reset password');            
-            $userToken->setUser($user);
-            $userToken->setCreatedAt(new \DateTime());
-            $userToken->setExpirationDate($currentDate->modify( '+1 month'));
-            
-            $entityManager->persist($userToken);
-            $entityManager->flush();                     
+            //check if user has token or generate and save token whith service : tokenManager
+            $token = $tokenManager->generateAndSaveToken('reset password', $user);                                        
            
             $url = $this->generateUrl('app_reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
 
