@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\UserToken;
 use App\Form\RegistrationFormType;
 use App\Form\UserType;
 use App\Service\SendMail;
@@ -73,16 +74,18 @@ class RegistrationController extends AbstractController
     public function accountConfirmation($token)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $user = $entityManager->getRepository(User::class)->findOneBy(['confirmationToken' => $token]);
+        $userToken = $entityManager->getRepository(UserToken::class)->findOneBy(['token' => $token, 'type' => 'account confirmation']);
 
-        if ($user === null) {
-            $this->addFlash('danger', 'Votre compte est déjà activé');
+        if ($userToken === null) {
+            $this->addFlash('danger', 'Ce lien est inactif. Si votre compte n\'a pas été activé cliquez sur le lien ci dessous "Je n\'ai pas reçu mon email d\'activation" ');
             return $this->redirectToRoute('app_login');
         }
-
-        $user->setConfirmationToken(null);
+        $user = $userToken->getUser();
+        
         $user->setIsActive(true);
+        $entityManager->remove($userToken);
         $entityManager->flush($user);
+
 
         $this->addFlash('success', 'Votre compte est désormais actif, vous pouvez vous identifier.');
         return $this->redirectToRoute('app_login');
@@ -92,15 +95,14 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register/account/new_confirmation_mail", name="app_send_confirmation_token")
      */
-    public function sendConfirmationToken(Request $request, SendMail $sendMail)
+    public function sendConfirmationToken(Request $request, SendMail $sendMail, TokenManager $tokenGenerator)
     {
         $form = $this->createForm(UserType::class);
         $form->handleRequest($request);
-
-        $email = $form->get('email')->getData();
-
+               
         if ($form->isSubmitted() && $form->isValid()) {
-
+            
+            $email = $form->get('email')->getData();
             $entityManager = $this->getDoctrine()->getManager();
             $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
 
@@ -108,9 +110,11 @@ class RegistrationController extends AbstractController
 
                 $this->addFlash('danger', 'Email Inconnu');
                 return $this->redirectToRoute('app_forgotten_password');
-            } elseif ($user && $user->getConfirmationToken() != null) {
+            } elseif ($user && $user->getIsActive() === false) {
 
-                $url = $this->generateUrl('app_confirmation', array('token' => $user->getConfirmationToken()), UrlGeneratorInterface::ABSOLUTE_URL);
+                //generate and save token whith TokenManager service
+                $userToken = $tokenGenerator->generateAndSaveToken('account confirmation',$user);                
+                $url = $this->generateUrl('app_confirmation', array('token' => $userToken), UrlGeneratorInterface::ABSOLUTE_URL);
 
                 $sendMail->sendAnEmail(
                     'Confirmation de votre inscription',
