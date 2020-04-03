@@ -25,19 +25,21 @@ class TokenManager
     {  
         //check if user already has token for this type.
         $userToken = $this->entityManager->getRepository(UserToken::class)->findOneBy(['user' => $user, 'type' => $type]);
+        $currentDate = new \DateTime();
 
         if ($userToken) {
             
             // if yes, generate new token to replace and send it.
             $token = $this->tokenGenerator->generateToken();
             $userToken->setToken($token);
+            $userToken->setExpirationDate($currentDate->modify( '+1 month'));
             $this->entityManager->flush(); 
         } else {
 
             //if no, generate and save new token for this user            
             $token = $this->tokenGenerator->generateToken();
             $userToken = new UserToken;
-            $currentDate = new \DateTime();
+            
 
             $userToken->setToken($token);
             $userToken->setType($type);            
