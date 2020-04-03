@@ -33,6 +33,7 @@ class TokenManager
             $token = $this->tokenGenerator->generateToken();
             $userToken->setToken($token);
             $userToken->setExpirationDate($currentDate->modify( '+1 month'));
+            $userToken->setUpdatedAT(new \DateTime());
             $this->entityManager->flush(); 
         } else {
 

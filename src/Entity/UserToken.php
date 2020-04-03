@@ -41,6 +41,11 @@ class UserToken
      * @ORM\Column(type="datetime")
      */
     private $expirationDate;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
   
     public function getId(): ?int
     {
