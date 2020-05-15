@@ -7,7 +7,7 @@ use App\Entity\UserToken;
 use App\Form\PasswordUserType;
 use App\Form\UserType;
 use App\Service\SendMail;
-use App\Service\TokenManager;
+use App\Service\TokenService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,11 +48,11 @@ class SecurityController extends AbstractController
     /**
      * @Route("/forgotten_password", name="app_forgotten_password")
      */
-    public function forgottenPassword(Request $request, SendMail $sendMail, TokenManager $tokenManager): Response
+    public function forgottenPassword(Request $request, SendMail $sendMail, TokenService $TokenService): Response
     {
         $form = $this->createForm(UserType::class);
-        $form->handleRequest($request);               
-       
+        $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             $email = $form->get('email')->getData();
@@ -64,9 +64,9 @@ class SecurityController extends AbstractController
                 return $this->redirectToRoute('app_forgotten_password');
             }
 
-            //check if user has token or generate and save token whith service : tokenManager
-            $token = $tokenManager->generateAndSaveToken('reset password', $user);                                        
-           
+            //check if user has token or generate and save token whith service : TokenService
+            $token = $TokenService->generateAndSaveToken('reset password', $user);
+
             $url = $this->generateUrl('app_reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
 
             //use service to send mail
@@ -99,8 +99,8 @@ class SecurityController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $userToken = $entityManager->getRepository(UserToken::class)->findOneBy(['token' => $token, 'type' => 'reset password']);
         $currentDate = new \DateTime();
-       
-        
+
+
         if ($userToken === null || $userToken->getExpirationDate() < $currentDate) {
             $this->addFlash('danger', 'Un problème est survenu, votre mot de passe n\'a pas été modifié. Ce lien n\'est peut-être plus disponible.');
             return $this->redirectToRoute('main');

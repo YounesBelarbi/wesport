@@ -7,7 +7,7 @@ use App\Entity\UserToken;
 use App\Form\RegistrationFormType;
 use App\Form\UserType;
 use App\Service\SendMail;
-use App\Service\TokenManager;
+use App\Service\TokenService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +20,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, TokenManager $tokenGenerator, SendMail $sendMail): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, TokenService $tokenGenerator, SendMail $sendMail): Response
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('main');
@@ -38,13 +38,13 @@ class RegistrationController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
-            
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
-            //generate and save token whith TokenManager service
-            $ConfirmationToken = $tokenGenerator->generateAndSaveToken('account confirmation',$user);
+            //generate and save token whith TokenService service
+            $ConfirmationToken = $tokenGenerator->generateAndSaveToken('account confirmation', $user);
 
             // do anything else you need here, like send an email
             $url = $this->generateUrl('app_confirmation', array('token' => $ConfirmationToken), UrlGeneratorInterface::ABSOLUTE_URL);
@@ -81,7 +81,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
         $user = $userToken->getUser();
-        
+
         $user->setIsActive(true);
         $entityManager->remove($userToken);
         $entityManager->flush($user);
@@ -95,13 +95,13 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register/account/new_confirmation_mail", name="app_send_confirmation_token")
      */
-    public function sendConfirmationToken(Request $request, SendMail $sendMail, TokenManager $tokenGenerator)
+    public function sendConfirmationToken(Request $request, SendMail $sendMail, TokenService $tokenGenerator)
     {
         $form = $this->createForm(UserType::class);
         $form->handleRequest($request);
-               
+
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $email = $form->get('email')->getData();
             $entityManager = $this->getDoctrine()->getManager();
             $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
@@ -112,8 +112,8 @@ class RegistrationController extends AbstractController
                 return $this->redirectToRoute('app_forgotten_password');
             } elseif ($user && $user->getIsActive() === false) {
 
-                //generate and save token whith TokenManager service
-                $userToken = $tokenGenerator->generateAndSaveToken('account confirmation',$user);                
+                //generate and save token whith TokenService service
+                $userToken = $tokenGenerator->generateAndSaveToken('account confirmation', $user);
                 $url = $this->generateUrl('app_confirmation', array('token' => $userToken), UrlGeneratorInterface::ABSOLUTE_URL);
 
                 $sendMail->sendAnEmail(
