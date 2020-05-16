@@ -13,7 +13,6 @@ class DeleteOutdateToken extends Command
 {
     // the name of the command (the part after "bin/console")
     protected static $defaultName = 'app:token-cleaner';
-
     private $entitymanager;
     private $userTokenRepository;
 
@@ -29,7 +28,6 @@ class DeleteOutdateToken extends Command
         $this
         ->setDescription('Delete token if it is obsolete.')
         ->setHelp('This command is used to clean the database of perimated tokens.');
-
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -45,23 +43,16 @@ class DeleteOutdateToken extends Command
         $allTokens = $this->userTokenRepository->findAll();
 
         foreach ($allTokens as $key => $token) {
-            
             if ($token->getExpirationDate() < $currentDate) {
-
                 $this->entitymanager->remove($token);
                 $this->entitymanager->flush();
                 $compteur++;
-
             }
         }
 
         $io = new SymfonyStyle($input, $output);
         $io->success($compteur . ' token ont été suuprimés avec succès !');
-
-
-
         $output->writeln('your database is clean.');
-
 
         return 0;
     }

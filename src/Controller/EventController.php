@@ -35,18 +35,14 @@ class EventController extends AbstractController
     public function eventOrganization(Request $request, EntityManagerInterface $em)
     {
         $user = $this->getUser();
-
         $eventOrganizationForm = $this->createForm(EventType::class);
-
         $eventOrganizationForm->handleRequest($request);
 
         if ($eventOrganizationForm->isSubmitted() && $eventOrganizationForm->isValid()) {
-
             $event = new Event;
 
             $event->setEventOrganizer($user);
             $event->setAuthor($user->getUsername());
-
             $event->setEventBody($eventOrganizationForm->get('eventBody')->getData());
             $event->setSportConcerned($eventOrganizationForm->get('sportConcerned')->getData());
             $event->setTitle($eventOrganizationForm->get('title')->getData());
@@ -66,7 +62,6 @@ class EventController extends AbstractController
                 $this->addFlash('success', 'Votre événement est créer');
                 return $this->redirectToRoute('profile_show');
             } catch (\Exception $e) {
-
                 $this->addFlash('warning', 'Un problème est survenu, une information est manquante. Votre événement n\'est pas enregistré');
             }
 
@@ -82,16 +77,20 @@ class EventController extends AbstractController
     /**
      * @Route("/event/edit/{id}", name="edit")
      */
-    public function eventEdit($id, Request $request, EntityManagerInterface $em, EventRepository $eventRepository, Event $event)
-    {
+    public function eventEdit(
+        Request $request,
+        EntityManagerInterface $em,
+        EventRepository $eventRepository,
+        Event $event
+    ) {
         $eventEditForm = $this->createForm(EventType::class, $event);
-
         $eventEditForm->handleRequest($request);
 
+        // dump($eventEditForm);
         if ($eventEditForm->isSubmitted() && $eventEditForm->isValid()) {
             $em->flush();
             $this->addFlash('success', 'l\'événement à été mit à jour');
-            return $this->redirectToRoute('profile_show');
+            // return $this->redirectToRoute('profile_show');
         }
 
         return $this->render('event/event.html.twig', [
@@ -122,7 +121,6 @@ class EventController extends AbstractController
         $user = $this->getUser();
         $event = $eventRepository->find($id);
         $event->addParticipatingUserList($user);
-
         $em->flush();
         $this->addFlash('success', 'Vous êtes inscrit à l\'evenement ' . $event->getTitle());
 
@@ -138,7 +136,6 @@ class EventController extends AbstractController
         $user = $this->getUser();
         $event = $eventRepository->find($id);
         $event->removeParticipatingUserList($user);
-
         $em->flush();
         $this->addFlash('warning', 'Vous n\'êtes plus inscrit à l\'evenement ' . $event->getTitle());
 

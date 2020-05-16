@@ -11,17 +11,17 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-  /**
-   * @Route("/", name="main")
-   */
-  public function index(EventRepository $eventRepository, EntityManagerInterface $em)
-  {
-    $lastEvent = $em->getRepository(Event::class)->lastEvents();
-    $lastClassifiedAds = $em->getRepository((ClassifiedAd::class))->lastClassifiedAds();
+    /**
+     * @Route("/", name="main")
+     */
+    public function index(EventRepository $eventRepository, EntityManagerInterface $em)
+    {
+        $lastEvent = $em->getRepository(Event::class)->lastEvents();
+        $lastClassifiedAds = $em->getRepository((ClassifiedAd::class))->lastClassifiedAds();
 
-    return $this->render('main/index.html.twig', [
-      'lastEvent' => $lastEvent,
-      'lastClassifiedAds' => $lastClassifiedAds,
-    ]);
-  }
+        return $this->render('main/index.html.twig', [
+            'lastEvent' => $lastEvent,
+            'lastClassifiedAds' => $lastClassifiedAds,
+        ]);
+    }
 }

@@ -54,7 +54,6 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $email = $form->get('email')->getData();
             $entityManager = $this->getDoctrine()->getManager();
             $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
@@ -110,7 +109,6 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $user = $userToken->getUser();
             $user->setPassword($passwordEncoder->encodePassword($user, $form->get('newPassword')->getData()));
             $entityManager->remove($userToken);
@@ -121,7 +119,7 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('app_login');
         } else {
 
-            return $this->render('security/reset_password.html.twig',  [
+            return $this->render('security/reset_password.html.twig', [
                 'form' => $form->createView(),
             ]);
         }
