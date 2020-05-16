@@ -79,19 +79,9 @@ class User implements UserInterface
     private $createdAt;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $resetToken;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $isActive;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $confirmationToken;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Event", inversedBy="participatingUserList")
@@ -123,6 +113,11 @@ class User implements UserInterface
      */
     private $favoriteSports;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserToken", mappedBy="user")
+     */
+    private $userTokens;
+
     public function __construct()
     {
         $this->isActive = false;
@@ -132,6 +127,7 @@ class User implements UserInterface
         $this->contactLists = new ArrayCollection();
         $this->presentInContactList = new ArrayCollection();
         $this->favoriteSports = new ArrayCollection();
+        $this->userTokens = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -292,23 +288,11 @@ class User implements UserInterface
     }
 
     /**
-    * @ORM\PrePersist
-    */
+     * @ORM\PrePersist
+     */
     public function setCreatedAtValue()
     {
         $this->createdAt = new \DateTime();
-    }
-
-    public function getResetToken(): ?string
-    {
-        return $this->resetToken;
-    }
-
-    public function setResetToken(?string $resetToken): self
-    {
-        $this->resetToken = $resetToken;
-
-        return $this;
     }
 
     public function getIsActive(): ?bool
@@ -319,18 +303,6 @@ class User implements UserInterface
     public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
-
-        return $this;
-    }
-
-    public function getConfirmationToken(): ?string
-    {
-        return $this->confirmationToken;
-    }
-
-    public function setConfirmationToken(?string $confirmationToken): self
-    {
-        $this->confirmationToken = $confirmationToken;
 
         return $this;
     }
@@ -505,6 +477,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($favoriteSport->getUser() === $this) {
                 $favoriteSport->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserToken[]
+     */
+    public function getUserTokens(): Collection
+    {
+        return $this->userTokens;
+    }
+
+    public function addUserToken(UserToken $userToken): self
+    {
+        if (!$this->userTokens->contains($userToken)) {
+            $this->userTokens[] = $userToken;
+            $userToken->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserToken(UserToken $userToken): self
+    {
+        if ($this->userTokens->contains($userToken)) {
+            $this->userTokens->removeElement($userToken);
+            // set the owning side to null (unless already changed)
+            if ($userToken->getUser() === $this) {
+                $userToken->setUser(null);
             }
         }
 

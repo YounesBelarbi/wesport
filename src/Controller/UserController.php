@@ -34,12 +34,10 @@ class UserController extends AbstractController
     public function editProfileUser(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder)
     {
         $user = $this->getUser();
-
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $em->flush();
             $this->addFlash('success', 'Votre profile à été mit à jour');
             return $this->redirectToRoute('profile_show');
@@ -57,12 +55,10 @@ class UserController extends AbstractController
     public function userPasswordReset(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder)
     {
         $user = $this->getUser();
-
         $form = $this->createForm(PasswordUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             //password processing
             $oldPassword = $form->get('oldPassword')->getData();
             $newPassword = $form->get('newPassword')->getData();

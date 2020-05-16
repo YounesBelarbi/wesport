@@ -29,7 +29,7 @@
 						<div class="event-item">
 							<div class="event-pic">
 								<h3>{{event.sportConcerned}}</h3>
-								<img src="{{asset('assets/img/test-image.jpg')}}" alt="">
+								<img src="{{asset( 'https://picsum.photos/200/300?random=' ~ random(1, 100))}}" alt="">
 							</div>
 							<div class="event-content">
 								<h4>{{event.title}}</h4>
@@ -57,7 +57,7 @@
 				{% for classifiedAd in lastClassifiedAds %}
 					<div class="col-lg-6 row col-md-12">
 						<div class="col-4 classifiedAdImg">
-							<img src="{{asset('assets/img/test-image.jpg')}}" alt="">
+							<img src="{{asset('https://picsum.photos/260/170?random=' ~ random(1, 100))}}" alt="">
 						</div>
 						<div class="col-8 adsBody">
 							<div class="d-flex justify-content-center">

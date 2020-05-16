@@ -23,11 +23,9 @@ class SportresearchController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $criteria = $form->getData();
 
             if (!is_null($criteria['age']) || !is_null($criteria['city']) || !is_null($criteria['sport']) || !is_null($criteria['level'])) {
-
                 $userSportList = $em->getRepository(FavoriteSport::class)->findUsersByAllInformations($criteria);
             }
         }

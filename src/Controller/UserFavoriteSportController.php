@@ -40,7 +40,6 @@ class UserFavoriteSportController extends AbstractController
         $favoriteSportForm->handleRequest($request);
 
         if ($favoriteSportForm->isSubmitted() && $favoriteSportForm->isValid()) {
-
             $favoriteSport = new FavoriteSport;
             $level = $favoriteSportForm->get('level')->getData();
             $sport = $favoriteSportForm->get('sport')->getData();
@@ -50,14 +49,12 @@ class UserFavoriteSportController extends AbstractController
             $favoriteSport->setSport($sport);
 
             if ($sport != null && $level != null) {
-
                 try {
                     $em->persist($favoriteSport);
                     $em->flush();
                     $this->addFlash('success', 'Le sport est rajouté dans vos favoris');
                     return $this->redirectToRoute('profile_edit');
                 } catch (\Exception $e) {
-
                     $this->addFlash('warning', 'Ce sport fait déjà parti de votre liste de favori');
                 }
             } else {
@@ -84,7 +81,6 @@ class UserFavoriteSportController extends AbstractController
         $favoriteSportForm->handleRequest($request);
 
         if ($favoriteSportForm->isSubmitted() && $favoriteSportForm->isValid()) {
-
             $em->flush();
             $this->addFlash('success', 'Les modifications ont bien été faites');
             return $this->redirectToRoute('user_favorite_sport_list');

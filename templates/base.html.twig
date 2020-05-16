@@ -16,16 +16,6 @@
 		{% endblock %}
 	</head>
 	</body>
-		{% for label, messages in app.flashes %}
-			{% for  message in messages %}
-				<div class="alert alert-{{label}} alert-dismissible fade show col-12" role="alert">
-					{{ message }}
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-			{% endfor %}
-		{% endfor %}
 		<!-- Header section -->
 		<header class="header-section">
 			<nav class="navbar navbar-light bg-light navbar-expand-lg">
@@ -60,6 +50,16 @@
 			</nav>
 		</header>
 		<!-- Header section end -->
+		{% for label, messages in app.flashes %}
+			{% for  message in messages %}
+				<div class="alert alert-{{label}} alert-dismissible fade show col-12" role="alert">
+					{{ message }}
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			{% endfor %}
+		{% endfor %}
 		{% block body %}{% endblock %}
 		<!-- Footer section -->
 		<footer class="footer-section">

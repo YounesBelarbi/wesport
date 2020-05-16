@@ -20,10 +20,10 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email',null, [
+            ->add('email', null, [
                 'row_attr' => ['class' => 'col-md-12'],
             ])
-            ->add('username',null, [
+            ->add('username', null, [
                 'row_attr' => ['class' => 'col-md-12'],
                 'label' => 'Pseudonyme'
             ])
@@ -48,44 +48,40 @@ class RegistrationFormType extends AbstractType
                 'options' => ['row_attr' => ['class' => 'col-md-6']],
                 'first_options'  => [
                     'label' => 'Mot de passe',
-                    
                 ],
                 'second_options' => ['label' => 'Confirmer le mot de passe'],
                 'invalid_message' => 'Les mots de passe doivent être identiques',
             ])
-            ->add('age',null, [
+            ->add('age', null, [
                 'row_attr' => ['class' => 'col-md-2'],
                 'label' => 'Âge',
                 'required' => false
             ])
-            ->add('lastname',null, [
+            ->add('lastname', null, [
                 'row_attr' => ['class' => 'col-md-5'],
                 'label' => 'Nom',
                 'required' => false
             ])
-            ->add('firstname',null, [
+            ->add('firstname', null, [
                 'row_attr' => ['class' => 'col-md-5'],
                 'label' => 'Prénom',
                 'required' => false
             ])
-            ->add('city',null, [
+            ->add('city', null, [
                 'row_attr' => ['class' => 'col-md-6'],
                 'label' => 'Ville',
                 'required' => false
             ])
-            ->add('phonenumber',TelType::class, [
+            ->add('phonenumber', TelType::class, [
                 'row_attr' => ['class' => 'col-md-6'],
                 'label' => 'Numéro de téléphone',
                 'required' => false
-                
             ])
             ->add('send', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-lg btn-primary site-btn col-md-6'],
                 'label' => 'Je valide mon profile',
                 'row_attr' => ['class' => 'd-flex justify-content-center'],
-            ])
-            
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -15,24 +15,21 @@ class FavoriteSportType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            
             ->add('sport', null, [
                 'row_attr' => ['class' => 'col-md-6'],
-                'placeholder'=> 'selectionner un sport'
+                'placeholder' => 'selectionner un sport',
             ])
             ->add('level', EntityType::class, [
                 'class' => Level::class,
                 'row_attr' => ['class' => 'col-md-6'],
                 'label' => 'niveau',
-                'placeholder'=> 'selectionner un niveau'
-                
+                'placeholder' => 'selectionner un niveau',
             ])
             ->add('send', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-lg btn-primary site-btn col-md-6'],
                 'label' => 'Enregistrer',
                 'row_attr' => ['class' => 'd-flex justify-content-center'],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -15,26 +15,26 @@ class ClassifiedAdType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('classifiedAdBody', null , [
+            ->add('classifiedAdBody', null, [
                 'row_attr' => ['class' => 'col-md-12'],
                 'label' => 'Texte de votre annnonce',
             ])
-            ->add('title', null , [
+            ->add('title', null, [
                 'row_attr' => ['class' => 'col-md-12'],
                 'label' => 'Titre de votre annonce',
 
             ])
-            ->add('price', null , [
+            ->add('price', null, [
                 'row_attr' => ['class' => 'col-md-2'],
                 'label' => 'Prix',
 
             ])
-            ->add('sportConcerned', EntityType::class , [
+            ->add('sportConcerned', EntityType::class, [
                 'class' => Sport::class,
                 'row_attr' => ['class' => 'col-md-5'],
                 'label' => 'Sport concerné par l\'annonce',
             ])
-            ->add('objectForSale', null , [
+            ->add('objectForSale', null, [
                 'row_attr' => ['class' => 'col-md-5'],
                 'label' => 'Objet que vous souhaitez vendre',
             ])
@@ -42,8 +42,7 @@ class ClassifiedAdType extends AbstractType
                 'attr' => ['class' => 'btn btn-lg btn-primary site-btn col-md-6'],
                 'label' => 'Enregistrer mon annonce',
                 'row_attr' => ['class' => 'd-flex justify-content-center'],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
