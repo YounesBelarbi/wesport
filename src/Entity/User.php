@@ -79,19 +79,9 @@ class User implements UserInterface
     private $createdAt;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $resetToken;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $isActive;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $confirmationToken;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Event", inversedBy="participatingUserList")
@@ -298,23 +288,11 @@ class User implements UserInterface
     }
 
     /**
-    * @ORM\PrePersist
-    */
+     * @ORM\PrePersist
+     */
     public function setCreatedAtValue()
     {
         $this->createdAt = new \DateTime();
-    }
-
-    public function getResetToken(): ?string
-    {
-        return $this->resetToken;
-    }
-
-    public function setResetToken(?string $resetToken): self
-    {
-        $this->resetToken = $resetToken;
-
-        return $this;
     }
 
     public function getIsActive(): ?bool
@@ -325,18 +303,6 @@ class User implements UserInterface
     public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
-
-        return $this;
-    }
-
-    public function getConfirmationToken(): ?string
-    {
-        return $this->confirmationToken;
-    }
-
-    public function setConfirmationToken(?string $confirmationToken): self
-    {
-        $this->confirmationToken = $confirmationToken;
 
         return $this;
     }
