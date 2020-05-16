@@ -21,7 +21,6 @@ class PasswordUserType extends AbstractType
     {
         $builder
             ->add('newPassword', RepeatedType::class, [
-
                 'type' => PasswordType::class,
                 'mapped' => false,
                 'constraints' => [
@@ -34,10 +33,8 @@ class PasswordUserType extends AbstractType
                 'first_options'  => ['label' => 'Nouveau mot de passe', 'row_attr' => ['class' => 'col-md-12'],],
                 'second_options' => ['label' => 'Confirmer le nouveau mot de passe', 'row_attr' => ['class' => 'col-md-12'],],
                 'invalid_message' => 'Les mots de passe doivent être identiques',
-
             ])
             ->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'onPreSetData'])
-
             ->add('send', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-lg btn-primary site-btn col-md-6'],
                 'label' => 'Je confirme mon nouveau mot de passe',
@@ -59,7 +56,6 @@ class PasswordUserType extends AbstractType
                     'label' => 'Mot de passe actuelle ',
                     'row_attr' => ['class' => 'col-md-12'],
                     'constraints' => new NotBlank(['message' => 'veuillez mettre votre ancien mot de passe']),
-
                 ]);
         }
     }

@@ -17,38 +17,36 @@ class SportResearchType extends AbstractType
         $builder
             ->add('sport', EntityType::class, [
                 'class' => Sport::class,
-                'attr' => ['class' => 'form-control search-slt','placeholder' => 'Sport'],
-                'label'=> false,
+                'attr' => ['class' => 'form-control search-slt', 'placeholder' => 'Sport'],
+                'label' => false,
                 'row_attr' => ['class' => 'd-flex justify-content-center'],
-                'required' =>false,
+                'required' => false,
                 'placeholder' => 'Sport',
-                
             ])
             ->add('level', EntityType::class, [
                 'class' => Level::class,
-                'attr' => ['class' => 'form-control search-slt','placeholder' => 'Sport'],
-                'label'=> false,
+                'attr' => ['class' => 'form-control search-slt', 'placeholder' => 'Sport'],
+                'label' => false,
                 'row_attr' => ['class' => 'd-flex justify-content-center'],
-                'required' =>false,
+                'required' => false,
                 'placeholder' => 'Niveau',
             ])
             ->add('age', null, [
-                'attr' => ['class' => 'form-control search-slt','placeholder' => 'Âge'],
-                'label'=> false,
+                'attr' => ['class' => 'form-control search-slt', 'placeholder' => 'Âge'],
+                'label' => false,
                 'row_attr' => ['class' => 'd-flex justify-content-center'],
-                'required' =>false
+                'required' => false,
             ])
             ->add('city', null, [
-                'attr' => ['class' => 'form-control search-slt','placeholder' => 'Ville'],
-                'label'=> false,
+                'attr' => ['class' => 'form-control search-slt', 'placeholder' => 'Ville'],
+                'label' => false,
                 'row_attr' => ['class' => 'd-flex justify-content-center'],
-                'required' =>false
+                'required' => false,
             ])
             ->add('send', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-danger wrn-btn'],
-                'label' => 'rechercher'
-            ])
-        ;
+                'label' => 'rechercher',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

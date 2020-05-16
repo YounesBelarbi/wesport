@@ -13,7 +13,7 @@ class ContactListType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null , [
+            ->add('name', null, [
                 'row_attr' => ['class' => 'col-md-12'],
                 'label' => 'Nom de votre liste',
             ])
@@ -21,8 +21,7 @@ class ContactListType extends AbstractType
                 'attr' => ['class' => 'btn btn-lg btn-primary site-btn col-md-6'],
                 'label' => 'Enregistrer ma liste',
                 'row_attr' => ['class' => 'd-flex justify-content-center'],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -16,10 +16,7 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'onPreSetData'])
-           
-           
-        ;
+            ->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'onPreSetData']);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -36,33 +33,28 @@ class UserType extends AbstractType
 
         if ($user == null) {
             $form
-            ->add('email', null, [
-                'mapped' => false
-            ])
-            ->add('send', SubmitType::class, [
-                'attr' => ['class' => 'btn btn-lg btn-primary site-btn col-md-6'],
-                'label' => 'Recevoir le lien',
-                'row_attr' => ['class' => 'd-flex justify-content-center'],
-            ])
-            ;
+                ->add('email', null, [
+                    'mapped' => false
+                ])
+                ->add('send', SubmitType::class, [
+                    'attr' => ['class' => 'btn btn-lg btn-primary site-btn col-md-6'],
+                    'label' => 'Recevoir le lien',
+                    'row_attr' => ['class' => 'd-flex justify-content-center'],
+                ]);
         } else {
-            
             $form
-            ->add('email')
-            ->add('username')
-            ->add('age')
-            ->add('lastName')
-            ->add('firstName')
-            ->add('city')
-            ->add('phoneNumber')
-            ->add('send', SubmitType::class, [
-                'attr' => ['class' => 'btn btn-lg btn-primary site-btn col-md-6'],
-                'label' => 'enregistrer les modifications',
-                'row_attr' => ['class' => 'd-flex justify-content-center'],
-            ])
-            ;
+                ->add('email')
+                ->add('username')
+                ->add('age')
+                ->add('lastName')
+                ->add('firstName')
+                ->add('city')
+                ->add('phoneNumber')
+                ->add('send', SubmitType::class, [
+                    'attr' => ['class' => 'btn btn-lg btn-primary site-btn col-md-6'],
+                    'label' => 'enregistrer les modifications',
+                    'row_attr' => ['class' => 'd-flex justify-content-center'],
+                ]);
         }
-
-
     }
 }
