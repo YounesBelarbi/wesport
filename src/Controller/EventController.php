@@ -86,7 +86,6 @@ class EventController extends AbstractController
         $eventEditForm = $this->createForm(EventType::class, $event);
         $eventEditForm->handleRequest($request);
 
-        // dump($eventEditForm);
         if ($eventEditForm->isSubmitted() && $eventEditForm->isValid()) {
             $em->flush();
             $this->addFlash('success', 'l\'événement à été mit à jour');
