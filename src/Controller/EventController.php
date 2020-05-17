@@ -22,10 +22,13 @@ class EventController extends AbstractController
     {
         $allEvent = $eventRepository->findAll();
 
-        return $this->render('event/event_list.html.twig', [
-            'eventList' => $allEvent,
-            'user' =>  $this->getUser(),
-        ]);
+        return $this->render(
+            'event/event_list.html.twig',
+            [
+                'eventList' => $allEvent,
+                'user' =>  $this->getUser(),
+            ]
+        );
     }
 
 
@@ -75,7 +78,7 @@ class EventController extends AbstractController
 
 
     /**
-     * @Route("/event/edit/{id}", name="edit")
+     * @Route("/event/edit/{slug}", name="edit")
      */
     public function eventEdit(
         Request $request,
