@@ -16,7 +16,7 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('eventBody', ull, [
+            ->add('eventBody', null, [
                 'row_attr' => ['class' => 'col-md-12'],
                 'label' => 'Texte déscriptif de l\'événement',
             ])
