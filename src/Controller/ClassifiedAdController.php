@@ -65,16 +65,16 @@ class ClassifiedAdController extends AbstractController
 
 
     /**
-     * @Route("/user/classified-ad/update-an-ad/{id}", name="ad_updating")
+     * @Route("/user/classified-ad/update-an-ad/{slug}", name="ad_updating")
      */
     public function updateAnAd(
         Request $request,
-        $id,
+        $slug,
         ClassifiedAdRepository $classifiedAdRepository,
         EntityManagerInterface $em,
         ClassifiedAd $classifiedAd
     ) {
-        $classifiedAd = $classifiedAdRepository->find($id);
+        $classifiedAd = $classifiedAdRepository->findOneBy(['slug' => $slug]);
         $classifiedAdForm = $this->createForm(ClassifiedAdType::class, $classifiedAd);
         $classifiedAdForm->handleRequest($request);
 
