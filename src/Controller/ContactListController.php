@@ -58,16 +58,16 @@ class ContactListController extends AbstractController
 
 
     /**
-     * @Route("/contact_list/update/{id}", name="updating")
+     * @Route("/contact_list/update/{slug}", name="updating")
      */
     public function updateContactList(
         Request $request,
-        $id,
+        $slug,
         EntityManagerInterface $em,
         ContactList $contactList,
         ContactListRepository $contactListRepository
     ) {
-        $contactList = $contactListRepository->find($id);
+        $contactList = $contactListRepository->find($slug);
         $contactListForm = $this->createForm(ContactListType::class, $contactList);
         $contactListForm->handleRequest($request);
 
