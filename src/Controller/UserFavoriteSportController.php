@@ -83,7 +83,7 @@ class UserFavoriteSportController extends AbstractController
         if ($favoriteSportForm->isSubmitted() && $favoriteSportForm->isValid()) {
             $em->flush();
             $this->addFlash('success', 'Les modifications ont bien été faites');
-            return $this->redirectToRoute('user_favorite_sport_list');
+            return $this->redirectToRoute('profile_show');
         }
 
         return $this->render('user_favorite_sport/favorite_sport.html.twig', [
