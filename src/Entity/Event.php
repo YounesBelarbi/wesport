@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
@@ -68,6 +69,13 @@ class Event
      * @ORM\JoinColumn(nullable=false)
      */
     private $eventOrganizer;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     * 
+     * @Gedmo\Slug(fields={"title"})
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -211,6 +219,18 @@ class Event
     public function setEventOrganizer(?User $eventOrganizer): self
     {
         $this->eventOrganizer = $eventOrganizer;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

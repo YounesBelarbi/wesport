@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContactListRepository")
@@ -43,6 +44,13 @@ class ContactList
      * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="presentInContactList")
      */
     private $userContactList;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     * 
+     * @Gedmo\Slug(fields={"name"})
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -126,6 +134,18 @@ class ContactList
             $this->userContactList->removeElement($userContactList);
             $userContactList->removePresentInContactList($this);
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
