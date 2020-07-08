@@ -1364,9 +1364,18 @@ Blog page
 search section home-page
  ---------------------*/
 
- #search-image {
+.search-image {
 	max-width:60%
 }
+
+#username {
+	display: inline;
+}
+
+#age {
+	display: inline;
+}
+
 
 /* ----------------
 Contact page
