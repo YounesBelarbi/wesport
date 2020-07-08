@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\ClassifiedAd;
 use App\Entity\Event;
+use App\Entity\FavoriteSport;
+use App\Entity\User;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,10 +20,12 @@ class MainController extends AbstractController
     {
         $lastEvent = $em->getRepository(Event::class)->lastEvents();
         $lastClassifiedAds = $em->getRepository((ClassifiedAd::class))->lastClassifiedAds();
+        $lastUserRegistred = $em->getRepository(User::class)->lastRegistred();
 
         return $this->render('main/index.html.twig', [
             'lastEvent' => $lastEvent,
             'lastClassifiedAds' => $lastClassifiedAds,
+            'lastUserRegistred' => $lastUserRegistred,
         ]);
     }
 }
