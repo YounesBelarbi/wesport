@@ -42,10 +42,6 @@ class SportResearchType extends AbstractType
                 'label' => false,
                 'row_attr' => ['class' => 'd-flex justify-content-center'],
                 'required' => false,
-            ])
-            ->add('send', SubmitType::class, [
-                'attr' => ['class' => 'btn btn-danger wrn-btn'],
-                'label' => 'rechercher',
             ]);
     }
 
