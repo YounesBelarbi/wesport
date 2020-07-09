@@ -10,23 +10,53 @@ let app = {
     },
     handleSelect: function (e) {
         // e.preventDefault();
-        var infoObject = {};
+        var data = {};
         $("select option:selected").each(function () {
             let fieldName = $(this).parent().attr("data-name");
-            infoObject[fieldName] = $(this).text();
+            data[fieldName] = $(this).text();
         });
-        console.log(infoObject);
-        app.searchRequestUsers(infoObject);
+        console.log(data);
+        app.searchRequestUsers(data);
+
     },
-    searchRequestUsers: function (infoObject) {
+    searchRequestUsers: function (data) {
         axios
-            .post("/user/sportresearch", infoObject)
+            .post("/user/sportresearch", data)
             .then(function (response) {
-                console.log(response.data);
+                // console.log(response.data);
+                app.generateListElement(response);
             })
             .catch(function (error) {
                 console.log(error.response);
             });
     },
+    generateListElement: function (response) {
+        let $section = $("#result_section");
+
+        // deletion of previous results
+        let $result_container = $section.find('.container');
+        $result_container.contents().remove();
+
+        let $templateElement = $("#templateResult");
+        let $contentElements = $templateElement.contents();
+
+        let $result = response.data;
+        let resultNumber = $result.length;
+        $result_container.append("<div class='d-flex justify-content-between m-4 row'><h2  class='search-title'> résultat de votre recherche</h2></div>");
+
+        $.each(response.data, function (key, value) {
+
+            //clone template
+            let $cloneContentElements = $contentElements.clone();
+            // filling the template with the information
+            $cloneContentElements.find('#username').text(value.username)
+            $cloneContentElements.find('#age').text(value.age + ' ans')
+            $cloneContentElements.find('#city').text(value.city)
+
+            //insert template in dom
+            $result_container.append($cloneContentElements)
+
+        });
+    }
 };
 $(app.init);

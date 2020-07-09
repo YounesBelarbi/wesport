@@ -160,4 +160,35 @@
 			</div>
 		</section>
 		<!-- ClassifiedAds section end-->
+
+		<!-- Template section -->
+
+		<template id="templateResult">
+			<div class="row mb-4 justify-content-center" id="result_content">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="row ">
+								<div class="col-md-3">
+									<img class="search-image" src="{{asset('assets/img/avatar.svg')}}" alt="">
+								</div>
+								<div class="col-md-5" id="profil_information">
+									<h3 id="username">username</h3>
+									<p id="age">âge</p>
+									<p id="city">ville</p>
+								</div>
+								<div class="col-md-4">
+									<h6></h6>
+									<div class="sub-row">
+										<button type="button" class="btn btn-secondary btn-sm btn-block">Voir profile</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</template>
+
+		<!-- Template section end -->
 	{% endblock %}
