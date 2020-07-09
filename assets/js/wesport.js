@@ -1,3 +1,4 @@
+const axios = require("axios").default;
 
 let app = {
     init: function () {
@@ -11,10 +12,21 @@ let app = {
         // e.preventDefault();
         var infoObject = {};
         $("select option:selected").each(function () {
-            let fieldName = $(this).parent().attr("id");
+            let fieldName = $(this).parent().attr("data-name");
             infoObject[fieldName] = $(this).text();
         });
         console.log(infoObject);
+        app.searchRequestUsers(infoObject);
+    },
+    searchRequestUsers: function (infoObject) {
+        axios
+            .post("/user/sportresearch", infoObject)
+            .then(function (response) {
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                console.log(error.response);
+            });
     },
 };
 $(app.init);
