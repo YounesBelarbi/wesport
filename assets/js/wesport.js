@@ -21,13 +21,14 @@ let app = {
     },
     searchRequestUsers: function (data) {
         axios
-            .post("/user/sportresearch", data)
+            .post("/sportresearch", data)
             .then(function (response) {
-                // console.log(response.data);
                 app.generateListElement(response);
             })
             .catch(function (error) {
-                console.log(error.response);
+                if (error.response.status == 403) {
+                    location.href = '/login';
+                }
             });
     },
     generateListElement: function (response) {

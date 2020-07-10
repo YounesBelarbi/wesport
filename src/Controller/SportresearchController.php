@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
 class SportresearchController extends AbstractController
 {
     /**
-     * @Route("/user/sportresearch", name="sportresearch")
+     * @Route("/sportresearch", name="sportresearch")
      */
     public function index(
         Request $request,
@@ -29,6 +29,15 @@ class SportresearchController extends AbstractController
         SportRepository $sportRepository,
         LevelRepository $levelRepository
     ) {
+        $response = new Response();
+
+        if (!$this->getUser()) {  
+            $response->setContent(json_encode(['error' => 'unidentified user']));
+            $response->setStatusCode(Response::HTTP_FORBIDDEN);
+            $response->headers->set('content-type', 'application/json');
+            return $response;
+        }                  
+
         $requestContent = json_decode($request->getContent(), true);
         $users = [];
         $userSportList = [];
@@ -36,8 +45,7 @@ class SportresearchController extends AbstractController
         $criteria['sport'] = $sportRepository->findOneBy(['name' => $requestContent['sport']]);
         $criteria['level'] = $levelRepository->findOneBy(['name' => $requestContent['level']]);
         $criteria['age'] = null;
-        $criteria['city'] = null;
-
+        $criteria['city'] = null;    
 
         if (!is_null($criteria['sport']) || !is_null($criteria['level'])) {
             $userSportList = $em->getRepository(FavoriteSport::class)->findUsersByAllInformations($criteria);
@@ -52,10 +60,9 @@ class SportresearchController extends AbstractController
         $serializer = new Serializer([$normalizer]);
         $data = $serializer->normalize($users, null, ['groups' => 'searchResult']);
 
-        $response = new Response();
         $response->setContent(json_encode($data));
-        $response->headers->set('Content-Type', 'application/json');
-
+        $response->headers->set('Content-Type', 'application/json');   
+   
         return $response;
     }
 }
