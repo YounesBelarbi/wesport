@@ -43,7 +43,7 @@ let app = {
 
         let $result = response.data;
         let resultNumber = $result.length;
-        $result_container.append("<div class='d-flex justify-content-between m-4 row'><h2  class='search-title'> résultat de votre recherche</h2></div>");
+        $result_container.append("<div class='d-flex justify-content-between m-4 row'><h2  class='search-title'> il y a " + resultNumber + " résultat pour votre recherche</h2></div>");
 
         $.each(response.data, function (key, value) {
 
