@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserFavoriteSportController extends AbstractController
 {
     /**
-     * @Route("/listfavorite/sport", name="sport_list")
+     * @Route("/favorite-sport-list", name="sport_list")
      */
     public function userFavoriteSportList(FavoriteSportRepository $favoriteSportRepository)
     {
@@ -30,7 +30,7 @@ class UserFavoriteSportController extends AbstractController
 
 
     /**
-     * @Route("/addfavorite/sport", name="sport_add")
+     * @Route("/favorite-sport-list/add", name="sport_add")
      */
     public function addFavoriteSport(Request $request, EntityManagerInterface $em)
     {
@@ -69,7 +69,7 @@ class UserFavoriteSportController extends AbstractController
 
 
     /**
-     * @Route("/updatefavorite/sport/{id}", name="sport_update")
+     * @Route("/favorite-sport-list/update/{id}", name="sport_update")
      */
     public function updateFavoriteSport(Request $request, $id, EntityManagerInterface $em)
     {
@@ -93,7 +93,7 @@ class UserFavoriteSportController extends AbstractController
 
 
     /**
-     * @Route("/deletefavorite/sport/{id}", name="sport_delete")
+     * @Route("/favorite-sport-list/delete/{id}", name="sport_delete")
      */
     public function deleteFavoriteSport(Request $request, $id, EntityManagerInterface $em)
     {

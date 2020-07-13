@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EventController extends AbstractController
 {
     /**
-     * @Route("/event/show", name="list")
+     * @Route("/event", name="list")
      */
     public function eventShow(Request $request, EntityManagerInterface $em, EventRepository $eventRepository)
     {
@@ -33,7 +33,7 @@ class EventController extends AbstractController
 
 
     /**
-     * @Route("/event/organization", name="organized")
+     * @Route("/event/add", name="organized")
      */
     public function eventOrganization(Request $request, EntityManagerInterface $em)
     {
@@ -78,7 +78,7 @@ class EventController extends AbstractController
 
 
     /**
-     * @Route("/event/edit/{slug}", name="edit")
+     * @Route("/event/update/{slug}", name="edit")
      */
     public function eventEdit(
         Request $request,
@@ -102,7 +102,7 @@ class EventController extends AbstractController
 
 
     /**
-     * @Route("/event/deletion/{id}", name="deletion")
+     * @Route("/event/delete/{id}", name="deletion")
      */
     public function eventDeletion($id, EntityManagerInterface $em, EventRepository $eventRepository)
     {
@@ -116,7 +116,7 @@ class EventController extends AbstractController
 
 
     /**
-     * @Route("/event/participation/{id}", name="participation")
+     * @Route("/event/registration/{id}", name="participation")
      */
     public function eventParticipation($id, EntityManagerInterface $em, EventRepository $eventRepository)
     {
