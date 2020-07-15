@@ -3,19 +3,20 @@ const axios = require("axios").default;
 let app = {
     init: function () {
         console.log("init");
-        $("select").change(app.handleSelect);
+
+        $(".select").change(app.handleSelect);
+        $(".departement").change(app.handleCityList);
+
         setTimeout(function () {
             $(".alert").remove();
         }, 5000);
     },
     handleSelect: function (e) {
-        // e.preventDefault();
         var data = {};
         $("select option:selected").each(function () {
             let fieldName = $(this).parent().attr("data-name");
             data[fieldName] = $(this).text();
         });
-        console.log(data);
         app.searchRequestUsers(data);
 
     },
@@ -57,6 +58,26 @@ let app = {
             //insert template in dom
             $result_container.append($cloneContentElements)
 
+        });
+    },
+    handleCityList: function () {
+        axios
+            .post("/sportresearch/get-city-list", { 'departmentCode': $(".departement").val() })
+            .then(function (response) {
+                app.fillFormField(response);
+            })
+            .catch(function (error) {
+
+            });
+    },
+    fillFormField: function (response) {
+
+        $(".city option").remove();
+        $('.city').prop("disabled", false);
+
+        $.each(response.data.cityList, function (key, value) {
+            console.log(value.nom);
+            $('.city').append('<option value="' + value.nom + '">' + value.nom + '</option>');
         });
     }
 };
