@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\FavoriteSport;
 use App\Repository\LevelRepository;
 use App\Repository\SportRepository;
+use App\Service\RequestCity;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Common\Annotations\AnnotationReader;
@@ -63,6 +64,22 @@ class SportresearchController extends AbstractController
         $response->setContent(json_encode($data));
         $response->headers->set('Content-Type', 'application/json');   
    
+        return $response;
+    }
+
+
+     /**
+     * @Route("/sportresearch/get-city-list", name="cityPerDepartement")
+     */
+    public function cityforDepartement(Request $request, RequestCity $requestCityService)
+    {
+        $requestContent = json_decode($request->getContent(), true);
+        $cityList = $requestCityService->getCity($requestContent['departmentCode']);
+
+        $response = new Response();
+        $response->setContent(json_encode(['cityList' => $cityList]));
+        $response->headers->set('Content-Type', 'application/json');
+        
         return $response;
     }
 }
