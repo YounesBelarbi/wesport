@@ -13,12 +13,16 @@ let app = {
     },
     handleSelect: function (e) {
         var data = {};
-        $("select option:selected").each(function () {
+        $(".select option:selected").each(function () {
             let fieldName = $(this).parent().attr("data-name");
-            data[fieldName] = $(this).text();
+
+            if ($(this).text() == 'Ville' || $(this).text() == 'Sport' || $(this).text() == 'Niveau') {
+                data[fieldName] = null;
+            } else {
+                data[fieldName] = $(this).text();
+            }
         });
         app.searchRequestUsers(data);
-
     },
     searchRequestUsers: function (data) {
         axios
@@ -75,8 +79,9 @@ let app = {
         $(".city option").remove();
         $('.city').prop("disabled", false);
 
+        $('.city').append('<option> Selectionner votre ville</option>');
         $.each(response.data.cityList, function (key, value) {
-            console.log(value.nom);
+
             $('.city').append('<option value="' + value.nom + '">' + value.nom + '</option>');
         });
     }
