@@ -43,13 +43,14 @@ class SportResearchType extends AbstractType
             ])
             ->add('departement',ChoiceType::class, [
                 'choices' => $this->requestCityService->getDepartement(),
-                'attr' => ['class' => 'form-control search-slt departement', 'placeholder' => 'Âge', 'data-name' => 'age'],
+                'attr' => ['class' => 'form-control search-slt departement',  'data-name' => 'age'],
                 'label' => false,
                 'row_attr' => ['class' => 'd-flex justify-content-center'],
                 'required' => false,
+                'placeholder' => 'Departement',
             ])
             ->add('city', ChoiceType::class, [        
-                'attr' => ['class' => 'form-control search-slt city', 'placeholder' => 'Ville', 'data-name' => 'city', 'disabled' => 'disabled'],
+                'attr' => ['class' => 'form-control search-slt city select', 'placeholder' => 'Ville', 'data-name' => 'city', 'disabled' => 'disabled'],
                 'label' => false,
                 'row_attr' => ['class' => 'd-flex justify-content-center'],
                 'required' => false,
