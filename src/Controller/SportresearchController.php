@@ -46,14 +46,17 @@ class SportresearchController extends AbstractController
         $criteria['sport'] = $sportRepository->findOneBy(['name' => $requestContent['sport']]);
         $criteria['level'] = $levelRepository->findOneBy(['name' => $requestContent['level']]);
         $criteria['age'] = null;
-        $criteria['city'] = null;    
+        $criteria['city'] =  $requestContent['city'];    
 
-        if (!is_null($criteria['sport']) || !is_null($criteria['level'])) {
+        if (!is_null($criteria['sport']) || !is_null($criteria['level']) || !is_null($criteria['city'])) {
             $userSportList = $em->getRepository(FavoriteSport::class)->findUsersByAllInformations($criteria);
         }
 
         foreach ($userSportList as $key => $value) {
-            $users[] = $value->getUser();
+            //check that the user only appears once in the list
+            if (!in_array($value->getUser(), $users)) {                
+                $users[] = $value->getUser();
+            }            
         }
 
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
