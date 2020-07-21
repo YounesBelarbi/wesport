@@ -34,6 +34,7 @@ let app = {
                 app.generateListElement(response);
             })
             .catch(function (error) {
+                //if the user is not authenticated 
                 if (error.response.status == 403) {
                     location.href = '/login';
                 }
@@ -74,12 +75,16 @@ let app = {
                 app.fillFormField(response);
             })
             .catch(function (error) {
+                //if  API server returned error
+                if (error.response.data.status == 500) {
+                    let $section = $("#search_section");
+                    $section.append('<p class= "alert alert-warning">un problème est survenue relancer la recherche</p>');
+
+                }
 
             });
     },
     fillFormField: function (response) {
-
-
         $(".city option").remove(); //reset previous result of select field
         $('.city').prop("disabled", false); //field city select activation
 
