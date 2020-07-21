@@ -12,11 +12,12 @@ let app = {
         }, 5000);
     },
     handleSelect: function (e) {
+        //get select fields data and use it in axios request 
         var data = {};
         $(".select option:selected").each(function () {
             let fieldName = $(this).parent().attr("data-name");
 
-            if ($(this).text() == 'Ville' || $(this).text() == 'Sport' || $(this).text() == 'Niveau') {
+            if ($(this).text() == 'Ville' || $(this).text() == 'Selectionner votre ville' || $(this).text() == 'Sport' || $(this).text() == 'Niveau') {
                 data[fieldName] = null;
             } else {
                 data[fieldName] = $(this).text();
@@ -25,9 +26,11 @@ let app = {
         app.searchRequestUsers(data);
     },
     searchRequestUsers: function (data) {
+        ;
         axios
             .post("/sportresearch", data)
             .then(function (response) {
+                console.log(response.data)
                 app.generateListElement(response);
             })
             .catch(function (error) {
@@ -76,10 +79,11 @@ let app = {
     },
     fillFormField: function (response) {
 
-        $(".city option").remove();
-        $('.city').prop("disabled", false);
 
-        $('.city').append('<option> Selectionner votre ville</option>');
+        $(".city option").remove(); //reset previous result of select field
+        $('.city').prop("disabled", false); //field city select activation
+
+        $('.city').append('<option>Selectionner votre ville</option>');
         $.each(response.data.cityList, function (key, value) {
 
             $('.city').append('<option value="' + value.nom + '">' + value.nom + '</option>');
