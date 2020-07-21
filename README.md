@@ -39,5 +39,6 @@ mot de passe des users fixtures: "azerty"
 
 
 **Mise en route de l'application**  
-``yarn encore dev``
-``symfony server:start --no-tls``
+- ``symfony server:start --no-tls``
+- ``yarn encore dev-server``   
+
