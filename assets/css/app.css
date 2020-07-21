@@ -1,18 +1,7 @@
-/* =================================
-------------------------------------
-  X Gym - Fitness HTML Template
-  Version: 1.0
- ------------------------------------
- ====================================*/
-
- 
-/*----------------------------------------*/
-/* Template default CSS
-/*----------------------------------------*/
 
 html,
 body {
-	height: 100%;
+  	height: 100%;
 	font-family: "PT Sans", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
@@ -31,7 +20,7 @@ h6 {
 }
 
 h1 {
-	font-size: 70px;
+    font-size: 70px;
 }
 
 h2 {
@@ -1372,6 +1361,23 @@ Blog page
 }
 
 /* ----------------
+search section home-page
+ ---------------------*/
+
+.search-image {
+	max-width:60%
+}
+
+#username {
+	display: inline;
+}
+
+#age {
+	display: inline;
+}
+
+
+/* ----------------
 Contact page
  ---------------------*/
 
@@ -1611,7 +1617,7 @@ Responsive
 	}
 	.hero-section {
 		height: auto;
-	
+    }
 	
 	.hero-text {
 		padding-top: 200px;

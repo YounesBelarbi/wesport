@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ClassifiedAdController extends AbstractController
 {
     /**
-     * @Route("user/classified-ad/show", name="ad_list")
+     * @Route("user/classified-ad", name="ad_list")
      */
     public function classifiedAdList(ClassifiedAdRepository $classifiedAdRepository)
     {
@@ -26,7 +26,7 @@ class ClassifiedAdController extends AbstractController
 
 
     /**
-     * @Route("/user/classified-ad/post-an-ad", name="ad_creating")
+     * @Route("/user/classified-ad/add", name="ad_creating")
      */
     public function postAnAd(Request $request, EntityManagerInterface $em)
     {
@@ -65,7 +65,7 @@ class ClassifiedAdController extends AbstractController
 
 
     /**
-     * @Route("/user/classified-ad/update-an-ad/{slug}", name="ad_updating")
+     * @Route("/user/classified-ad/update/{slug}", name="ad_updating")
      */
     public function updateAnAd(
         Request $request,
@@ -91,7 +91,7 @@ class ClassifiedAdController extends AbstractController
 
 
     /**
-     * @Route("/user/classified-ad/delete-an-ad/{id}", name="ad_deleting")
+     * @Route("/user/classified-ad/delete/{id}", name="ad_deleting")
      */
     public function deleteAnAd(
         Request $request,

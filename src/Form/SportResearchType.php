@@ -9,15 +9,25 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use App\Service\RequestCity;
 
 class SportResearchType extends AbstractType
 {
+    private $requestCityService;
+    
+
+    public function __construct(RequestCity $requestCityService)
+    {
+        $this->requestCityService = $requestCityService;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('sport', EntityType::class, [
                 'class' => Sport::class,
-                'attr' => ['class' => 'form-control search-slt', 'placeholder' => 'Sport'],
+                'attr' => ['class' => 'form-control search-slt select', 'placeholder' => 'Sport', 'data-name' => 'sport'],
                 'label' => false,
                 'row_attr' => ['class' => 'd-flex justify-content-center'],
                 'required' => false,
@@ -25,27 +35,26 @@ class SportResearchType extends AbstractType
             ])
             ->add('level', EntityType::class, [
                 'class' => Level::class,
-                'attr' => ['class' => 'form-control search-slt', 'placeholder' => 'Sport'],
+                'attr' => ['class' => 'form-control search-slt select', 'placeholder' => 'Level', 'data-name' => 'level'],
                 'label' => false,
                 'row_attr' => ['class' => 'd-flex justify-content-center'],
                 'required' => false,
                 'placeholder' => 'Niveau',
             ])
-            ->add('age', null, [
-                'attr' => ['class' => 'form-control search-slt', 'placeholder' => 'Âge'],
+            ->add('departement',ChoiceType::class, [
+                'choices' => $this->requestCityService->getDepartement(),
+                'attr' => ['class' => 'form-control search-slt departement',  'data-name' => 'age'],
                 'label' => false,
                 'row_attr' => ['class' => 'd-flex justify-content-center'],
                 'required' => false,
+                'placeholder' => 'Departement',
             ])
-            ->add('city', null, [
-                'attr' => ['class' => 'form-control search-slt', 'placeholder' => 'Ville'],
+            ->add('city', ChoiceType::class, [        
+                'attr' => ['class' => 'form-control search-slt city select', 'placeholder' => 'Ville', 'data-name' => 'city', 'disabled' => 'disabled'],
                 'label' => false,
                 'row_attr' => ['class' => 'd-flex justify-content-center'],
                 'required' => false,
-            ])
-            ->add('send', SubmitType::class, [
-                'attr' => ['class' => 'btn btn-danger wrn-btn'],
-                'label' => 'rechercher',
+                'placeholder' => 'Ville',
             ]);
     }
 
@@ -55,4 +64,5 @@ class SportResearchType extends AbstractType
             // Configure your form options here
         ]);
     }
+   
 }

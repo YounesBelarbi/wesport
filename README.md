@@ -9,6 +9,8 @@
 
 **composer**: ``composer install``
 
+**yarn**: ``yarn install``
+
 **.env.local**: 
 
 - *Base de données* : à la racine du dossier créer un fichier .env.local et y coller la ligne: ``DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7``   
@@ -31,6 +33,12 @@ Pour mettre en place la base de données, il faut éxécuter les commandes suiva
 - envoie des migrations : ``bin/console d:m:m``
 
 **Utilisation des fixtures**
-Mise en place des fixtures en cli: ``bin/console d:f:l``
-
+Mise en place des fixtures en cli: ``bin/console d:f:l``  
 mot de passe des users fixtures: "azerty"
+
+
+
+**Mise en route de l'application**  
+- ``symfony server:start --no-tls``
+- ``yarn encore dev-server``   
+

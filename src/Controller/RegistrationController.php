@@ -109,7 +109,6 @@ class RegistrationController extends AbstractController
 
             if ($user === null) {
                 $this->addFlash('danger', 'Email Inconnu');
-                return $this->redirectToRoute('app_forgotten_password');
             } elseif ($user && $user->getIsActive() === false) {
                 //generate and save token whith TokenService service
                 $userToken = $tokenGenerator->generateAndSaveToken('account confirmation', $user);
