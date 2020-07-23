@@ -1,0 +1,13 @@
+{% extends 'base_errors_pages.html.twig' %}
+
+{% block body %}
+	<div id='oopss'>
+		<div id='error-text'>
+			<img src="https://cdn.rawgit.com/ahmedhosna95/upload/1731955f/sad404.svg" alt="error">
+			<span>Erreur</span>
+			<p class="p-a">Une erreur est suvenue.</p>
+			<p class="p-b">Vous devez recommencez votre demande</p>
+			<a href="{{path('main')}}" class="back">Revenir à l'accueil</a>
+		</div>
+	</div>
+{% endblock %}
