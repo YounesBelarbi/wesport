@@ -1543,7 +1543,7 @@ select {
 	font-size: 90px;
 	font-weight: 800;
   }
-  
+
   .error-page-403 h2{
 	color: #455d7a;
 	text-align: center;
@@ -1551,6 +1551,13 @@ select {
 	font-size: 30px;
 	text-transform: uppercase;
 	color: #facf5a;
+  }
+
+  .content__link__403 {
+	  text-align: center;
+	  display: block;
+	  color: white;
+	  margin-top: 10px;
   }
 
 /* ----------------
