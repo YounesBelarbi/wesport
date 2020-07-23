@@ -1,1 +1,12 @@
-<h1>grosse error</h1>
+{% extends 'base_errors_pages.html.twig' %}
+
+{% block body %}
+	<section class="error-page ">
+		<div class="content">
+			<h1 class="content__error-type">404</h1>
+			<h2 class="content__title">Occasion raté</h2>
+			<p class="content__text">Dommage, à ras de la lucarne. Vous aurez d'autres occasions</p>
+			<a class="content__link" href="{{path('main')}}">Revenir à l'accueil</a>
+		</div>
+	</section>
+{% endblock %}
