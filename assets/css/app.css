@@ -1459,7 +1459,7 @@ select {
 
 
 /* ----------------
-errors-pages
+404 errors-pages
  ---------------------*/
 
  .error-page {
@@ -1503,6 +1503,55 @@ errors-pages
 }
 
 
+/* ----------------
+403 errors-pages
+ ---------------------*/
+
+  .error-page-403 {
+	background: #233142;
+	height: 100vh;	
+  } 
+  .whistle{
+	width: 20%;
+	fill: #f95959;
+	margin: 100px 40%;
+	text-align: left;
+	transform: translate(-50%, -50%);
+	transform: rotate(0);
+	transform-origin: 80% 30%;
+	animation: wiggle .2s infinite;
+  }
+  
+  @keyframes wiggle {
+	0%{
+	  transform: rotate(3deg);
+	}
+	50%{
+	  transform: rotate(0deg);
+	}
+	100%{
+	  transform: rotate(3deg);
+	}
+  }
+
+  .error-page-403 h1{
+	margin-top: -100px;
+	margin-bottom: 20px;
+	color: #facf5a;
+	text-align: center;
+	font-family: 'Raleway';
+	font-size: 90px;
+	font-weight: 800;
+  }
+  
+  .error-page-403 h2{
+	color: #455d7a;
+	text-align: center;
+	font-family: 'Raleway';
+	font-size: 30px;
+	text-transform: uppercase;
+	color: #facf5a;
+  }
 
 /* ----------------
 Responsive
