@@ -62,6 +62,9 @@ let app = {
             $cloneContentElements.find('#username').text(value.username)
             $cloneContentElements.find('#age').text(value.age + ' ans')
             $cloneContentElements.find('#city').text(value.city)
+            if (value.profileImage) {
+                $cloneContentElements.find('.search-image').attr('src', 'uploads/usersProfileImages/' + value.profileImage);
+            }
 
             //insert template in dom
             $result_container.append($cloneContentElements)
