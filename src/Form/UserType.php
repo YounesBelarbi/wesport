@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -52,11 +53,7 @@ class UserType extends AbstractType
                 ->add('firstName')
                 ->add('city')
                 ->add('phoneNumber')
-                ->add('send', SubmitType::class, [
-                    'attr' => ['class' => 'btn btn-lg btn-primary site-btn col-md-6'],
-                    'label' => 'enregistrer les modifications',
-                    'row_attr' => ['class' => 'd-flex justify-content-center'],
-                ])
+                ->add('description', TextareaType::class)
                 ->add('profileImage', FileType::class,[
                     'label' => 'photo (format: jpeg)',
                     'mapped' => false,
@@ -67,9 +64,14 @@ class UserType extends AbstractType
                                 'image/jpeg',
                             ],
                             'mimeTypesMessage' => 'seul le format jpeg est supporté',
+                            ])
+                        ],
+                        
                         ])
-                    ],
-
+                ->add('send', SubmitType::class, [
+                    'attr' => ['class' => 'btn btn-lg btn-primary site-btn col-md-6'],
+                    'label' => 'enregistrer les modifications',
+                    'row_attr' => ['class' => 'd-flex justify-content-center'],
                 ]);
         }
     }
