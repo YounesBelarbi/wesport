@@ -4,11 +4,13 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 
 class UserType extends AbstractType
@@ -54,6 +56,20 @@ class UserType extends AbstractType
                     'attr' => ['class' => 'btn btn-lg btn-primary site-btn col-md-6'],
                     'label' => 'enregistrer les modifications',
                     'row_attr' => ['class' => 'd-flex justify-content-center'],
+                ])
+                ->add('profileImage', FileType::class,[
+                    'label' => 'photo (format: jpeg)',
+                    'mapped' => false,
+                    'required' => false,
+                    'constraints' => [
+                        new File([
+                            'mimeTypes' => [
+                                'image/jpeg',
+                            ],
+                            'mimeTypesMessage' => 'seul le format jpeg est supporté',
+                        ])
+                    ],
+
                 ]);
         }
     }
