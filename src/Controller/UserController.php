@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\PasswordUserType;
 use App\Form\UserType;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,13 +32,21 @@ class UserController extends AbstractController
     /**
      * @Route("/edit", name="edit")
      */
-    public function editProfileUser(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder)
+    public function editProfileUser(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, FileUploader $fileUploader)
     {
         $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $profileImage = $form->get('profileImage')->getData();
+                        
+            if ($profileImage) {
+                $fileUploader->deleteOldFile($user);
+                $profileImageFileName = $fileUploader->upload($profileImage);
+                $user->setProfileImage($profileImageFileName);
+            }
+
             $em->flush();
             $this->addFlash('success', 'Votre profile à été mit à jour');
             return $this->redirectToRoute('profile_show');
