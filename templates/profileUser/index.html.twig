@@ -114,6 +114,14 @@
 									<p>{{user.phonenumber}}</p>
 								</div>
 							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<label>Description</label>
+								</div>
+								<div class="col-md-6">
+									<p>{{user.description}}</p>
+								</div>
+							</div>
 							<div class="col-md-5 mt-5 ml-5 text-center">
 								<a href="{{path('profile_edit')}}">
 									<button class="profile-edit-btn">Modifier mes informations</button>
@@ -137,26 +145,28 @@
 											<i class="fas fa-plus-square"></i>
 										</a>
 									</div>
-									{% for favorite in user.favoriteSports %}
-										<tr>
-											<td>
-												<a href="" data-toggle="modal" data-target="#exampleModalScrollable">{{favorite.sport.name}}</a>
-											</td>
-											<td>
-												<a href="" data-toggle="modal" data-target="#exampleModalScrollable">{{favorite.level.name}}</a>
-											</td>
-											<td>
-												<a href="{{ path('user_favorite_sport_update', {id:favorite.sport.id }) }}" class="icon-contact-list">
-													<i class="fas fa-edit"></i>
-												</a>
-											</td>
-											<td>
-												<a href="{{ path('user_favorite_sport_delete', {id:favorite.sport.id}) }}" class="icon-contact-list">
-													<i class="far fa-trash-alt"></i>
-												</a>
-											</td>
-										</tr>
-									{% endfor %}
+									{% if user.favoriteSports is empty %}
+										{% for favorite in user.favoriteSports %}
+											<tr>
+												<td>
+													<a href="" data-toggle="modal" data-target="#exampleModalScrollable">{{favorite.sport.name}}</a>
+												</td>
+												<td>
+													<a href="" data-toggle="modal" data-target="#exampleModalScrollable">{{favorite.level.name}}</a>
+												</td>
+												<td>
+													<a href="{{ path('user_favorite_sport_update', {id:favorite.sport.id }) }}" class="icon-contact-list">
+														<i class="fas fa-edit"></i>
+													</a>
+												</td>
+												<td>
+													<a href="{{ path('user_favorite_sport_delete', {id:favorite.sport.id}) }}" class="icon-contact-list">
+														<i class="far fa-trash-alt"></i>
+													</a>
+												</td>
+											</tr>
+										{% endfor %}
+									{% endif %}}
 								</tbody>
 							</table>
 						</div>
