@@ -1376,6 +1376,15 @@ search section home-page
 	display: inline;
 }
 
+ .search-card{
+	max-height: 240px;
+}
+
+.description {
+	height: 195px;
+	overflow: auto;
+}
+
 
 /* ----------------
 Contact page
@@ -1732,6 +1741,10 @@ Responsive
 		font-size: large;
 		max-width: 700px;
 		text-align: center;
+	}
+	.description {
+		height: 121px;
+		overflow: auto;
 	}
 }
 
