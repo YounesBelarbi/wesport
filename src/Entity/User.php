@@ -124,6 +124,11 @@ class User implements UserInterface
      */
     private $profileImage;
 
+    /**
+     * @ORM\Column(type="string", length=1000)
+     */
+    private $description;
+
     public function __construct()
     {
         $this->isActive = false;
@@ -533,6 +538,18 @@ class User implements UserInterface
     public function setProfileImage(?string $profileImage): self
     {
         $this->profileImage = $profileImage;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
