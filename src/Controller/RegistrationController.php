@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\UserToken;
 use App\Form\RegistrationFormType;
 use App\Form\UserType;
+use App\Service\FileUploader;
 use App\Service\SendMail;
 use App\Service\TokenService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,7 +24,8 @@ class RegistrationController extends AbstractController
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder,
         TokenService $tokenGenerator,
-        SendMail $sendMail
+        SendMail $sendMail,
+        FileUploader $fileUploader
     ) {
         if ($this->getUser()) {
             return $this->redirectToRoute('main');
@@ -41,6 +43,13 @@ class RegistrationController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
+
+            $profileImage = $form->get('profileImage')->getData();
+                        
+            if ($profileImage) {
+                $profileImageFileName = $fileUploader->upload($profileImage);
+                $user->setProfileImage($profileImageFileName);
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
