@@ -118,6 +118,11 @@ class User implements UserInterface
      */
     private $userTokens;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $profileImage;
+
     public function __construct()
     {
         $this->isActive = false;
@@ -515,6 +520,18 @@ class User implements UserInterface
                 $userToken->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProfileImage(): ?string
+    {
+        return $this->profileImage;
+    }
+
+    public function setProfileImage(?string $profileImage): self
+    {
+        $this->profileImage = $profileImage;
 
         return $this;
     }
