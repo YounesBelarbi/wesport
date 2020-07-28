@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class EventType extends AbstractType
 {
@@ -43,6 +44,14 @@ class EventType extends AbstractType
                 'attr' => ['class' => 'btn btn-lg btn-primary site-btn col-md-6'],
                 'label' => 'Enregistrer l\'événement',
                 'row_attr' => ['class' => 'd-flex justify-content-center'],
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'download_uri' => true,
+                'image_uri' => true,
+                'asset_helper' => true,
+                'row_attr' => ['class' => 'col-md-12'],
             ]);
     }
 
