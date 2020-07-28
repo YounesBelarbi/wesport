@@ -106,7 +106,7 @@
 							<div class="event-item">
 								<div class="event-pic">
 									<h3>{{event.sportConcerned}}</h3>
-									<img src="{{asset( 'https://picsum.photos/200/300?random=' ~ random(1, 100))}}" alt="">
+									<img src="{{ asset('images/event_image/' ~ event.image.name) }}" alt="">
 								</div>
 								<div class="event-content">
 									<h4>{{event.title}}</h4>
