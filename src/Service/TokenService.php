@@ -18,33 +18,29 @@ class TokenService
         $this->tokenGenerator = $tokenGenerator;
     }
 
-
-    public function generateAndSaveToken(string $type, User $user)
+    public function token(string $type, User $user)
     {
         //check if user already has token for this type.
         $userToken = $this->checkUserHasToken($type, $user);
         $currentDate = new \DateTime();
-        $token = $this->tokenGenerator->generateToken();
+        $token = $this->generateToken();
 
         if ($userToken) {
             // if yes,  replace and send it.
-            $userToken->setToken($token);
             $userToken->setExpirationDate($currentDate->modify('+1 month'));
             $userToken->setUpdatedAT(new \DateTime());
-            $this->entityManager->flush();
         } else {
             //if no, save new token for this user
             $userToken = new UserToken;
-
-            $userToken->setToken($token);
             $userToken->setType($type);
             $userToken->setUser($user);
             $userToken->setCreatedAt(new \DateTime());
             $userToken->setExpirationDate($currentDate->modify('+1 month'));
             $this->entityManager->persist($userToken);
-            $this->entityManager->flush();
         }
 
+        $userToken->setToken($token);
+        $this->entityManager->flush();
         return $token;
     }
 
@@ -53,7 +49,11 @@ class TokenService
         $userToken = $this->entityManager->getRepository(UserToken::class)->findOneBy([
             'user' => $user, 'type' => $type
         ]);
-
         return $userToken;
+    }
+    
+    public function generateToken()
+    {
+        return rtrim(strtr(base64_encode(random_bytes(128)), '+/', '-_'), '=');
     }
 }
