@@ -56,7 +56,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             //generate and save token whith TokenService service
-            $ConfirmationToken = $tokenGenerator->generateAndSaveToken('account confirmation', $user);
+            $ConfirmationToken = $tokenGenerator->token('account confirmation', $user);
 
             // do anything else you need here, like send an email
             $url = $this->generateUrl('app_confirmation', array('token' => $ConfirmationToken), UrlGeneratorInterface::ABSOLUTE_URL);
@@ -120,7 +120,7 @@ class RegistrationController extends AbstractController
                 $this->addFlash('danger', 'Email Inconnu');
             } elseif ($user && $user->getIsActive() === false) {
                 //generate and save token whith TokenService service
-                $userToken = $tokenGenerator->generateAndSaveToken('account confirmation', $user);
+                $userToken = $tokenGenerator->token('account confirmation', $user);
                 $url = $this->generateUrl('app_confirmation', array('token' => $userToken), UrlGeneratorInterface::ABSOLUTE_URL);
 
                 $sendMail->sendAnEmail(

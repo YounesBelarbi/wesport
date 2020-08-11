@@ -64,9 +64,9 @@ class SecurityController extends AbstractController
             }
 
             //check if user has token or generate and save token whith service : TokenService
-            $token = $TokenService->generateAndSaveToken('reset password', $user);
+            $token = $TokenService->token('reset password', $user);
 
-            $url = $this->generateUrl('app_reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
+            $url = $this->generateUrl('app_reset_password', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL);
 
             //use service to send mail
             $sendMail->sendAnEmail(
@@ -74,7 +74,7 @@ class SecurityController extends AbstractController
                 $this->getParameter('app_email'),
                 $user->getEmail(),
                 "Pour réinitialiser votre mot de passe cliquez sur le lien : " . $url,
-                'text/html'
+                'teayxt/html'
             );
 
             $this->addFlash('success', 'Mail envoyé');
@@ -96,7 +96,11 @@ class SecurityController extends AbstractController
     public function resetPassword(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $userToken = $entityManager->getRepository(UserToken::class)->findOneBy(['token' => $token, 'type' => 'reset password']);
+        $userToken = $entityManager->getRepository(UserToken::class)->findOneBy(
+            [
+                'token' => $token, 'type' => 'reset password'
+            ]
+        );
         $currentDate = new \DateTime();
 
 
