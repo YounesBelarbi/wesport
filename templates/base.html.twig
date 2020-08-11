@@ -25,23 +25,31 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="main-menu navbar-nav mr-auto justify-content-end">
-			<li class="nav-item">
-				<a class="nav-link" href="{{path('main')}}">Accueil</a>
-			</li>
-			{% if is_granted('ROLE_USER') %}
+			{% if app.request.attributes.get('_route') != 'main' %}
 				<li class="nav-item">
-					<a class="nav-link" href="{{path('profile_show')}}">Mon compte</a>
+					<a class="nav-link" href="{{path('main')}}">Accueil</a>
 				</li>
+			{% endif %}
+			{% if is_granted('ROLE_USER') %}
+				{% if app.request.attributes.get('_route') != 'profile_show' %}
+					<li class="nav-item">
+						<a class="nav-link" href="{{path('profile_show')}}">Mon compte</a>
+					</li>
+				{% endif %}
 				<li class="nav-item">
 					<a class="nav-link" href="{{path('app_logout')}}">Deconnection</a>
 				</li>
 			{% else %}
-				<li class="nav-item">
-					<a class="nav-link" href="{{path('app_login')}}">Connexion</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{path('app_register')}}">Inscription</a>
-				</li>
+				{% if app.request.attributes.get('_route') != 'app_login' %}
+					<li class="nav-item">
+						<a class="nav-link" href="{{path('app_login')}}">Connexion</a>
+					</li>
+				{% endif %}
+				{% if app.request.attributes.get('_route') != 'app_register' %}
+					<li class="nav-item">
+						<a class="nav-link" href="{{path('app_register')}}">Inscription</a>
+					</li>
+				{% endif %}
 			{% endif %}
 		</ul>
 	</div>
