@@ -87,8 +87,9 @@ class RegistrationController extends AbstractController
     {
         $entityManager = $this->getDoctrine()->getManager();
         $userToken = $entityManager->getRepository(UserToken::class)->findOneBy(['token' => $token, 'type' => 'account confirmation']);
+        $currentDate = new \DateTime();
 
-        if ($userToken === null) {
+        if ($userToken === null || $userToken->getExpirationDate() < $currentDate) {
             $this->addFlash('danger', 'Ce lien est inactif. Si votre compte n\'a pas été activé cliquez sur le lien ci dessous "Je n\'ai pas reçu mon email d\'activation" ');
             return $this->redirectToRoute('app_login');
         }
