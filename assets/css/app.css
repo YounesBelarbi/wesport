@@ -54,6 +54,10 @@ img {
 	max-width: 100%;
 }
 
+.logo {
+	width: 20%;
+}
+
 input:focus,
 select:focus,
 button:focus,
