@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -77,6 +78,11 @@ class RegistrationFormType extends AbstractType
             ->add('phonenumber', TelType::class, [
                 'row_attr' => ['class' => 'col-md-6'],
                 'label' => 'Numéro de téléphone',
+                'required' => false
+            ])
+            ->add('description', TextareaType::class, [
+                'row_attr' => ['class' => 'col-md-12'],
+                'label' => 'Description',
                 'required' => false
             ])
             ->add('send', SubmitType::class, [
