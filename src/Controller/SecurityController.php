@@ -74,7 +74,7 @@ class SecurityController extends AbstractController
                 $this->getParameter('app_email'),
                 $user->getEmail(),
                 "Pour réinitialiser votre mot de passe cliquez sur le lien : " . $url,
-                'teayxt/html'
+                'text/html'
             );
 
             $this->addFlash('success', 'Mail envoyé');
@@ -84,7 +84,7 @@ class SecurityController extends AbstractController
         return $this->render('security/mail_user.html.twig', [
             'form' => $form->createView(),
             'pageTitle' => 'Mot de passe oublié',
-            'title' => 'Mot de passe oubliée',
+            'title' => 'Mot de passe oublié',
             'description' => 'saisissez votre email pour recevoir le lien vous permettant de changer votre mot de passe'
         ]);
     }
