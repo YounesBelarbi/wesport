@@ -1372,11 +1372,11 @@ search section home-page
 	max-width:60%
 }
 
-#username {
+.username {
 	display: inline;
 }
 
-#age {
+.age {
 	display: inline;
 }
 

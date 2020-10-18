@@ -2,8 +2,6 @@ const axios = require("axios").default;
 
 let app = {
     init: function () {
-        console.log("init");
-
         $(".select").change(app.handleSelect);
         $(".departement").change(app.handleCityList);
 
@@ -26,11 +24,9 @@ let app = {
         app.searchRequestUsers(data);
     },
     searchRequestUsers: function (data) {
-        ;
         axios
             .post("/sportresearch", data)
             .then(function (response) {
-                console.log(response.data)
                 app.generateListElement(response);
             })
             .catch(function (error) {
@@ -59,9 +55,9 @@ let app = {
             //clone template
             let $cloneContentElements = $contentElements.clone();
             // filling the template with the information
-            $cloneContentElements.find('#username').text(value.username)
-            $cloneContentElements.find('#age').text(value.age + ' ans')
-            $cloneContentElements.find('#city').text(value.city)
+            $cloneContentElements.find('.username').text(value.username)
+            $cloneContentElements.find('.age').text(value.age + ' ans')
+            $cloneContentElements.find('.user-city').text(value.city)
 
             //insert template in dom
             $result_container.append($cloneContentElements)
@@ -88,7 +84,7 @@ let app = {
         $(".city option").remove(); //reset previous result of select field
         $('.city').prop("disabled", false); //field city select activation
 
-        $('.city').append('<option>Selectionner votre ville</option>');
+        $('.city-list').append('<option>Selectionner votre ville</option>');
         $.each(response.data.cityList, function (key, value) {
 
             $('.city').append('<option value="' + value.nom + '">' + value.nom + '</option>');
