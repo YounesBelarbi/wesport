@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\FavoriteSport;
-use App\Entity\Level;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -18,12 +17,6 @@ class FavoriteSportType extends AbstractType
             ->add('sport', null, [
                 'row_attr' => ['class' => 'col-md-6'],
                 'placeholder' => 'selectionner un sport',
-            ])
-            ->add('level', EntityType::class, [
-                'class' => Level::class,
-                'row_attr' => ['class' => 'col-md-6'],
-                'label' => 'niveau',
-                'placeholder' => 'selectionner un niveau',
             ])
             ->add('send', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-lg btn-primary site-btn col-md-6'],

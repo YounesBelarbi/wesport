@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Level;
+
 use App\Entity\Sport;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -32,14 +32,6 @@ class SportResearchType extends AbstractType
                 'row_attr' => ['class' => 'd-flex justify-content-center'],
                 'required' => false,
                 'placeholder' => 'Sport',
-            ])
-            ->add('level', EntityType::class, [
-                'class' => Level::class,
-                'attr' => ['class' => 'form-control search-slt select', 'placeholder' => 'Level', 'data-name' => 'level'],
-                'label' => false,
-                'row_attr' => ['class' => 'd-flex justify-content-center'],
-                'required' => false,
-                'placeholder' => 'Niveau',
             ])
             ->add('departement',ChoiceType::class, [
                 'choices' => $this->requestCityService->getDepartement(),

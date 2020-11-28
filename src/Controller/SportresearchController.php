@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\FavoriteSport;
-use App\Repository\LevelRepository;
 use App\Repository\SportRepository;
 use App\Service\RequestCity;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,8 +26,7 @@ class SportresearchController extends AbstractController
     public function index(
         Request $request,
         EntityManagerInterface $em,
-        SportRepository $sportRepository,
-        LevelRepository $levelRepository
+        SportRepository $sportRepository
     ) {
         $response = new Response();
 
@@ -44,11 +42,10 @@ class SportresearchController extends AbstractController
         $userSportList = [];
         $criteria = [];
         $criteria['sport'] = $sportRepository->findOneBy(['name' => $requestContent['sport']]);
-        $criteria['level'] = $levelRepository->findOneBy(['name' => $requestContent['level']]);
         $criteria['age'] = null;
         $criteria['city'] =  $requestContent['city'];    
 
-        if (!is_null($criteria['sport']) || !is_null($criteria['level']) || !is_null($criteria['city'])) {
+        if (!is_null($criteria['sport']) || !is_null($criteria['city'])) {
             $userSportList = $em->getRepository(FavoriteSport::class)->findUsersByAllInformations($criteria);
         }
 

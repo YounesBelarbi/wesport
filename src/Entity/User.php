@@ -94,21 +94,6 @@ class User implements UserInterface
     private $eventsOrganized;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ClassifiedAd", mappedBy="seller")
-     */
-    private $classifiedAds;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ContactList", mappedBy="creator")
-     */
-    private $contactLists;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\ContactList", inversedBy="userContactList")
-     */
-    private $presentInContactList;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\FavoriteSport", mappedBy="user")
      */
     private $favoriteSports;
@@ -123,9 +108,6 @@ class User implements UserInterface
         $this->isActive = false;
         $this->eventParticipation = new ArrayCollection();
         $this->eventsOrganized = new ArrayCollection();
-        $this->classifiedAds = new ArrayCollection();
-        $this->contactLists = new ArrayCollection();
-        $this->presentInContactList = new ArrayCollection();
         $this->favoriteSports = new ArrayCollection();
         $this->userTokens = new ArrayCollection();
     }
@@ -369,93 +351,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|ClassifiedAd[]
-     */
-    public function getClassifiedAds(): Collection
-    {
-        return $this->classifiedAds;
-    }
-
-    public function addClassifiedAd(ClassifiedAd $classifiedAd): self
-    {
-        if (!$this->classifiedAds->contains($classifiedAd)) {
-            $this->classifiedAds[] = $classifiedAd;
-            $classifiedAd->setSeller($this);
-        }
-
-        return $this;
-    }
-
-    public function removeClassifiedAd(ClassifiedAd $classifiedAd): self
-    {
-        if ($this->classifiedAds->contains($classifiedAd)) {
-            $this->classifiedAds->removeElement($classifiedAd);
-            // set the owning side to null (unless already changed)
-            if ($classifiedAd->getSeller() === $this) {
-                $classifiedAd->setSeller(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|ContactList[]
-     */
-    public function getContactLists(): Collection
-    {
-        return $this->contactLists;
-    }
-
-    public function addContactList(ContactList $contactList): self
-    {
-        if (!$this->contactLists->contains($contactList)) {
-            $this->contactLists[] = $contactList;
-            $contactList->setCreator($this);
-        }
-
-        return $this;
-    }
-
-    public function removeContactList(ContactList $contactList): self
-    {
-        if ($this->contactLists->contains($contactList)) {
-            $this->contactLists->removeElement($contactList);
-            // set the owning side to null (unless already changed)
-            if ($contactList->getCreator() === $this) {
-                $contactList->setCreator(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|ContactList[]
-     */
-    public function getPresentInContactList(): Collection
-    {
-        return $this->presentInContactList;
-    }
-
-    public function addPresentInContactList(ContactList $presentInContactList): self
-    {
-        if (!$this->presentInContactList->contains($presentInContactList)) {
-            $this->presentInContactList[] = $presentInContactList;
-        }
-
-        return $this;
-    }
-
-    public function removePresentInContactList(ContactList $presentInContactList): self
-    {
-        if ($this->presentInContactList->contains($presentInContactList)) {
-            $this->presentInContactList->removeElement($presentInContactList);
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|FavoriteSport[]

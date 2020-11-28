@@ -41,14 +41,12 @@ class UserFavoriteSportController extends AbstractController
 
         if ($favoriteSportForm->isSubmitted() && $favoriteSportForm->isValid()) {
             $favoriteSport = new FavoriteSport;
-            $level = $favoriteSportForm->get('level')->getData();
             $sport = $favoriteSportForm->get('sport')->getData();
 
-            $favoriteSport->setLevel($level);
             $favoriteSport->setUser($user);
             $favoriteSport->setSport($sport);
 
-            if ($sport != null && $level != null) {
+            if ($sport != null) {
                 try {
                     $em->persist($favoriteSport);
                     $em->flush();

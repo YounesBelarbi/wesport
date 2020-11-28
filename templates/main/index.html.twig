@@ -33,9 +33,6 @@
 							<div class="col-lg-3 col-md-3 col-sm-12 p-0">
 								{{form_row(form.sport)}}
 							</div>
-							<div class="col-lg-3 col-md-3 col-sm-12 p-0">
-								{{form_row(form.level)}}
-							</div>
 						</div>
 					</div>
 				</div>
@@ -113,37 +110,7 @@
 		</section>
 		<!-- Event section end -->
 
-		<!-- ClassifiedAds section-->
-		<section class="classifiedAds-section">
-			<div class="ads-container">
-				<div class="section-title text-center">
-					<h2>Les Nouvelles annonces</h2>
-				</div>
-				<div class="row row-cols-2">
-					{% for classifiedAd in lastClassifiedAds %}
-						<div class="col-lg-6 row col-md-12">
-							<div class="col-4 classifiedAdImg">
-								<img src="{{asset('https://picsum.photos/260/170?random=' ~ random(1, 100))}}" alt="">
-							</div>
-							<div class="col-8 adsBody">
-								<div class="d-flex justify-content-center">
-									<h3>{{classifiedAd.title}}</h3>
-								</div>
-								<p class="d-inline-block">{{classifiedAd.classifiedAdBody}}</p>
-								<div class="d-flex justify-content-end">
-									<p>Publiée par
-										{{classifiedAd.author}}
-										le
-										{{classifiedAd.createdAt|format_datetime('full','none',locale='fr')}}
-									</p>
-								</div>
-							</div>
-						</div>
-					{% endfor %}
-				</div>
-			</div>
-		</section>
-		<!-- ClassifiedAds section end-->
+		
 
 		<!-- Template section -->
 

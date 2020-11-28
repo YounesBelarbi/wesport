@@ -24,18 +24,12 @@ class Sport
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Level", mappedBy="sport")
-     */
-    private $levels;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\FavoriteSport", mappedBy="sport")
      */
     private $favoriteSports;
 
     public function __construct()
     {
-        $this->levels = new ArrayCollection();
         $this->favoriteSports = new ArrayCollection();
     }
 
@@ -61,33 +55,6 @@ class Sport
         return $this;
     }
 
-    /**
-     * @return Collection|Level[]
-     */
-    public function getLevels(): Collection
-    {
-        return $this->levels;
-    }
-
-    public function addLevel(Level $level): self
-    {
-        if (!$this->levels->contains($level)) {
-            $this->levels[] = $level;
-            $level->addSport($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLevel(Level $level): self
-    {
-        if ($this->levels->contains($level)) {
-            $this->levels->removeElement($level);
-            $level->removeSport($this);
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|FavoriteSport[]

@@ -13,28 +13,6 @@ App\Entity\User:
         isActive: '<boolean()>'
 
 
-
-App\Entity\ClassifiedAd:
-    classified_ad_{1..23}:
-        classifiedAdBody: '<text(100)>' 
-        title: '<word(5)>' 
-        seller: '@user*'
-        # author: #username of the author set in appFixtures.php file
-        sportConcerned: '<sports()>'
-        objectForSale: '<word()>'
-        createdAt: '<date_create()>'
-        price: '<randomFloat(0,4,300)>'
-        
-
-
-App\Entity\ContactList:
-    contactList_{1..50}:
-        name: '<word(3))>'
-        creator: '@user*'
-        userContactList: '<numberBetween(1, 10)>x @user*'
-        createdAt: '<date_create()>'
-
-
 App\Entity\Event:
     event_{1..20}:
         eventBody: '<text(55)>'
@@ -52,19 +30,13 @@ App\Entity\FavoriteSport:
     favoriteSport_{1..20}:
         user: '@user*'
         sport: '@sport*'
-        level: '@level*'
+
        
-
-
-App\Entity\Level:
-    level_{1..4}:
-        name (unique): '<levels()>'
-
-
+       
 App\Entity\Sport:
     sport_{1..55}:
         name (unique): '<sports()>'
-        levels: '4x @level*'
+
 
 
 

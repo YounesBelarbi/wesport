@@ -54,7 +54,6 @@ class FavoriteSportRepository extends ServiceEntityRepository
         $qb
             ->join('f.user', 'user');
 
-
         if (!is_null($criteria['age'])) {
             $qb
                 ->where('user.age =:age')
@@ -67,11 +66,6 @@ class FavoriteSportRepository extends ServiceEntityRepository
                 ->setParameter('city', $criteria['city']);
         }
 
-        if (!is_null($criteria['level'])) {
-            $qb
-                ->andWhere('f.level= :level')
-                ->setParameter('level', $criteria['level']);
-        }
 
         if (!is_null($criteria['sport'])) {
             $qb

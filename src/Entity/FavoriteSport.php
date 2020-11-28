@@ -21,13 +21,6 @@ class FavoriteSport
      * @ORM\Id @ORM\ManyToOne(targetEntity="App\Entity\Sport", inversedBy="favoriteSports")
      */
     private $sport;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Level", inversedBy="favoriteSports")
-     */
-    private $level;
-
-
   
 
     public function getId(): ?int
@@ -58,18 +51,5 @@ class FavoriteSport
 
         return $this;
     }
-
-    public function getLevel(): ?Level
-    {
-        return $this->level;
-    }
-
-    public function setLevel(?Level $level): self
-    {
-        $this->level = $level;
-
-        return $this;
-    }
-
    
 }

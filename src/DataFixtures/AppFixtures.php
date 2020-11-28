@@ -21,10 +21,7 @@ class AppFixtures extends Fixture
         //empile la liste d'objet à enregistrer en BDD
         foreach ($entities as $entity) {
 
-            if ($entity instanceof ClassifiedAd) {
-
-                $entity->setAuthor($entity->getSeller()->getUsername());
-            } elseif ($entity instanceof Event) {
+            if ($entity instanceof Event) {
 
                 $entity->setAuthor($entity->getEventOrganizer()->getUsername());
             }
