@@ -54,15 +54,13 @@ class UserSportPraticedController extends AbstractController
     /**
      * @Route("/delete/{id}", name="delete")
      */
-    public function deleteFavoriteSport(Request $request, $id, EntityManagerInterface $em)
+    public function deletePracticedSport(Request $request, $id, EntityManagerInterface $em)
     {
         $sport = $em->getRepository(Sport::class)->findOneBy(['id' => $id]);
         $user = $this->getUser();
-        $myFavoriteSport = $em->getRepository(FavoriteSport::class)->find(['sport' => $sport, 'user' => $user]);
-
-        $em->remove($myFavoriteSport);
+        $user->removeSportPraticed($sport);
         $em->flush();
         $this->addFlash('success', 'Les modifications ont bien été faites');
-        return $this->redirectToRoute('user_favorite_sport_list');
+        return $this->redirectToRoute('profile_show');
     }
 }
