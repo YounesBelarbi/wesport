@@ -29,9 +29,6 @@
 							<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mes données personnelles</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Mes listes de contact</a>
-						</li>
-						<li class="nav-item">
 							<a class="nav-link" id="event-tab" data-toggle="tab" href="#event" role="tab" aria-controls="event" aria-selected="false">Mes Evénements</a>
 						</li>
 					</ul>
@@ -48,9 +45,6 @@
 
 							<li class="nav-item">
 								<a href="{{path('event_list')}}">Liste des evenements</a><br/>
-							</li>
-							<li class="nav-item">
-								<a href="{{path('ad_list')}}">Liste des petites annonces</a><br/>
 							</li>
 							<li class="nav-item">
 								<a href="{{path('sportresearch')}}">Rechercher des coéquipiers</a><br/>
@@ -123,8 +117,6 @@
 								<thead>
 									<tr>
 										<th scope="col">sport</th>
-										<th scope="col">niveau</th>
-										<th scope="col">modifier</th>
 										<th scope="col">supprimer</th>
 									</tr>
 								</thead>
@@ -135,58 +127,20 @@
 										</a>
 									</div>
 									{% for favorite in user.favoriteSports %}
-										<tr>
-											<td>
-												<a href="" data-toggle="modal" data-target="#exampleModalScrollable">{{favorite.sport.name}}</a>
-											</td>
-											<td>
-												<a href="{{ path('user_favorite_sport_update', {id:favorite.sport.id }) }}" class="icon-contact-list">
-													<i class="fas fa-edit"></i>
-												</a>
-											</td>
-											<td>
-												<a href="{{ path('user_favorite_sport_delete', {id:favorite.sport.id}) }}" class="icon-contact-list">
-													<i class="far fa-trash-alt"></i>
-												</a>
-											</td>
-										</tr>
+									<tr></tr>
+										<td>
+											<a href="" data-toggle="modal" data-target="#exampleModalScrollable">{{favorite.sport.name}}</a>
+										</td>
+										<td>
+											<a href="{{ path('user_favorite_sport_delete', {id:favorite.sport.id}) }}" class="icon-contact-list">
+												<i class="far fa-trash-alt"></i>
+											</a>
+										</td>
+									</tr>										
 									{% endfor %}
 								</tbody>
 							</table>
-						</div>
-						<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-							<div>
-								<a href="{{ path('contact_list_creating')}}">nouvelle liste
-									<i class="fas fa-plus-square"></i>
-								</a>
-							</div>
-							<table class="table table-borderless">
-								<thead>
-									<tr>
-										<th scope="col">Nom de la liste</th>
-										<th scope="col">modifier</th>
-										<th scope="col">supprimer</th>
-									</tr>
-								</thead>
-								<tbody>
-									{% for contactList in user.contactLists %}
-										<tr>
-											<td>{{contactList.name}}</td>
-											<td>
-												<a href="{{ path('contact_list_updating', {slug: contactList.slug}) }}" class="icon-contact-list">
-													<i class="fas fa-edit"></i>
-												</a>
-											</td>
-											<td>
-												<a href="{{ path('contact_list_deleting', {id: contactList.id}) }}" class="icon-contact-list">
-													<i class="far fa-trash-alt"></i>
-												</a>
-											</td>
-										</tr>
-									{% endfor %}
-								</tbody>
-							</table>
-						</div>
+						</div>					
 						<div class="tab-pane fade" id="event" role="tabpanel" aria-labelledby="event-tab">
 							<div>
 								<a href="{{ path('event_organized')}}">nouvel événement
