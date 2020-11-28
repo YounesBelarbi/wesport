@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\FavoriteSport;
 use App\Repository\SportRepository;
 use App\Service\RequestCity;
 use Doctrine\ORM\EntityManagerInterface;
@@ -45,9 +44,9 @@ class SportresearchController extends AbstractController
         $criteria['age'] = null;
         $criteria['city'] =  $requestContent['city'];    
 
-        if (!is_null($criteria['sport']) || !is_null($criteria['city'])) {
-            $userSportList = $em->getRepository(FavoriteSport::class)->findUsersByAllInformations($criteria);
-        }
+        // if (!is_null($criteria['sport']) || !is_null($criteria['city'])) {
+        //     $userSportList = $em->getRepository(FavoriteSport::class)->findUsersByAllInformations($criteria);
+        // }
 
         foreach ($userSportList as $key => $value) {
             //check that the user only appears once in the list

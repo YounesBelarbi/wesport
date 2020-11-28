@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\ClassifiedAd;
 use App\Entity\Event;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;

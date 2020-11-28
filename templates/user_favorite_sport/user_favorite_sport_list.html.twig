@@ -6,7 +6,7 @@
 {% block body %}
 	<div class="container-fluid">
 		<div class="row">
-			{% for favoritelist in userFavoriteSportList %}
+			{% for sportlist in userPraticedSportList %}
 				<div class="card" style="width: 18rem;">
 					<img src="..." class="card-img-top" alt="...">
 					<div class="card-body">
@@ -14,11 +14,11 @@
 					</div>
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item">sport:
-							{{favoritelist.sport.name}}</li>
+							{{sportlist .sport.name}}</li>
 					</ul>
 					<div class="card-body">
-						<a href="{{ path('user_favorite_sport_update', {id: favoritelist.sport.id}) }}" class="card-link">modifié ce favori</a>
-						<a href="{{ path('user_favorite_sport_delete', {id: favoritelist.sport.id}) }}" class="card-link">supprimé ce favori</a>
+						<a href="{{ path('user_favorite_sport_update', {id: sportlist .sport.id}) }}" class="card-link">modifié ce favori</a>
+						<a href="{{ path('user_favorite_sport_delete', {id: sportlist .sport.id}) }}" class="card-link">supprimé ce favori</a>
 					</div>
 				</div>
 			{% endfor %}

@@ -24,14 +24,7 @@ App\Entity\Event:
         createdAt: '<dateTimeBetween("-60 days", "now")>'
         participatingUserList: '<numberBetween(1, 15)>x @user*'
         eventOrganizer: '@user*'
-
-
-App\Entity\FavoriteSport:
-    favoriteSport_{1..20}:
-        user: '@user*'
-        sport: '@sport*'
-
-       
+    
        
 App\Entity\Sport:
     sport_{1..55}:

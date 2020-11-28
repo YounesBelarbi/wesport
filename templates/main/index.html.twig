@@ -59,9 +59,10 @@
 												<p class="age">, {{user.age}} ans</p>
 											{% endif %}
 											<p class="user-city">{{user.city}}</p>
+											
 											<p>
-												{% for sportList in user.favoriteSports%}
-													{{sportList.sport.name}}
+												{% for sportList in user.sportPraticed%}
+													{{sportList.name}}
 													{% if not loop.last %},
 													{% endif %}
 												{% endfor %}

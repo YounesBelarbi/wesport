@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Event;
-use App\Entity\FavoriteSport;
 use App\Entity\User;
 use App\Form\SportResearchType;
 use App\Repository\EventRepository;

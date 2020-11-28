@@ -24,13 +24,13 @@ class Sport
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\FavoriteSport", mappedBy="sport")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="sportPraticed")
      */
-    private $favoriteSports;
+    private $users;
 
     public function __construct()
     {
-        $this->favoriteSports = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function __toString()
@@ -55,35 +55,32 @@ class Sport
         return $this;
     }
 
-
     /**
-     * @return Collection|FavoriteSport[]
+     * @return Collection|User[]
      */
-    public function getFavoriteSports(): Collection
+    public function getUsers(): Collection
     {
-        return $this->favoriteSports;
+        return $this->users;
     }
 
-    public function addFavoriteSport(FavoriteSport $favoriteSport): self
+    public function addUser(User $user): self
     {
-        if (!$this->favoriteSports->contains($favoriteSport)) {
-            $this->favoriteSports[] = $favoriteSport;
-            $favoriteSport->setSport($this);
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addSportPraticed($this);
         }
 
         return $this;
     }
 
-    public function removeFavoriteSport(FavoriteSport $favoriteSport): self
+    public function removeUser(User $user): self
     {
-        if ($this->favoriteSports->contains($favoriteSport)) {
-            $this->favoriteSports->removeElement($favoriteSport);
-            // set the owning side to null (unless already changed)
-            if ($favoriteSport->getSport() === $this) {
-                $favoriteSport->setSport(null);
-            }
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            $user->removeSportPraticed($this);
         }
 
         return $this;
     }
+
 }

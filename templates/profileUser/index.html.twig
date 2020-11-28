@@ -122,17 +122,17 @@
 								</thead>
 								<tbody>
 									<div>
-										<a href="{{ path('user_favorite_sport_add')}}">Rajouter un sport favori
+										<a href="{{ path('sport_praticed_add')}}">Rajouter un sport favori
 											<i class="fas fa-plus-square"></i>
 										</a>
 									</div>
-									{% for favorite in user.favoriteSports %}
+									{% for praticedSport in user.sportPraticed %}
 									<tr></tr>
 										<td>
-											<a href="" data-toggle="modal" data-target="#exampleModalScrollable">{{favorite.sport.name}}</a>
+											<a href="" data-toggle="modal" data-target="#exampleModalScrollable">{{praticedSport.name}}</a>
 										</td>
 										<td>
-											<a href="{{ path('user_favorite_sport_delete', {id:favorite.sport.id}) }}" class="icon-contact-list">
+											<a href="{{ path('sport_praticed_delete', {id:praticedSport.id}) }}" class="icon-contact-list">
 												<i class="far fa-trash-alt"></i>
 											</a>
 										</td>
