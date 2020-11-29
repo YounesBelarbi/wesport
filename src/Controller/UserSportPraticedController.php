@@ -21,7 +21,6 @@ class UserSportPraticedController extends AbstractController
     public function addPracticedSport(Request $request, EntityManagerInterface $em, SportRepository $sportRepository )
     {
         $user = $this->getUser();
-
         $practicedSportForm = $this->createForm(PraticedSportType::class);
         $practicedSportForm->handleRequest($request);
 
@@ -29,7 +28,7 @@ class UserSportPraticedController extends AbstractController
             
             $sport = $practicedSportForm->get('name')->getData();    
             $user->addSportPraticed($sport);
-
+            
             if ($sport != null) {
                 try {
                     $em->persist($user);
@@ -39,9 +38,7 @@ class UserSportPraticedController extends AbstractController
                 } catch (\Exception $e) {
                     $this->addFlash('warning', 'Ce sport fait déjà parti de votre liste de favori');
                 }
-            } else {
-                $this->addFlash('warning', 'renseigné tous les champs');
-            }
+            } 
         }
 
         return $this->render('sport_praticed_by_user/index.html.twig', [
