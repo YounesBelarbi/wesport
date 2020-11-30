@@ -8,6 +8,35 @@ let app = {
         setTimeout(function () {
             $(".alert").remove();
         }, 5000);
+
+                $(".city").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "https://api-adresse.data.gouv.fr/search/?city="+$("input[name='ville']").val(),
+                    
+                    data: { q: request.term },
+                    dataType: "json",
+                    success: function (data) {
+                        var cities = [];
+                        response($.map(data.features, function (item) {
+                            // Ici on est obligé d'ajouter les villes dans un array pour ne pas avoir plusieurs fois la même
+                            if ($.inArray(item.properties.postcode, cities) == -1) {
+                                cities.push(item.properties.postcode);
+                                var result =  
+                                { label:item.properties.city, 
+                                city: item.properties.city,
+                                value: item.properties.city
+                       };
+                                
+                                console.log(result)
+                                return result
+                            }
+                        }));
+                    }
+                });
+            } ,minLength: 4      
+            
+        });
     },
     handleSelect: function (e) {
         //get select fields data and use it in axios request 
