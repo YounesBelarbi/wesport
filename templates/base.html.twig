@@ -7,7 +7,9 @@
 			{% block title %} {% endblock %} - wesport 
 		</title> 
 		{% block stylesheets %} 
-			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> <!-- Main Stylesheets --> {# <link rel="stylesheet" href="{{asset('assets/css/style.css')}}"/> #} {{ encore_entry_link_tags('app') }} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"> 
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> 
+			{{ encore_entry_link_tags('index') }} 
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"> 
 		{% endblock %} 
 	</head> 
 	<body>
@@ -81,6 +83,6 @@
 		</script>
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		{% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
+		{% block javascripts %}{{ encore_entry_script_tags('index') }}{% endblock %}
 	</body>
 </html>
