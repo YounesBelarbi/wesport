@@ -4,6 +4,7 @@ namespace App\Form;
 
 
 use App\Entity\Sport;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,6 +18,10 @@ class SportResearchType extends AbstractType
         $builder
             ->add('sport', EntityType::class, [
                 'class' => Sport::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('s')
+                        ->orderBy('s.name', 'ASC');
+                },
                 'attr' => ['class' => 'form-control search-slt select', 'placeholder' => 'Sport', 'data-name' => 'sport'],
                 'label' => false,
                 'row_attr' => ['class' => 'd-flex justify-content-center'],

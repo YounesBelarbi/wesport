@@ -1315,6 +1315,10 @@ search section home-page
 	display: inline;
 }
 
+.search-fields-container {
+    width: 50%;
+    margin: 0 auto;
+}
 
 /* ----------------
 Contact page
