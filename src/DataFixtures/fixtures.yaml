@@ -1,16 +1,17 @@
 App\Entity\User:
     user_{1..50}:
-        email (unique): '<email()>'
+        email (unique): '<fr_FR:email()>'
         roles: '<roles()>'
         password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$sg7Gw4fdepeiPc9FyuKfJA\$0+AMLeya0eMBNPvR164M2NlRlbvM4wlJOe+aSTvArUg'
         username (unique): '<userName()>'
         age: '<numberBetween(20, 60)>'
-        lastName: '<lastName()>'
-        firstName: '<firstName()>'
-        city: '<city()>'
+        lastName: '<fr_FR:lastName()>'
+        firstName: '<fr_FR:firstName()>'
+        city: '<fr_FR:cityProvider()>'  #'<city()>'
         phoneNumber: '<phoneNumber()>'
         createdAt: '<date_create()>'
         isActive: '<boolean()>'
+        sportPraticed: '<numberBetween(1,6)>x @sport*' #['@sport*','@sport*','@sport*','@sport*','@sport*']
 
 
 App\Entity\Event:
