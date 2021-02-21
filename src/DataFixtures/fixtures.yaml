@@ -7,11 +7,12 @@ App\Entity\User:
         age: '<numberBetween(20, 60)>'
         lastName: '<fr_FR:lastName()>'
         firstName: '<fr_FR:firstName()>'
-        city: '<fr_FR:cityProvider()>'  #'<city()>'
+        # city: set in appFixtures.php file from cities class
+        # departement: set in appFixtures.php file from cities class
         phoneNumber: '<phoneNumber()>'
-        createdAt: '<date_create()>'
+        createdAt: '<date_create()>' 
         isActive: '<boolean()>'
-        sportPraticed: '<numberBetween(1,6)>x @sport*' #['@sport*','@sport*','@sport*','@sport*','@sport*']
+        sportPraticed: '<numberBetween(1,6)>x @sport*' 
 
 
 App\Entity\Event:
@@ -28,7 +29,7 @@ App\Entity\Event:
     
        
 App\Entity\Sport:
-    sport_{1..55}:
+    sport_{1..40}:
         name (unique): '<sports()>'
 
 
