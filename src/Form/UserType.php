@@ -48,6 +48,7 @@ class UserType extends AbstractType
                 ->add('age')
                 ->add('lastName')
                 ->add('firstName')
+                ->add('departement')
                 ->add('city')
                 ->add('phoneNumber')
                 ->add('send', SubmitType::class, [
