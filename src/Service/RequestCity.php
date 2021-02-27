@@ -15,7 +15,8 @@ class RequestCity
         foreach ($response->toArray() as $key => $choice) {
         $choices[$choice['nom']] = $choice['code'];
         }     
-
+        
+        ksort($choices);        
         return $choices;
     }
 

@@ -103,11 +103,7 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity="App\Entity\Sport", inversedBy="users")
      */
     private $sportPraticed;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $departement;
+    
 
     public function __construct()
     {
@@ -410,18 +406,6 @@ class User implements UserInterface
         if ($this->sportPraticed->contains($sportPraticed)) {
             $this->sportPraticed->removeElement($sportPraticed);
         }
-
-        return $this;
-    }
-
-    public function getDepartement(): ?string
-    {
-        return $this->departement;
-    }
-
-    public function setDepartement(string $departement): self
-    {
-        $this->departement = $departement;
 
         return $this;
     }

@@ -32,10 +32,9 @@ class AppFixtures extends Fixture
                     $entity->setIsActive(true);
                 }
 
-                //fill city and departement for users using the cities class
+                //fill city for users using the cities class
                 $cityInformations = Cities::cityProvider();
                 $entity->setCity($cityInformations['city']);
-                $entity->setDepartement($cityInformations['admin_name']);
             }
 
             $em->persist($entity);

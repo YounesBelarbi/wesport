@@ -3,7 +3,6 @@ const axios = require("axios").default;
 let app = {
     init: function () {
         $(".select").change(app.handleSelect);
-        $(".departement").change(app.handleCityList);
         
         setTimeout(function () {
             $(".alert").remove();
@@ -104,11 +103,37 @@ let app = {
                             }
                         }));
                     });
-            } ,minLength: 4,
+            } ,minLength: 3,
             select: function(event, ui) {
                 app.handleCitySelect( ui.item.value);
             }
         });
     },
+    // handleCityList: function () {
+    //     axios
+    //         .post("/sportresearch/get-city-list", { 'departmentCode': $(".departement").val() })
+    //         .then(function (response) {
+    //             app.fillFormField(response);
+    //         })
+    //         .catch(function (error) {
+    //             //if  API server returned error
+    //             if (error.response.data.status == 500) {
+    //                 let $section = $("#search_section");
+    //                 $section.append('<p class= "alert alert-warning">un problème est survenue relancer la recherche</p>');
+
+    //             }
+
+    //         });
+    // },
+    // fillFormField: function (response) {
+    //     $(".city option").remove(); //reset previous result of select field
+    //     $('.city').prop("disabled", false); //field city select activation
+
+    //     $('.city').append('<option>Ville</option>');
+    //     $.each(response.data.cityList, function (key, value) {
+
+    //         $('.city').append('<option value="' + value.nom + '">' + value.nom + '</option>');
+    //     });
+    // }
 };
 $(app.init);

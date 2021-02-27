@@ -8,7 +8,6 @@ App\Entity\User:
         lastName: '<fr_FR:lastName()>'
         firstName: '<fr_FR:firstName()>'
         # city: set in appFixtures.php file from cities class
-        # departement: set in appFixtures.php file from cities class
         phoneNumber: '<phoneNumber()>'
         createdAt: '<date_create()>' 
         isActive: '<boolean()>'

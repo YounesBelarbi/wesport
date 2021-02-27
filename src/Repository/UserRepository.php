@@ -91,7 +91,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 ->andWhere('u.city =:city')
                 ->setParameter('city', $criteria['city']);
         }
-
+        
         return $qb
             ->getQuery()
             ->getResult();
