@@ -9,7 +9,7 @@
 
 **composer**: ``composer install``
 
-**yarn**: ``yarn install``
+**npm**: ``npm install``
 
 **.env.local**: 
 
@@ -40,5 +40,5 @@ mot de passe des users fixtures: "azerty"
 
 **Mise en route de l'application**  
 - ``symfony server:start --no-tls``
-- ``yarn encore dev-server``   
+- ``npm encore dev-server``   
 

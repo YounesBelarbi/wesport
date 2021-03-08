@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\ClassifiedAd;
 use App\Entity\Event;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -21,10 +20,7 @@ class AppFixtures extends Fixture
         //empile la liste d'objet à enregistrer en BDD
         foreach ($entities as $entity) {
 
-            if ($entity instanceof ClassifiedAd) {
-
-                $entity->setAuthor($entity->getSeller()->getUsername());
-            } elseif ($entity instanceof Event) {
+            if ($entity instanceof Event) {
 
                 $entity->setAuthor($entity->getEventOrganizer()->getUsername());
             }
@@ -35,6 +31,10 @@ class AppFixtures extends Fixture
 
                     $entity->setIsActive(true);
                 }
+
+                //fill city for users using the cities class
+                $cityInformations = Cities::cityProvider();
+                $entity->setCity($cityInformations['city']);
             }
 
             $em->persist($entity);

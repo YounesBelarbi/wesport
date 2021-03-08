@@ -1,11 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Création d'un événement
-{% endblock %}
+{% block title %}Création d'un événement{% endblock %}
 
 {% block body %}
-
-
 	<section class="page-top-section">
 		<div class="container">
 			<h2>Organiser un événement</h2>
@@ -16,8 +13,9 @@
 		<div class="container mb-5 pt-5 mt-5">
 			<div class="row justify-content-md-center form-div">
 				{{ form_start(eventForm, {
-                'attr': {'class': 'contact-form col-10 ',
-            }})}}
+                		'attr': {'class': 'contact-form col-10 '}
+					})
+				}}
 				<div class="row">
 					{{form_row(eventForm.title)}}
 					{{form_row(eventForm.location)}}
@@ -30,5 +28,4 @@
 			</div>
 		</div>
 	</section>
-
 {% endblock %}

@@ -73,4 +73,27 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getQuery()
             ->getResult();
     }
+
+
+    public function findUsers($criteria)
+    {       
+        $qb = $this->createQueryBuilder('u')
+            ->join('u.sportPraticed', 'sportPraticed');
+
+        if (!is_null($criteria['sport'])) {
+            $qb
+                ->andWhere('sportPraticed= :sport')
+                ->setParameter('sport', $criteria['sport']);
+        }
+
+        if (!is_null($criteria['city'])) {
+            $qb
+                ->andWhere('u.city =:city')
+                ->setParameter('city', $criteria['city']);
+        }
+        
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
 }

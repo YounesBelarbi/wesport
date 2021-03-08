@@ -24,19 +24,13 @@ class Sport
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Level", mappedBy="sport")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="sportPraticed")
      */
-    private $levels;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\FavoriteSport", mappedBy="sport")
-     */
-    private $favoriteSports;
+    private $users;
 
     public function __construct()
     {
-        $this->levels = new ArrayCollection();
-        $this->favoriteSports = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function __toString()
@@ -62,61 +56,31 @@ class Sport
     }
 
     /**
-     * @return Collection|Level[]
+     * @return Collection|User[]
      */
-    public function getLevels(): Collection
+    public function getUsers(): Collection
     {
-        return $this->levels;
+        return $this->users;
     }
 
-    public function addLevel(Level $level): self
+    public function addUser(User $user): self
     {
-        if (!$this->levels->contains($level)) {
-            $this->levels[] = $level;
-            $level->addSport($this);
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addSportPraticed($this);
         }
 
         return $this;
     }
 
-    public function removeLevel(Level $level): self
+    public function removeUser(User $user): self
     {
-        if ($this->levels->contains($level)) {
-            $this->levels->removeElement($level);
-            $level->removeSport($this);
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            $user->removeSportPraticed($this);
         }
 
         return $this;
     }
 
-    /**
-     * @return Collection|FavoriteSport[]
-     */
-    public function getFavoriteSports(): Collection
-    {
-        return $this->favoriteSports;
-    }
-
-    public function addFavoriteSport(FavoriteSport $favoriteSport): self
-    {
-        if (!$this->favoriteSports->contains($favoriteSport)) {
-            $this->favoriteSports[] = $favoriteSport;
-            $favoriteSport->setSport($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFavoriteSport(FavoriteSport $favoriteSport): self
-    {
-        if ($this->favoriteSports->contains($favoriteSport)) {
-            $this->favoriteSports->removeElement($favoriteSport);
-            // set the owning side to null (unless already changed)
-            if ($favoriteSport->getSport() === $this) {
-                $favoriteSport->setSport(null);
-            }
-        }
-
-        return $this;
-    }
 }

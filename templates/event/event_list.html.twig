@@ -1,10 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des événements
-{% endblock %}
+{% block title %}Liste des événements{% endblock %}
 
 {% block body %}
-
 	<section class="page-top-section">
 		<div class="container">
 			<h2>Liste des événements</h2>
@@ -14,7 +12,6 @@
 	<section class="container pt-5">
 		<div class="row justify-content-center">
 			{% for event in eventList %}
-
 				<div class="card m-3" style="width: 18rem;">
 					<div class="card-body">
 						<h5 class="card-title">{{event.title}}</h5>
@@ -37,10 +34,7 @@
 						<a href="{{ path('event_deregistration', {id: event.id}) }}" class="card-link">se désinscrire de l'evénement</a>
 					</div>
 				</div>
-
 			{% endfor %}
 		</div>
 	</section>
-
-
 {% endblock %}

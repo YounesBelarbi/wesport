@@ -12,7 +12,6 @@ class Provider extends BaseProvider
         ['ROLE_ADMIN'],
     ];
 
-
     protected static $sports = [
 
         'Alpinisme',
@@ -70,31 +69,16 @@ class Provider extends BaseProvider
         'Sports d\'eau',
         'Tir à l\'arc',
         'Yoga',
-    ];
-
-
-    protected static $levels = [
-        'debutant',
-        'moyen',
-        'bon niveau',
-        'exellent niveau',
-    ];
-
+    ];    
 
     public static function roles()
     {
         return static::randomElement(static::$roles);
     }
 
-
     public static function sports()
     {
         return static::randomElement(static::$sports);
     }
 
-
-    public static function levels()
-    {
-        return static::randomElement(static::$levels);
-    }
 }

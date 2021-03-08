@@ -7,7 +7,9 @@
 			{% block title %} {% endblock %} - wesport 
 		</title> 
 		{% block stylesheets %} 
-			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> <!-- Main Stylesheets --> {# <link rel="stylesheet" href="{{asset('assets/css/style.css')}}"/> #} {{ encore_entry_link_tags('app') }} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"> 
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> 
+			{{ encore_entry_link_tags('index') }} 
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"> 
 		{% endblock %} 
 	</head> 
 	<body>
@@ -17,9 +19,9 @@
 				<a href="{{path('main')}}" class="site-logo">					
 						<img class="logo" src="{{asset('assets/img/logo_wesport.png')}}" alt="">					
 				</a>
-			{# <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
-			</button> #}
+				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="main-menu navbar-nav mr-auto justify-content-end">
 						<li class="nav-item">
@@ -79,6 +81,7 @@
 		</script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
 		</script>
-		{% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		{% block javascripts %}{{ encore_entry_script_tags('index') }}{% endblock %}
 	</body>
 </html>

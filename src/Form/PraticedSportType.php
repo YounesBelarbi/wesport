@@ -2,32 +2,35 @@
 
 namespace App\Form;
 
-use App\Entity\ContactList;
+use App\Entity\Sport;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ContactListType extends AbstractType
+class PraticedSportType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, [
+            ->add('name', EntityType::class, [
+                'class' => Sport::class,
                 'row_attr' => ['class' => 'col-md-12'],
-                'label' => 'Nom de votre liste',
+                'label' => 'Sport',
             ])
             ->add('send', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-lg btn-primary site-btn col-md-6'],
-                'label' => 'Enregistrer ma liste',
+                'label' => 'Enregistrer',
                 'row_attr' => ['class' => 'd-flex justify-content-center'],
             ]);
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => ContactList::class,
+            'data_class' => Sport::class,
         ]);
     }
 }

@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil
-{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
 	<!-- Hero section -->
@@ -23,18 +22,12 @@
 			{{form_start(form, {'action': path('sportresearch'), 'method': 'POST'})}}
 				<div class="row">
 					<div class="col-lg-12">
-						<div class="row">
-							<div class="col-lg-3 col-md-3 col-sm-12 p-0">
-								{{form_row(form.departement)}}
-							</div>
-							<div class="col-lg-3 col-md-3 col-sm-12 p-0">
+						<div class="row search-fields-container">
+							<div class="col-lg-6 col-md-4 col-sm-4 p-0">
 								{{form_row(form.city)}}
 							</div>
-							<div class="col-lg-3 col-md-3 col-sm-12 p-0">
+							<div class="col-lg-6 col-md-4 col-sm-4 p-0">
 								{{form_row(form.sport)}}
-							</div>
-							<div class="col-lg-3 col-md-3 col-sm-12 p-0">
-								{{form_row(form.level)}}
 							</div>
 						</div>
 					</div>
@@ -61,10 +54,10 @@
 											{% if user.age %}
 												<p class="age">, {{user.age}} ans</p>
 											{% endif %}
-											<p class="user-city">{{user.city}}</p>
+											<p class="user-city">{{user.city}}</p>											
 											<p>
-												{% for sportList in user.favoriteSports%}
-													{{sportList.sport.name}}
+												{% for sportList in user.sportPraticed%}
+													{{sportList.name}}
 													{% if not loop.last %},
 													{% endif %}
 												{% endfor %}
@@ -113,37 +106,7 @@
 		</section>
 		<!-- Event section end -->
 
-		<!-- ClassifiedAds section-->
-		<section class="classifiedAds-section">
-			<div class="ads-container">
-				<div class="section-title text-center">
-					<h2>Les Nouvelles annonces</h2>
-				</div>
-				<div class="row row-cols-2">
-					{% for classifiedAd in lastClassifiedAds %}
-						<div class="col-lg-6 row col-md-12">
-							<div class="col-4 classifiedAdImg">
-								<img src="{{asset('https://picsum.photos/260/170?random=' ~ random(1, 100))}}" alt="">
-							</div>
-							<div class="col-8 adsBody">
-								<div class="d-flex justify-content-center">
-									<h3>{{classifiedAd.title}}</h3>
-								</div>
-								<p class="d-inline-block">{{classifiedAd.classifiedAdBody}}</p>
-								<div class="d-flex justify-content-end">
-									<p>Publiée par
-										{{classifiedAd.author}}
-										le
-										{{classifiedAd.createdAt|format_datetime('full','none',locale='fr')}}
-									</p>
-								</div>
-							</div>
-						</div>
-					{% endfor %}
-				</div>
-			</div>
-		</section>
-		<!-- ClassifiedAds section end-->
+		
 
 		<!-- Template section -->
 

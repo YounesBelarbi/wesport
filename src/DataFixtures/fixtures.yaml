@@ -1,38 +1,17 @@
 App\Entity\User:
     user_{1..50}:
-        email (unique): '<email()>'
+        email (unique): '<fr_FR:email()>'
         roles: '<roles()>'
         password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$sg7Gw4fdepeiPc9FyuKfJA\$0+AMLeya0eMBNPvR164M2NlRlbvM4wlJOe+aSTvArUg'
         username (unique): '<userName()>'
         age: '<numberBetween(20, 60)>'
-        lastName: '<lastName()>'
-        firstName: '<firstName()>'
-        city: '<city()>'
+        lastName: '<fr_FR:lastName()>'
+        firstName: '<fr_FR:firstName()>'
+        # city: set in appFixtures.php file from cities class
         phoneNumber: '<phoneNumber()>'
-        createdAt: '<date_create()>'
+        createdAt: '<date_create()>' 
         isActive: '<boolean()>'
-
-
-
-App\Entity\ClassifiedAd:
-    classified_ad_{1..23}:
-        classifiedAdBody: '<text(100)>' 
-        title: '<word(5)>' 
-        seller: '@user*'
-        # author: #username of the author set in appFixtures.php file
-        sportConcerned: '<sports()>'
-        objectForSale: '<word()>'
-        createdAt: '<date_create()>'
-        price: '<randomFloat(0,4,300)>'
-        
-
-
-App\Entity\ContactList:
-    contactList_{1..50}:
-        name: '<word(3))>'
-        creator: '@user*'
-        userContactList: '<numberBetween(1, 10)>x @user*'
-        createdAt: '<date_create()>'
+        sportPraticed: '<numberBetween(1,6)>x @sport*' 
 
 
 App\Entity\Event:
@@ -46,25 +25,12 @@ App\Entity\Event:
         createdAt: '<dateTimeBetween("-60 days", "now")>'
         participatingUserList: '<numberBetween(1, 15)>x @user*'
         eventOrganizer: '@user*'
-
-
-App\Entity\FavoriteSport:
-    favoriteSport_{1..20}:
-        user: '@user*'
-        sport: '@sport*'
-        level: '@level*'
+    
        
-
-
-App\Entity\Level:
-    level_{1..4}:
-        name (unique): '<levels()>'
-
-
 App\Entity\Sport:
-    sport_{1..55}:
+    sport_{1..40}:
         name (unique): '<sports()>'
-        levels: '4x @level*'
+
 
 
 
