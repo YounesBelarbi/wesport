@@ -1,16 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Compte utilisateur
-{% endblock %}
+{% block title %}Compte utilisateur{% endblock %}
 
 {% block body %}
-
 	<section class="page-top-section">
 		<div class="container">
 			<h2>Mon compte</h2>
 		</div>
 	</section>
-
 
 	<section class="container emp-profile">
 		<div class="row">
@@ -39,95 +36,88 @@
 			<div class="col-md-4">
 				<nav class="navbar ">
 					<ul class="navbar-nav profile-nav">
+						<p>Lien de visite</p>
+						<li class="nav-item">
+							<a href="{{path('event_list')}}">Liste des evenements</a><br/>
+						</li>
+					</ul>
+				</nav>
+			</div>
 
-						<ul class="navbar-nav profile-nav">
-							<p>Lien de visite</p>
-
-							<li class="nav-item">
-								<a href="{{path('event_list')}}">Liste des evenements</a><br/>
-							</li>
-							<li class="nav-item">
-								<a href="{{path('sportresearch')}}">Rechercher des coéquipiers</a><br/>
-							</li>
-						</ul>
-					</nav>
-
-				</div>
-
-				<div class="col-md-8">
-					<div class="tab-content profile-tab" id="myTabContent">
-						<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-							<div class="row">
-								<div class="col-md-6">
-									<label>Email</label>
-								</div>
-								<div class="col-md-6">
-									<p>{{user.email}}</p>
-								</div>
+			<div class="col-md-8">
+				<div class="tab-content profile-tab" id="myTabContent">
+					<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+						<div class="row">
+							<div class="col-md-6">
+								<label>Email</label>
 							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<label>Nom</label>
-								</div>
-								<div class="col-md-6">
-									<p>{{user.lastname}}</p>
-								</div>
+							<div class="col-md-6">
+								<p>{{user.email}}</p>
 							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<label>prénom</label>
-								</div>
-								<div class="col-md-6">
-									<p>{{user.firstname}}</p>
-								</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>Nom</label>
 							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<label>Âge</label>
-								</div>
-								<div class="col-md-6">
-									<p>{{user.age}}</p>
-								</div>
+							<div class="col-md-6">
+								<p>{{user.lastname}}</p>
 							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<label>Ville</label>
-								</div>
-								<div class="col-md-6">
-									<p>{{user.city}}</p>
-								</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>prénom</label>
 							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<label>Numéro de téléphone</label>
+							<div class="col-md-6">
+								<p>{{user.firstname}}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>Âge</label>
+							</div>
+							<div class="col-md-6">
+								<p>{{user.age}}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>Ville</label>
+							</div>
+							<div class="col-md-6">
+								<p>{{user.city}}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>Numéro de téléphone</label>
+							</div>
+							<div class="col-md-6">
+								<p>{{user.phonenumber}}</p>
+							</div>
+						</div>
+						<div class="col-md-5 mt-5 ml-5 text-center">
+							<a href="{{path('profile_edit')}}">
+								<button class="profile-edit-btn">Modifier mes informations</button>
+							</a>
+						</div>
+						<div class="">
+							<h3 class="mt-5 mb-4">mes sports favoris</h3>
+						</div>
+						<table class="table table-borderless">
+							<thead>
+								<tr>
+									<th scope="col">sport</th>
+									<th scope="col">supprimer</th>
+								</tr>
+							</thead>
+							<tbody>
+								<div>
+									<a href="{{ path('sport_praticed_add')}}">Rajouter un sport favori
+										<i class="fas fa-plus-square"></i>
+									</a>
 								</div>
-								<div class="col-md-6">
-									<p>{{user.phonenumber}}</p>
-								</div>
-							</div>
-							<div class="col-md-5 mt-5 ml-5 text-center">
-								<a href="{{path('profile_edit')}}">
-									<button class="profile-edit-btn">Modifier mes informations</button>
-								</a>
-							</div>
-							<div class="">
-								<h3 class="mt-5 mb-4">mes sports favoris</h3>
-							</div>
-							<table class="table table-borderless">
-								<thead>
+								{% for praticedSport in user.sportPraticed %}
 									<tr>
-										<th scope="col">sport</th>
-										<th scope="col">supprimer</th>
-									</tr>
-								</thead>
-								<tbody>
-									<div>
-										<a href="{{ path('sport_praticed_add')}}">Rajouter un sport favori
-											<i class="fas fa-plus-square"></i>
-										</a>
-									</div>
-									{% for praticedSport in user.sportPraticed %}
-									<tr></tr>
 										<td>
 											<a href="" data-toggle="modal" data-target="#exampleModalScrollable">{{praticedSport.name}}</a>
 										</td>
@@ -137,48 +127,47 @@
 											</a>
 										</td>
 									</tr>										
-									{% endfor %}
-								</tbody>
-							</table>
-						</div>					
-						<div class="tab-pane fade" id="event" role="tabpanel" aria-labelledby="event-tab">
-							<div>
-								<a href="{{ path('event_organized')}}">nouvel événement
-									<i class="fas fa-plus-square"></i>
-								</a>
-							</div>
-							<table class="table table-borderless">
-								<thead>
-									<tr>
-										<th scope="col">Nom de l'événement</th>
-										<th scope="col">modifier</th>
-										<th scope="col">supprimer</th>
-									</tr>
-								</thead>
-								<tbody>
-									{% for event in user.eventsOrganized %}
-										<tr>
-											<td>
-												<a href="" data-toggle="modal" data-target="#exampleModalScrollable">{{event.title}}</a>
-											</td>
-											<td>
-												<a href="{{ path('event_edit', {slug: event.slug}) }}" class="icon-contact-list">
-													<i class="fas fa-edit"></i>
-												</a>
-											</td>
-											<td>
-												<a href="{{ path('event_deletion', {id: event.id}) }}" class="icon-contact-list">
-													<i class="far fa-trash-alt"></i>
-												</a>
-											</td>
-										</tr>
-									{% endfor %}
-								</tbody>
-							</table>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>					
+					<div class="tab-pane fade" id="event" role="tabpanel" aria-labelledby="event-tab">
+						<div>
+							<a href="{{ path('event_organized')}}">nouvel événement
+								<i class="fas fa-plus-square"></i>
+							</a>
 						</div>
+						<table class="table table-borderless">
+							<thead>
+								<tr>
+									<th scope="col">Nom de l'événement</th>
+									<th scope="col">modifier</th>
+									<th scope="col">supprimer</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for event in user.eventsOrganized %}
+									<tr>
+										<td>
+											<a href="" data-toggle="modal" data-target="#exampleModalScrollable">{{event.title}}</a>
+										</td>
+										<td>
+											<a href="{{ path('event_edit', {slug: event.slug}) }}" class="icon-contact-list">
+												<i class="fas fa-edit"></i>
+											</a>
+										</td>
+										<td>
+											<a href="{{ path('event_deletion', {id: event.id}) }}" class="icon-contact-list">
+												<i class="far fa-trash-alt"></i>
+											</a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
-		</section>
-
-	{% endblock %}
+		</div>
+	</section>
+{% endblock %}

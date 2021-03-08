@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion
-{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block body %}
 	<section class="page-top-section  ">
@@ -17,7 +16,6 @@
 						{% if error %}
 							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 						{% endif %}
-
 						{% if app.user %}
 							<div class="mb-3">
 								You are logged in as
@@ -50,10 +48,8 @@
 						<br>
 						<a href="{{path('app_send_confirmation_token')}}">Je n'ai pas reçu mon email d'activation</a>
 					</form>
-
 				</div>
 			</div>
 		</div>
 	</section>
-
 {% endblock %}

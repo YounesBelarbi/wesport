@@ -1,10 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier le Profile utilisateur
-{% endblock %}
+{% block title %}Modifier le Profile utilisateur{% endblock %}
 
 {% block body %}
-
 	<section class="page-top-section">
 		<div class="container">
 			<h2>Modifier mes données personnelles</h2>
@@ -13,9 +11,11 @@
 	<section class="form-profile-section">
 		<div class="container mb-5 pt-5 mt-5">
 			<div class="row justify-content-md-center form-div">
-				{{ form_start(form, {
-                'attr': {'class': 'contact-form col-10 ',
-            }})}}
+				{{ 
+					form_start(form, {
+					'attr': {'class': 'contact-form col-10 ',
+					}})
+				}}
 				{{ form_row(form.username) }}
 				{{ form_row(form.email) }}
 				{{ form_row(form.firstName) }}
@@ -28,5 +28,4 @@
 			<a href="{{path('profile_edit_password')}}">changer mon mot de passe</a><br>
 		</div>
 	</section>
-
 {% endblock %}

@@ -1,10 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Rajouter un sport en favori
-{% endblock %}
+{% block title %}Rajouter un sport en favori{% endblock %}
 
 {% block body %}
-
 	<section class="page-top-section">
 		<div class="container">
 			<h2>Rajouter un sport favori</h2>
@@ -13,9 +11,11 @@
 	<section class="form-registration-section">
 		<div class="container mb-5 pt-5 mt-5">
 			<div class="row justify-content-md-center form-div">
-				{{ form_start(practicedSportForm, {
-                'attr': {'class': 'contact-form col-10 ',
-            }})}}
+				{{ 
+					form_start(practicedSportForm, {
+                	'attr': {'class': 'contact-form col-10 ',
+            		}})
+				}}
 				<div class="row">
 					{{form_row(practicedSportForm.name)}}
 				</div>
@@ -24,6 +24,4 @@
 			</div>
 		</div>
 	</section>
-
-
 {% endblock %}
