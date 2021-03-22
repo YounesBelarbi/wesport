@@ -90,9 +90,18 @@ class EventController extends AbstractController
         $eventEditForm->handleRequest($request);
 
         if ($eventEditForm->isSubmitted() && $eventEditForm->isValid()) {
-            $em->flush();
-            $this->addFlash('success', 'l\'événement à été mit à jour');
-            // return $this->redirectToRoute('profile_show');
+
+            $eventDate = $eventEditForm->get('eventDate')->getData();
+            //ckeck if event date comes after current date
+            
+            if ($eventDate > new \DateTime()) {
+                
+                $event->setEventDate($eventDate);
+                $em->flush();
+                $this->addFlash('success', 'l\'événement à été mit à jour');
+            } else {
+                $this->addFlash('warning', 'Date incorrect');
+            }
         }
 
         return $this->render('event/event.html.twig', [
