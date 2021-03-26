@@ -501,7 +501,7 @@ Hero section
 	-ms-flex-pack: center;
 	justify-content: center;
 	text-align: center;
-	background-image: url(/assets/img/fond-multisport.jpg);
+	background-image: url(../../public/assets/img/fond-multisport.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 	
@@ -814,7 +814,7 @@ Footer section
 .footer-section {
 	padding-top: 300px;
 	padding-bottom: 23px;
-	background-image: url(/assets/img/7.jpg);
+	background-image: url(../../public/assets/img/7.jpg);
 	background-repeat: no-repeat;
     background-size: cover;
     background-position: left;
@@ -890,13 +890,14 @@ Footer section
 ==================
 Other Pages
 ==================
+../assets/img/header-bg/6.jpg
 -----------------*/
 
 .page-top-section {
 	height: 400px;
 	text-align: center;
 	padding-top: 35px;
-	background-image: url(/assets/img/header-bg/6.jpg);
+	background-image: url(../../public/assets/img/header-bg/6.jpg);
 	background-repeat: no-repeat;
     background-size: cover;
     background-position: left;
@@ -1472,7 +1473,7 @@ other errors-pages
 
  .error-page {
 	position: relative;
-	background-image: url(/assets/img/football.jpg);
+	background-image: url(../../public/assets/img/football.jpg);
 	background-size: contain;
 	background-position: center;
 	background-size: cover;
